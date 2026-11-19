@@ -40,6 +40,11 @@ _SUFFIXES = {
     "TER": "TER", "HIGHWAY": "HWY", "HWY": "HWY", "CIRCLE": "CIR", "CIR": "CIR",
 }
 _DIRECTIONS = {"NORTH": "N", "SOUTH": "S", "EAST": "E", "WEST": "W"}
+_UNIT_MARKERS = {
+    "APT", "APARTMENT", "UNIT", "STE", "SUITE", "FL", "FLOOR", "RM", "ROOM",
+    "BSMT", "BASEMENT", "REAR", "FRONT", "GROUND", "LOWER", "UPPER", "TERMINAL",
+    "CONCOURSE",
+}
 
 
 def normalize_text(value: object) -> str:
@@ -68,9 +73,10 @@ def normalize_license(value: object) -> str:
 def normalize_address(value: object) -> str:
     """Canonical street address used *with* license/name, never as the only key.
 
-    Unit/floor strings are inconsistent between BACP and CDPH. When a normal street
-    address has a recognized suffix, retain the street through that suffix, keeping
-    the complete house-number range. Missing/redacted/unknown addresses stay empty.
+    Unit/floor strings are inconsistent between BACP and CDPH. Remove only a
+    recognizable unit/floor tail after a street suffix, keeping house-number ranges
+    and lettered Chicago street names such as AVENUE O. Unknown tails are preserved.
+    Missing/redacted/unknown addresses stay empty.
     """
     text = normalize_text(value)
     if text in {"", "UNKNOWN", "N/A", "NA", "NONE", "NAN"} or "REDACTED" in text:
@@ -80,11 +86,23 @@ def normalize_address(value: object) -> str:
     words = text.split()
     if len(words) > 1 and re.fullmatch(r"\d+[A-Z]?(?:-\d+[A-Z]?)?", words[0]):
         words[1] = _DIRECTIONS.get(words[1], words[1])
-        indices = [i for i, word in enumerate(words[2:], 2) if word in _SUFFIXES]
+        street_start = 2 if words[1] in {"N", "S", "E", "W"} else 1
+        indices = [i for i, word in enumerate(words[street_start:], street_start) if word in _SUFFIXES]
         if indices:
             last = indices[-1]
             words[last] = _SUFFIXES[words[last]]
-            words = words[: last + 1]
+            street_end = last
+            # AVENUE O and AVENUE L are different streets, not apartment labels.
+            if (last == street_start and words[last] == "AVE" and len(words) > last + 1
+                    and re.fullmatch(r"[A-Z]", words[last + 1])):
+                street_end += 1
+            tail = words[street_end + 1:]
+            if tail and (
+                tail[0] in _UNIT_MARKERS or tail[0].startswith("#")
+                or re.fullmatch(r"\d+(?:ST|ND|RD|TH)?(?:-[A-Z0-9]+)?", tail[0])
+                or (len(tail) == 1 and re.fullmatch(r"[A-Z]", tail[0]))
+            ):
+                words = words[: street_end + 1]
     return " ".join(words)
 
 
@@ -183,7 +201,7 @@ def load_inspections(path: str | Path) -> pd.DataFrame:
 
 
 def clean_licenses(frame: pd.DataFrame) -> pd.DataFrame:
-    """Parse license transactions without manufacturing historical legal status."""
+    """Parse transactions; impossible term ends become unknown, never legal status."""
     frame = _canonical_columns(frame.copy())
     _require(frame, ["license_number", "date_issued", "license_start_date", "expiration_date"])
     initial = len(frame)
@@ -203,6 +221,11 @@ def clean_licenses(frame: pd.DataFrame) -> pd.DataFrame:
         if column not in frame:
             frame[column] = ""
         frame[column] = frame[column].fillna("").astype(str).str.strip()
+    invalid_term_end = frame["expiration_date"] < frame["license_start_date"]
+    invalid_term_end_count = int(invalid_term_end.sum())
+    # Preserve the official raw snapshot. A negative-length recorded term cannot
+    # support a valid expiry feature, so its end is explicitly unknown downstream.
+    frame.loc[invalid_term_end, "expiration_date"] = pd.NaT
     frame["address_key"] = frame["address"].map(normalize_address)
     invalid = frame["license_number"].eq("") | frame["date_issued"].isna()
     invalid_count = int(invalid.sum())
@@ -215,7 +238,8 @@ def clean_licenses(frame: pd.DataFrame) -> pd.DataFrame:
         "input_rows": initial, "output_rows": len(frame), "invalid_identity_or_issue_rows_removed": invalid_count,
         "missing_term_start_rows": int(frame["license_start_date"].isna().sum()),
         "missing_expiration_rows": int(frame["expiration_date"].isna().sum()),
-        "expiration_before_start_rows": int((frame["expiration_date"] < frame["license_start_date"]).sum()),
+        "expiration_before_start_rows": invalid_term_end_count,
+        "invalid_term_end_dates_masked": invalid_term_end_count,
         "missing_address_rows": int(frame["address_key"].eq("").sum()),
     }
     return frame

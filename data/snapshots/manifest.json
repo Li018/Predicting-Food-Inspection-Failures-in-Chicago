@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "data_end_date": "2025-12-31",
+  "completed_at_utc": "2026-11-19T11:11:20.336442+00:00",
+  "snapshot_kind": "Official retrospective projection; not a historical publication-time archive",
+  "sources": {
+    "inspections": {
+      "dataset": "4ijn-s7e5",
+      "source_url": "https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5",
+      "selection": {
+        "$select": "inspection_id,dba_name,aka_name,license_,facility_type,risk,address,city,state,zip,inspection_date,inspection_type,results,latitude,longitude",
+        "$where": "inspection_date < '2026-01-01T00:00:00' AND inspection_date >= '2010-01-01T00:00:00'",
+        "$order": "inspection_id ASC"
+      },
+      "expected_rows": 304348,
+      "max_key": 2640586,
+      "source_rows_without_event_date": 0,
+      "started_at_utc": "2026-11-19T11:01:40.966007+00:00",
+      "page_size": 50000,
+      "source_rows_updated_at": 1795082999,
+      "source_description": "This information is derived from inspections of restaurants and other food establishments in Chicago from January 1, 2010 to the present. Inspections are performed by staff from the Chicago Department of Public Health’s Food Protection Program using a standardized procedure. The results of the inspection are inputted into a database, then reviewed and approved by a State of Illinois Licensed Environmental Health Practitioner (LEHP). For descriptions of the data elements included in this set, please click <a href=\"https://data.cityofchicago.org/api/assets/BAD5301B-681A-4202-9D25-51B2CAE672FF\">here</a>.\n\nNote about 7/1/2018 change to food inspection procedures that affects the data in this dataset: http://bit.ly/2yWd2JB\n\nDisclaimer: Attempts have been made to minimize any and all duplicate inspection reports. However, the dataset may still contain such duplicates and the appropriate precautions should be exercised when viewing or analyzing these data. The result of the inspections (pass, pass with conditions or fail) as well as the violations noted are based on the findings identified and reported by the inspector at the time of the inspection, and may not reflect the findings noted at other times. For more information about Food Inspections, go to https://www.chicago.gov/city/en/depts/cdph/provdrs/food_safety.html.",
+      "field_definitions": [
+        {
+          "field": "inspection_id",
+          "name": "Inspection ID",
+          "description": null
+        },
+        {
+          "field": "dba_name",
+          "name": "DBA Name",
+          "description": "Doing Business As"
+        },
+        {
+          "field": "aka_name",
+          "name": "AKA Name",
+          "description": "Also Known As"
+        },
+        {
+          "field": "license_",
+          "name": "License #",
+          "description": null
+        },
+        {
+          "field": "facility_type",
+          "name": "Facility Type",
+          "description": null
+        },
+        {
+          "field": "risk",
+          "name": "Risk",
+          "description": null
+        },
+        {
+          "field": "address",
+          "name": "Address",
+          "description": null
+        },
+        {
+          "field": "city",
+          "name": "City",
+          "description": null
+        },
+        {
+          "field": "state",
+          "name": "State",
+          "description": null
+        },
+        {
+          "field": "zip",
+          "name": "Zip",
+          "description": ""
+        },
+        {
+          "field": "inspection_date",
+          "name": "Inspection Date",
+          "description": null
+        },
+        {
+          "field": "inspection_type",
+          "name": "Inspection Type",
+          "description": null
+        },
+        {
+          "field": "results",
+          "name": "Results",
+          "description": null
+        },
+        {
+          "field": "latitude",
+          "name": "Latitude",
+          "description": null
+        },
+        {
+          "field": "longitude",
+          "name": "Longitude",
+          "description": null
+        }
+      ],
+      "downloaded_rows": 304348,
+      "retained_rows": 304348,
+      "pages": [
+        {
+          "shard": 0,
+          "page": 0,
+          "after_key": 0,
+          "upper_key": 2640586,
+          "rows": 50000,
+          "sha256": "e428e89d5ee0a605be33d876ddaa7f2a9bd71c460a4071fedabdb91c2a1de946"
+        },
+        {
+          "shard": 0,
+          "page": 1,
+          "after_key": 1151590,
+          "upper_key": 2640586,
+          "rows": 50000,
+          "sha256": "65b60f2ccdf9529ff4fefe1bbe0db11a4de050ae7060e7a54d5c113f542c057c"
+        },
+        {
+          "shard": 0,
+          "page": 2,
+          "after_key": 1496873,
+          "upper_key": 2640586,
+          "rows": 50000,
+          "sha256": "2cc160d2895d3f8ddaa3c31ad27a79c9b89351383358f7db299f8bdf4200793b"
+        },
+        {
+          "shard": 0,
+          "page": 3,
+          "after_key": 2049491,
+          "upper_key": 2640586,
+          "rows": 50000,
+          "sha256": "ba0f7a857ced9064820fed4b4d9de93f3362615f87e443a65f4c2f42b4ba49f8"
+        },
+        {
+          "shard": 0,
+          "page": 4,
+          "after_key": 2356294,
+          "upper_key": 2640586,
+          "rows": 50000,
+          "sha256": "1153c519784f0a0e091ed7fcedcf76f069adb6157d88021372bd9cee38e30e89"
+        },
+        {
+          "shard": 0,
+          "page": 5,
+          "after_key": 2571507,
+          "upper_key": 2640586,
+          "rows": 50000,
+          "sha256": "a86434956d5df1884545664d04094870338b1ecc823ceb3d712e215568faa203"
+        },
+        {
+          "shard": 0,
+          "page": 6,
+          "after_key": 2624865,
+          "upper_key": 2640586,
+          "rows": 4348,
+          "sha256": "3254226e193ba01fd65d71d47875fa798ff566d81f814923380efbd5d1d26304"
+        }
+      ]
+    },
+    "licenses": {
+      "dataset": "r5kz-chrr",
+      "source_url": "https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses/r5kz-chrr",
+      "selection": {
+        "$select": "license_id,license_number,account_number,site_number,legal_name,doing_business_as_name,address,city,state,zip_code,license_code,license_description,application_type,application_created_date,application_requirements_complete,license_start_date,expiration_date,license_approved_for_issuance,date_issued,license_status,license_status_change_date",
+        "$where": "date_issued < '2026-01-01T00:00:00'",
+        "$order": "license_id ASC"
+      },
+      "expected_rows": 1185058,
+      "max_key": 3065166,
+      "source_rows_without_event_date": 0,
+      "started_at_utc": "2026-11-19T11:04:31.958301+00:00",
+      "page_size": 50000,
+      "source_rows_updated_at": 1795085814,
+      "source_description": "NOTE, 9/25/2025 - We have populated the Address column for <a href=\"https://data.cityofchicago.org/stories/s/pnmi-a3z5\" target=\"_blank\">additional records</a>.\n\nBusiness licenses issued by the Department of Business Affairs and Consumer Protection in the City of Chicago from 2002 to the present. This dataset contains a large number of records/rows of data and may not be viewed in full in Microsoft Excel. Therefore, when downloading the file, select CSV from the Export menu. Open the file in an ASCII text editor, such as Notepad or Wordpad, to view and search. \n \nData fields requiring description are detailed below. \n\nAPPLICATION TYPE:  ‘ISSUE’ is the record associated with the initial license application.  ‘RENEW’ is a subsequent renewal record.  All renewal records are created with a term start date and term expiration date.  ‘C_LOC’ is a change of location record.  It means the business moved.   ‘C_CAPA’ is a change of capacity record.  Only a few license types may file this type of application.  ‘C_EXPA’ only applies to businesses that have liquor licenses.  It means the business location expanded.  'C_SBA' is a change of business activity record. It means that a new business activity was added or an existing business activity was marked as expired.\n\nLICENSE STATUS: ‘AAI’ means the license was issued. ‘AAC’ means the license was cancelled during its term.  ‘REV’ means the license was revoked. 'REA' means the license revocation has been appealed.\n\nLICENSE STATUS CHANGE DATE:  This date corresponds to the date a license was cancelled (AAC), revoked (REV) or appealed (REA).\n\nBusiness License Owner information may be accessed at:  https://data.cityofchicago.org/dataset/Business-Owners/ezma-pppn. To identify the owner of a business, you will need the account number or legal name, which may be obtained from this Business Licenses dataset. \n\nData Owner: Business Affairs and Consumer Protection. Time Period: January 1, 2002 to present. Frequency: Data is updated daily.",
+      "field_definitions": [
+        {
+          "field": "license_id",
+          "name": "LICENSE ID",
+          "description": "An internal database ID for each record.  Each license can have multiple records as it goes through renewals and other transactions.  See the LICENSE NUMBER field for the number generally known to the public and used in most other data sources that refer to the license."
+        },
+        {
+          "field": "account_number",
+          "name": "ACCOUNT NUMBER",
+          "description": "The account number of the business owner, which will stay consistent across that owner's licenses and can be used to find the owner in the Business Owners dataset."
+        },
+        {
+          "field": "site_number",
+          "name": "SITE NUMBER",
+          "description": "An internal database ID indicating the location of this licensed business to account for business owners with more than one location."
+        },
+        {
+          "field": "legal_name",
+          "name": "LEGAL NAME",
+          "description": ""
+        },
+        {
+          "field": "doing_business_as_name",
+          "name": "DOING BUSINESS AS NAME",
+          "description": ""
+        },
+        {
+          "field": "address",
+          "name": "ADDRESS",
+          "description": ""
+        },
+        {
+          "field": "city",
+          "name": "CITY",
+          "description": ""
+        },
+        {
+          "field": "state",
+          "name": "STATE",
+          "description": ""
+        },
+        {
+          "field": "zip_code",
+          "name": "ZIP CODE",
+          "description": ""
+        },
+        {
+          "field": "license_code",
+          "name": "LICENSE CODE",
+          "description": "A code for the type of license. Each code value corresponds to a specific LICENSE DESCRIPTION value."
+        },
+        {
+          "field": "license_description",
+          "name": "LICENSE DESCRIPTION",
+          "description": ""
+        },
+        {
+          "field": "license_number",
+          "name": "LICENSE NUMBER",
+          "description": "The license number known to the public and generally used in other data sources that refer to the license. This is the field most users will want for most purposes. Each license has a single license number that stays consistent throughout the lifetime of the license. By contrast, the LICENSE ID field is an internal database ID and not generally useful to external users."
+        },
+        {
+          "field": "application_type",
+          "name": "APPLICATION TYPE",
+          "description": ""
+        },
+        {
+          "field": "application_created_date",
+          "name": "APPLICATION CREATED DATE",
+          "description": "The date the business license application was created.  RENEW type records do not have an application."
+        },
+        {
+          "field": "application_requirements_complete",
+          "name": "APPLICATION REQUIREMENTS COMPLETE",
+          "description": "For all application types except RENEW, this is the date all required application documents were received.  For RENEW type records, this is the date the record was created."
+        },
+        {
+          "field": "license_start_date",
+          "name": "LICENSE TERM START DATE",
+          "description": ""
+        },
+        {
+          "field": "expiration_date",
+          "name": "LICENSE TERM EXPIRATION DATE",
+          "description": ""
+        },
+        {
+          "field": "license_approved_for_issuance",
+          "name": "LICENSE APPROVED FOR ISSUANCE",
+          "description": "This is the date the license was ready for issuance. Licenses may not be issued if the customer owes debt to the City. "
+        },
+        {
+          "field": "date_issued",
+          "name": "DATE ISSUED",
+          "description": ""
+        },
+        {
+          "field": "license_status",
+          "name": "LICENSE STATUS",
+          "description": "See the dataset description for the codes used."
+        },
+        {
+          "field": "license_status_change_date",
+          "name": "LICENSE STATUS CHANGE DATE",
+          "description": ""
+        }
+      ],
+      "downloaded_rows": 1185058,
+      "retained_rows": 201981,
+      "pages": [
+        {
+          "shard": 0,
+          "page": 0,
+          "after_key": 0,
+          "upper_key": 766291,
+          "rows": 1996,
+          "sha256": "412e34ff9dd5685b4cfb690df0e7f8bb1465ddf786d5dee171cfea8058aa16d4"
+        },
+        {
+          "shard": 1,
+          "page": 0,
+          "after_key": 766291,
+          "upper_key": 1532583,
+          "rows": 50000,
+          "sha256": "996a516b1b108ca23ba91936d5b9713627bf451fec083b82cfba3ef10524086e"
+        },
+        {
+          "shard": 1,
+          "page": 1,
+          "after_key": 1247483,
+          "upper_key": 1532583,
+          "rows": 50000,
+          "sha256": "3faeb870fb180f0755ccb4a1cb6d540c595c616362abdba8d53fb0cb106b6ba3"
+        },
+        {
+          "shard": 1,
+          "page": 2,
+          "after_key": 1312046,
+          "upper_key": 1532583,
+          "rows": 50000,
+          "sha256": "ffbf85b29ad20a02ffbfd7956b2f4fe1e54c0a81e80129dd65a42fafef0e89bd"
+        },
+        {
+          "shard": 1,
+          "page": 3,
+          "after_key": 1374861,
+          "upper_key": 1532583,
+          "rows": 50000,
+          "sha256": "ba6ba14b1d7018186e3dfd894ee7c7e3a15378ddd54db35f7a6a05ce348e692d"
+        },
+        {
+          "shard": 1,
+          "page": 4,
+          "after_key": 1457567,
+          "upper_key": 1532583,
+          "rows": 50000,
+          "sha256": "de1ca298d41f7194fb41684226dcf160d8a9fd6d295118103cbee22404b2edb0"
+        },
+        {
+          "shard": 1,
+          "page": 5,
+          "after_key": 1524075,
+          "upper_key": 1532583,
+          "rows": 7614,
+          "sha256": "abe6835e0bb97d169a3e5ac7a4918ad93f79f79938fa43d752a50217dc282e41"
+        },
+        {
+          "shard": 2,
+          "page": 0,
+          "after_key": 1532583,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "56c422a83a41c4fad8561ed31ef4678d4a70fc64f6063bf1aafcadbfb9277b57"
+        },
+        {
+          "shard": 2,
+          "page": 1,
+          "after_key": 1596991,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "ed0e785743bc1548f86393abb62afc912332a2cebf2c2e95ac3e200919bfc43c"
+        },
+        {
+          "shard": 2,
+          "page": 2,
+          "after_key": 1659382,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "ed6934df66bd95dacd56a7e310f2fac474aa108027c5e7dfd153bcd1d96ddb28"
+        },
+        {
+          "shard": 2,
+          "page": 3,
+          "after_key": 1742886,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "28f9f1cbbde0bbc0e3d30cb4321307789b3bf0db5c94a330b01e913effa2ac26"
+        },
+        {
+          "shard": 2,
+          "page": 4,
+          "after_key": 1808232,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "13b5f5280e5b66324c658220f56d12638039c64e7b9cd2ff6a378ad72f66868e"
+        },
+        {
+          "shard": 2,
+          "page": 5,
+          "after_key": 1872776,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "4cbb965014b242dca31570e7acef82d1f31c3ff6354cea1ffeb82ee6cde880d7"
+        },
+        {
+          "shard": 2,
+          "page": 6,
+          "after_key": 1943285,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "f367da52ad42aa9fc8f6473ac48c743d233a7e748a9afaaeac2d4f27ae678a33"
+        },
+        {
+          "shard": 2,
+          "page": 7,
+          "after_key": 2014709,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "82a1a924f5a206ab6c8d63563d9dab5eb143728e065491d6a4d8c439812287be"
+        },
+        {
+          "shard": 2,
+          "page": 8,
+          "after_key": 2085155,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "dc90dc0024e68114590034128cf8e03b44f78216ce68d1dd6d4ecd6f74161bb3"
+        },
+        {
+          "shard": 2,
+          "page": 9,
+          "after_key": 2156400,
+          "upper_key": 2298874,
+          "rows": 50000,
+          "sha256": "d457b046eace453f0e7e5c08dd0f668d3753bc32426c3a2b294516d1522a7b52"
+        },
+        {
+          "shard": 2,
+          "page": 10,
+          "after_key": 2250079,
+          "upper_key": 2298874,
+          "rows": 24646,
+          "sha256": "7134801122bc4756d24d91bde4796afc45f98d9607f7a8ed65c9fd7007bb79c2"
+        },
+        {
+          "shard": 3,
+          "page": 0,
+          "after_key": 2298874,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "257ecc9de3f889412b60f7c850f9419410881bfe6ab6b2f500ff1e30892fede6"
+        },
+        {
+          "shard": 3,
+          "page": 1,
+          "after_key": 2394984,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "13453b94d9a31e89fad12e184ce2483c5960c7b0dd887857347936ccf5e816b1"
+        },
+        {
+          "shard": 3,
+          "page": 2,
+          "after_key": 2490038,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "fef205412c698fc40dcf7e9b68d9377fdd1b51d7b47cc8289278125145b14fa9"
+        },
+        {
+          "shard": 3,
+          "page": 3,
+          "after_key": 2580790,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "1f576e61d8e0fc191d25b790b93478322b0136cc69015fb9f20d5794cbea1b18"
+        },
+        {
+          "shard": 3,
+          "page": 4,
+          "after_key": 2679355,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "77ac501a2ed2267a7ba89677fe8bf99cbd7f49833d3a3589c4de7d51a3bedd6f"
+        },
+        {
+          "shard": 3,
+          "page": 5,
+          "after_key": 2773182,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "83e620ab442fc40b4c013361be63a801144bfd1ca91c57176c3139d368aaa26b"
+        },
+        {
+          "shard": 3,
+          "page": 6,
+          "after_key": 2866892,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "5618a36867f4d688014dbc7ce50c582f9fe84cb35ffc22eab4e9c26456f80a06"
+        },
+        {
+          "shard": 3,
+          "page": 7,
+          "after_key": 2960332,
+          "upper_key": 3065166,
+          "rows": 50000,
+          "sha256": "7dca3b86e9b0bb3e90d0592ba8bf736feddacd11754b0090934bfc376e786f47"
+        },
+        {
+          "shard": 3,
+          "page": 8,
+          "after_key": 3059850,
+          "upper_key": 3065166,
+          "rows": 802,
+          "sha256": "5b9f3885e9e39e72aaffdad50ef7a11b437ea757f4e5925d1103c1e0e84aba24"
+        }
+      ],
+      "selection_note": "Keep transactions whose public license_number occurs in the downloaded inspection projection. This only reduces storage; feature construction still applies the per-row issue-date cutoff. No current status filter is applied."
+    }
+  },
+  "files": {
+    "inspections.parquet": {
+      "sha256": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+      "bytes": 6098957
+    },
+    "licenses.parquet": {
+      "sha256": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272",
+      "bytes": 4985210
+    }
+  },
+  "cleaning_audit": {
+    "inspections": {
+      "input_rows": 304348,
+      "exact_duplicates_removed": 0,
+      "invalid_date_rows_removed": 0,
+      "output_rows": 304348,
+      "missing_license_rows": 813,
+      "missing_address_rows": 3,
+      "isolated_unknown_entity_rows": 3
+    },
+    "licenses": {
+      "input_rows": 201981,
+      "output_rows": 201981,
+      "invalid_identity_or_issue_rows_removed": 0,
+      "missing_term_start_rows": 189,
+      "missing_expiration_rows": 175,
+      "expiration_before_start_rows": 158,
+      "invalid_term_end_dates_masked": 158,
+      "missing_address_rows": 0
+    }
+  },
+  "limitations": [
+    "Event and issue dates do not establish public availability dates.",
+    "The City backfilled additional license addresses on 2025-09-25 (pnmi-a3z5).",
+    "License term start is not a verified business opening date.",
+    "Final license status is retained for auditing only and must not be backfilled into features.",
+    "Violation definitions changed on 2018-07-01; violation text is not downloaded or modeled.",
+    "Fresh downloads may differ after retrospective source corrections."
+  ]
+}

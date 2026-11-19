@@ -21,6 +21,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -76,7 +77,7 @@ def query_url(dataset: str, params: dict, suffix: str = "json") -> str:
 
 def download_source(
     name: str, end_exclusive: str, raw_dir: Path, page_size: int,
-    keep_licenses: set[str] | None = None, refresh: bool = False,
+    keep_licenses: set[str] | None = None, refresh: bool = False, workers: int = 1,
 ) -> tuple[pd.DataFrame, dict]:
     source = SOURCES[name]
     dataset, key = source["dataset"], source["key"]
@@ -84,7 +85,8 @@ def download_source(
     if name == "inspections":
         where += " AND inspection_date >= '2010-01-01T00:00:00'"
     selection = {"$select": ",".join(source["columns"]), "$where": where, "$order": f"{key} ASC"}
-    fingerprint = hashlib.sha256(json.dumps(selection, sort_keys=True).encode()).hexdigest()[:16]
+    cache_identity = selection if workers == 1 else {"selection": selection, "workers": workers}
+    fingerprint = hashlib.sha256(json.dumps(cache_identity, sort_keys=True).encode()).hexdigest()[:16]
     cache = raw_dir / dataset / fingerprint
     if refresh and cache.exists():
         shutil.rmtree(cache)
@@ -115,35 +117,49 @@ def download_source(
             ],
         }
         header_path.write_text(json.dumps(header, indent=2, ensure_ascii=False) + "\n")
-    cursor, page_number, total = 0, 0, 0
-    kept, pages = [], []
-    while True:
-        params = dict(selection)
-        params["$where"] += f" AND {key} > {cursor} AND {key} <= {header['max_key']}"
-        params["$limit"] = page_size
-        path = cache / f"page_{page_number:04d}.csv.gz"
-        if not path.exists():
-            body = request_bytes(query_url(dataset, params, "csv"))
-            temporary = path.with_suffix(".tmp")
-            temporary.write_bytes(gzip.compress(body, mtime=0))
-            temporary.replace(path)
-        frame = pd.read_csv(io.BytesIO(gzip.decompress(path.read_bytes())), dtype=str, keep_default_na=False)
-        count = len(frame)
-        pages.append({"page": page_number, "after_key": cursor, "rows": count, "sha256": sha256_file(path)})
-        if not count:
-            break
-        values = pd.to_numeric(frame[key], errors="raise")
-        if values.duplicated().any() or not values.is_monotonic_increasing or values.iloc[0] <= cursor:
-            raise ValueError(f"Invalid {key} page ordering/uniqueness on page {page_number}")
-        cursor = int(values.iloc[-1])
-        total += count
-        if keep_licenses is not None:
-            frame = frame.loc[frame["license_number"].map(normalize_license).isin(keep_licenses)]
-        kept.append(frame)
-        print(f"{name}: {total:,}/{header['expected_rows']:,} source rows; {sum(len(p) for p in kept):,} retained", flush=True)
-        if count < page_size:
-            break
-        page_number += 1
+    def download_shard(shard: int) -> tuple[list[pd.DataFrame], list[dict], int]:
+        cursor = header["max_key"] * shard // workers
+        upper = header["max_key"] * (shard + 1) // workers
+        page_number, shard_total = 0, 0
+        kept, pages = [], []
+        while True:
+            params = dict(selection)
+            params["$where"] += f" AND {key} > {cursor} AND {key} <= {upper}"
+            params["$limit"] = page_size
+            prefix = "" if workers == 1 else f"shard_{shard:02d}_"
+            path = cache / f"{prefix}page_{page_number:04d}.csv.gz"
+            if not path.exists():
+                body = request_bytes(query_url(dataset, params, "csv"))
+                temporary = path.with_suffix(".tmp")
+                temporary.write_bytes(gzip.compress(body, mtime=0))
+                temporary.replace(path)
+            frame = pd.read_csv(io.BytesIO(gzip.decompress(path.read_bytes())), dtype=str, keep_default_na=False)
+            count = len(frame)
+            pages.append({"shard": shard, "page": page_number, "after_key": cursor,
+                          "upper_key": upper, "rows": count, "sha256": sha256_file(path)})
+            if not count:
+                break
+            values = pd.to_numeric(frame[key], errors="raise")
+            if (values.duplicated().any() or not values.is_monotonic_increasing
+                    or values.iloc[0] <= cursor or values.iloc[-1] > upper):
+                raise ValueError(f"Invalid {key} page ordering/uniqueness on shard {shard}, page {page_number}")
+            cursor = int(values.iloc[-1])
+            shard_total += count
+            if keep_licenses is not None:
+                frame = frame.loc[frame["license_number"].map(normalize_license).isin(keep_licenses)]
+            kept.append(frame)
+            print(f"{name} shard {shard + 1}/{workers}: {shard_total:,} source rows; "
+                  f"{sum(len(p) for p in kept):,} retained", flush=True)
+            if count < page_size:
+                break
+            page_number += 1
+        return kept, pages, shard_total
+
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        parts = list(executor.map(download_shard, range(workers)))
+    kept = [frame for frames, _, _ in parts for frame in frames]
+    pages = [page for _, shard_pages, _ in parts for page in shard_pages]
+    total = sum(n for _, _, n in parts)
     if total != header["expected_rows"]:
         raise ValueError(f"{name}: expected {header['expected_rows']} rows, received {total}; use --refresh if source changed")
     result = pd.concat(kept, ignore_index=True)
@@ -159,10 +175,13 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=ROOT / "data" / "snapshots")
     parser.add_argument("--raw-dir", type=Path, default=ROOT / "data" / "raw")
     parser.add_argument("--page-size", type=int, default=50000)
+    parser.add_argument("--license-workers", type=int, default=4)
     parser.add_argument("--refresh", action="store_true")
     args = parser.parse_args()
     if not 1 <= args.page_size <= 50000:
         parser.error("--page-size must be from 1 through 50000")
+    if not 1 <= args.license_workers <= 8:
+        parser.error("--license-workers must be from 1 through 8")
     end_exclusive = (datetime.strptime(args.end_date, "%Y-%m-%d") + timedelta(days=1)).date().isoformat()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     if (args.output_dir / "manifest.json").exists() and not args.refresh:
@@ -179,7 +198,7 @@ def main() -> None:
     licenses_used = set(inspections["license_"].map(normalize_license)) - {""}
     licenses, license_source = download_source(
         "licenses", end_exclusive, args.raw_dir, args.page_size,
-        keep_licenses=licenses_used, refresh=args.refresh,
+        keep_licenses=licenses_used, refresh=args.refresh, workers=args.license_workers,
     )
     license_path = args.output_dir / "licenses.parquet"
     licenses.to_parquet(license_path, index=False, compression="zstd")
