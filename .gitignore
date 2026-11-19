@@ -8,6 +8,16 @@ __pycache__/
 .env
 data/raw/
 data/processed/
+
+# Research datasets and fitted artifacts stay local (including inherited snapshots).
+*.parquet
+*.csv
+!reports/metrics/*.csv
+*.joblib
+*.pkl
+*.npy
+*.npz
+.local/
 artifacts/
 reports/reproduction/
 reports/tmp/
