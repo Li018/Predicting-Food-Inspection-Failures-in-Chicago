@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "selected_model": "logistic_regression",
+  "probability_kind": "calibrated",
+  "selection_metric": "2023 validation average_precision (non-interpolated AP)",
+  "selected_validation_average_precision": 0.37883007924805334,
+  "validation_average_precision_by_family": {
+    "prevalence": 0.27635014429022947,
+    "logistic_regression": 0.37883007924805334,
+    "lightgbm": 0.37806295377990484
+  },
+  "fixed_tie_order": [
+    "prevalence",
+    "logistic_regression",
+    "lightgbm"
+  ],
+  "selected_parameters": {
+    "C": 0.1,
+    "class_weight": null
+  },
+  "estimator_fit_period": [
+    "2019-01-01",
+    "2022-12-31"
+  ],
+  "calibrator_fit_period": [
+    "2024-01-01",
+    "2024-12-31"
+  ],
+  "refitted_after_selection": false,
+  "test_used_for_model_selection": false,
+  "descriptive_test_ap_leader": {
+    "model": "lightgbm",
+    "average_precision": 0.32149120266975106,
+    "role": "Descriptive held-out comparison only; does not replace the validation-selected model"
+  },
+  "requested_additional_families": {
+    "xgboost": "Not implemented in the remote baseline; no new model was added in this finishing scope",
+    "catboost": "Not implemented in the remote baseline; no new model was added in this finishing scope"
+  },
+  "source_metrics": {
+    "prevalence": {
+      "path": "reports/metrics/prevalence_metrics.json",
+      "sha256": "e5202caf8719d97e4a4c53948218f92a489e284bfbbd6299de9e9411aa46a1d9"
+    },
+    "logistic_regression": {
+      "path": "reports/metrics/logistic_regression_metrics.json",
+      "sha256": "1168703d881c8b1b91bd28a2623ff3aa6208cce6704ecd6f236dc2e804d0c6b0"
+    },
+    "lightgbm": {
+      "path": "reports/metrics/lightgbm_metrics.json",
+      "sha256": "b9d4949cc540ef5b9b20960207025409cc2c8669e22d3e1f2c40955339c0e92c"
+    }
+  },
+  "reported_population": "2025 observed Canvass inspections, conditional on historical scheduling",
+  "pr_auc_definition": "AP uses non-interpolated stepwise area; it is not trapezoidal integration of the plotted PR curve",
+  "daily_capacity_definition": "ceil(fraction * n_day); selected_n and selected_fraction report effective capacity",
+  "confidence_interval_scope": "Annual pooled fixed-model establishment bootstrap; no daily-queue intervals"
+}

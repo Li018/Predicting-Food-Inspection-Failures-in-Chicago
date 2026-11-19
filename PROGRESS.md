@@ -10,7 +10,7 @@ point-in-time features, model selection, calibration and evaluation are reused.
 - [x] **Step 2:** Full-data profile, annual drift, rule-change comparison, temporal split sizes and license linkage (`reports/metrics/data_summary.json`).
 - [x] **Step 3:** Full-data logistic regression, validation selection, 2024 calibration and 2025 evaluation.
 - [x] **Step 4:** Full-data LightGBM and held-out calibration/evaluation.
-- [ ] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
+- [x] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
 - [ ] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
 - [ ] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
 - [ ] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
@@ -60,3 +60,12 @@ needs calibration: Brier improves 0.220831 to 0.168129 and LogLoss 0.631613 to
 0.514865. Top-10% precision is 0.378734 (lift 1.679400). Ranking is unchanged by
 calibration. Logistic regression remains the validation-selected model; 2025
 descriptive performance does not replace the prespecified selection rule.
+
+### Step 5
+
+The comparison includes all three existing families, each raw and calibrated, with
+95% entity-cluster intervals. XGBoost/CatBoost were not implemented in the starting
+repository and were not added. The validation-selected primary model is calibrated
+logistic regression. Paired 2025 LightGBM-minus-LR AP is +0.006925, with 95% CI
+[-0.003442, 0.016447]; all five paired metric intervals include zero. The small
+test advantage does not support declaring LightGBM superior.

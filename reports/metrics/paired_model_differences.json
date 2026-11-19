@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "difference": "LightGBM calibrated minus Logistic Regression calibrated",
+  "split": "test",
+  "year": 2025,
+  "alignment": {
+    "key": "inspection_id",
+    "verified_fields": [
+      "inspection_date",
+      "entity_id",
+      "target"
+    ],
+    "n": 8363,
+    "n_entities": 8028,
+    "failures": 1886
+  },
+  "bootstrap": {
+    "method": "Paired establishment-cluster percentile bootstrap",
+    "n_replicates": 500,
+    "seed": 20261119,
+    "confidence": 0.95,
+    "same_cluster_draw_for_both_models": true,
+    "within_cluster_rows": "Retain all inspection rows for each sampled establishment"
+  },
+  "intervals": {
+    "roc_auc": {
+      "estimate": 0.0030931294370438733,
+      "lower": -0.00511898883862392,
+      "upper": 0.010748183959972058,
+      "valid_replicates": 500,
+      "contains_zero": true,
+      "direction_favoring_lightgbm": "positive"
+    },
+    "average_precision": {
+      "estimate": 0.0069249693051153804,
+      "lower": -0.0034422589353866355,
+      "upper": 0.0164466357053361,
+      "valid_replicates": 500,
+      "contains_zero": true,
+      "direction_favoring_lightgbm": "positive"
+    },
+    "brier_score": {
+      "estimate": -0.00038331654680029414,
+      "lower": -0.0011101568618256529,
+      "upper": 0.0004255956438413158,
+      "valid_replicates": 500,
+      "contains_zero": true,
+      "direction_favoring_lightgbm": "negative"
+    },
+    "log_loss": {
+      "estimate": -0.0005171236700175497,
+      "lower": -0.002420344902023794,
+      "upper": 0.0015660374738344718,
+      "valid_replicates": 500,
+      "contains_zero": true,
+      "direction_favoring_lightgbm": "negative"
+    },
+    "top_10pct_precision": {
+      "estimate": 0.016726403823178027,
+      "lower": -0.010746593271229498,
+      "upper": 0.043711482426961615,
+      "valid_replicates": 500,
+      "contains_zero": true,
+      "direction_favoring_lightgbm": "positive"
+    }
+  },
+  "limitations": [
+    "Conditional on fixed estimators, source snapshot and historical inspection scheduling.",
+    "No retraining, calendar-drift, publication-lag or policy-effect uncertainty is included.",
+    "Percentile intervals describe paired uncertainty; no multiplicity-adjusted hypothesis test was performed.",
+    "Annual pooled Top 10% ranking; these intervals are not intervals for daily inspection queues.",
+    "Test differences do not alter the model selected using 2023 validation AP."
+  ]
+}
