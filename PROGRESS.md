@@ -14,7 +14,7 @@ point-in-time features, model selection, calibration and evaluation are reused.
 - [x] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
 - [x] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
 - [x] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
-- [ ] **Step 9:** Evidence-based research and operational analysis (`reports/topic1_report.md`).
+- [x] **Step 9:** Evidence-based research and operational analysis (`reports/topic1_report.md`).
 - [ ] **Step 10:** Final README, reproduction command, full pytest, metric/link consistency and tracked-file checks.
 
 ## Fixed experiment
@@ -102,3 +102,13 @@ Top-10% allocation weight, while the largest individual probability change is
 12.55 percentage points. Correlated-feature contribution cancellation is measured
 without causal or feature-removal claims. No identities or row-level predictions
 are exported; all four new figures were visually inspected.
+
+### Step 9
+
+Completed the Chinese Topic 1 research report with all 39 feature definitions,
+11 figures and traceable aggregate evidence. Independent data and model reviews
+checked the split/linkage figures, selection and uncertainty, calibration, global
+and local explanations, lag sensitivity and daily-capacity recommendations.
+The report distinguishes event-time safeguards from unobservable publication
+history, conditional ranking yield from prospective policy impact, and SHAP
+associations from outcome causes. Final pytest and README/asset QA remain Step 10.
