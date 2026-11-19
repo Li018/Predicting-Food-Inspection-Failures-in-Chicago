@@ -10,12 +10,12 @@ point-in-time features, model selection, calibration and evaluation are reused.
 - [x] **Step 2:** Full-data profile, annual drift, rule-change comparison, temporal split sizes and license linkage (`reports/metrics/data_summary.json`).
 - [x] **Step 3:** Full-data logistic regression, validation selection, 2024 calibration and 2025 evaluation.
 - [x] **Step 4:** Full-data LightGBM and held-out calibration/evaluation.
-- [x] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
+- [x] **Step 5:** All model families implemented in the starting repository, with a unified comparison and confidence intervals (XGBoost/CatBoost absent).
 - [x] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
 - [x] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
 - [x] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
 - [x] **Step 9:** Evidence-based research and operational analysis (`reports/topic1_report.md`).
-- [ ] **Step 10:** Final README, reproduction command, full pytest, metric/link consistency and tracked-file checks.
+- [x] **Step 10:** Final README, reproduction command, full pytest, metric/link consistency and tracked-file checks.
 
 ## Fixed experiment
 
@@ -112,3 +112,16 @@ and local explanations, lag sensitivity and daily-capacity recommendations.
 The report distinguishes event-time safeguards from unobservable publication
 history, conditional ranking yield from prospective policy impact, and SHAP
 associations from outcome causes. Final pytest and README/asset QA remain Step 10.
+
+### Step 10
+
+Finalized the illustrated README, reproduction entry point, report QA status and
+a single authoritative progress log. Full pytest: 55 passed, one third-party
+pytest-plugin deprecation warning. Delivery QA verifies six model rows and
+78 confidence intervals, source/split/figure/SHAP/error/lag consistency, all
+39 dictionary features, Markdown links, and 11 300-dpi PNGs. No raw data, Parquet
+snapshots or fitted models are tracked at the current HEAD/pending delivery.
+The four reused core modules remain byte-identical to the starting remote commit.
+The 13-stage reproduction plan passed its actual dry run, including frozen source
+hashes; full analysis stages were already executed individually during Steps 2–8.
+The new wrapper was not represented as a second end-to-end training run.

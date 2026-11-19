@@ -116,7 +116,7 @@
 | 留出集参与预处理或选参 | 缺失处理、类别编码、估计器只在 2019–2022 年拟合；2023 年仅选择候选 | [运行脚本](../scripts/run_model.py) |
 | 用测试标签选择模型或校准 | 2024 年独立校准；2025 年只评估与解释；主模型选择记录冻结 | [model_selection.json](metrics/model_selection.json) |
 
-训练、预测及解释产物通过来源哈希和目标对齐检查连接起来；SHAP 重构与已保存概率也做了数值核对。已有回归测试覆盖未来记录不改变过去特征、同日不可见、实体隔离、未知结果处理、训练期预处理和测试标签不影响拟合等性质。**这些是本报告采用的实现约束与验证依据；完整 pytest 和最终链接／产物 QA 属于 Step 10，本报告不预先宣称该轮全量测试已经通过。**[特征测试](../tests/test_features.py)、[模型测试](../tests/test_models.py)
+训练、预测及解释产物通过来源哈希和目标对齐检查连接起来；SHAP 重构与已保存概率也做了数值核对。已有回归测试覆盖未来记录不改变过去特征、同日不可见、实体隔离、未知结果处理、训练期预处理和测试标签不影响拟合等性质。**最终完整 pytest 已通过：55 passed、1 warning。唯一警告来自第三方测试插件对 pytest 内部名称的弃用提示，不涉及模型数值或时间边界断言；具体交付核验见 [qa_summary.json](metrics/qa_summary.json)。**[特征测试](../tests/test_features.py)、[模型测试](../tests/test_models.py)
 
 ### 3.2 事件发生时间正确，不等于历史公开时间可复原
 
@@ -434,7 +434,7 @@ Kannan、Shapiro 与 Bilgic 的 *Hindsight Analysis of the Chicago Food Inspecti
 | 信息滞后及相关归因 | [lag_sensitivity.json](metrics/lag_sensitivity.json)、[feature_context.json](metrics/feature_context.json) |
 | 容量与业务收益 | [年度 Top-K](metrics/figure_topk_performance.csv)、[逐日容量](metrics/figure_daily_capacity_yield.csv) |
 
-当前研究结论建立在已完成的全量数据处理、模型训练、独立校准、留出评估及解释数值闭合上。**最终全量 pytest、README 一键复现说明、图片链接和 Git 追踪检查将在 Step 10 汇总；本节由最终 QA 结果更新。**
+当前研究结论建立在已完成的全量数据处理、模型训练、独立校准、留出评估及解释数值闭合上。最终完整 pytest 为 **55 passed、1 warning**。一键复现、来源哈希核验和简洁日志见 [README](../README.md) 与 [reproduce.py](../scripts/reproduce.py)；数值、链接、PNG 和当前 Git 追踪检查由 [qa_delivery.py](../scripts/qa_delivery.py) 汇总至 [qa_summary.json](metrics/qa_summary.json)。这些检查验证本次实现与交付的一致性，仍保留第 3 节关于历史发布时间的局限。
 
 ### 外部一手参考
 

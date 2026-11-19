@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "passed": true,
+  "checked_at_utc": "2026-11-19T12:29:14.359385+00:00",
+  "elapsed_seconds": 1.4382290159992408,
+  "source_commit_at_check": "33ead9377f9dc469ff89d9bb38c8871860ed84ae",
+  "checks": [
+    {
+      "name": "full_pytest",
+      "passed": true,
+      "elapsed_seconds": 0.0014670190003016614,
+      "details": {
+        "summary": "55 passed, 1 warning in 3.04s",
+        "passed_tests": 55,
+        "warnings": 1,
+        "warning_summaries": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec."
+        ],
+        "elapsed_seconds": 3.9795384359995296,
+        "reused_matching_receipt": true,
+        "fingerprint_files": 12,
+        "source_fingerprint": {
+          "pyproject.toml": "708c7e06f72756e8c005b5413dab5d201fd5971f1390b544e1c89767ebf49790",
+          "requirements-lock.txt": "1a9a8046b59a048424fe9f38609a784f73b8d620cd105262cf73f062e81fd167",
+          "scripts/download_data.py": "deea4fde00dd6c7c61eb5a8b5e3562737ebac355cd12bd75b6581b2879e89424",
+          "src/chicago_food/__init__.py": "fbc3e48d4e10136766cdcdb63aaaa95850b66fa85d0d6c1580bd86b5a7dc9aad",
+          "src/chicago_food/data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+          "src/chicago_food/features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686",
+          "src/chicago_food/metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663",
+          "src/chicago_food/models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+          "tests/test_data.py": "2b9111d3b570f123e95f1642b2b18813bb8d8bd92cc25ae24b778e11cc489eaa",
+          "tests/test_features.py": "d851708ce65f22b032f1ba0dc975d66f65e69d8b11ee5aa6235ebe0c88434415",
+          "tests/test_metrics.py": "b5ae3f95357ad83781db5a8c503374f5c809e12fc0dde7bd1310e7a139567965",
+          "tests/test_models.py": "00b018aed8362bcc036266f92ce54e295f0bfa12ee5a9db4a1ff0c5b015f246e"
+        },
+        "log_sha256": "9a78a8332153da9c5ca5d314bef8c93ea677d6c96e701ff00b45fbc7efb77763",
+        "warning_interpretation": "The recorded PytestRemovedIn10Warning, if present, is from the installed AnyIO pytest plugin; it is not a model fit or leakage-test failure."
+      }
+    },
+    {
+      "name": "data_and_splits",
+      "passed": true,
+      "elapsed_seconds": 0.026778180999826873,
+      "details": {
+        "feature_rows": 51626,
+        "features": 39,
+        "split_rows": {
+          "train": 27396,
+          "validation": 7277,
+          "calibration": 8590,
+          "test": 8363
+        },
+        "annual_rows": 16,
+        "source_sha256": {
+          "inspections.parquet": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+          "licenses.parquet": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272"
+        }
+      }
+    },
+    {
+      "name": "models_and_intervals",
+      "passed": true,
+      "elapsed_seconds": 0.17132235200006107,
+      "details": {
+        "comparison_rows": 6,
+        "confidence_intervals": 78,
+        "selected_by_2023_ap": "logistic_regression",
+        "test_rows_per_model": 8363
+      }
+    },
+    {
+      "name": "calibration_and_capacity",
+      "passed": true,
+      "elapsed_seconds": 0.06980669499989745,
+      "details": {
+        "calibration_bins": 20,
+        "pooled_curve_rows": 81,
+        "daily_capacity_rows": 9
+      }
+    },
+    {
+      "name": "shap_and_errors",
+      "passed": true,
+      "elapsed_seconds": 0.051622660999782966,
+      "details": {
+        "global_features": 39,
+        "global_plot_sample": 1500,
+        "full_test_explanations": 8363,
+        "maximum_probability_reconstruction_error": 4.440892098500626e-16,
+        "local_cases": 9,
+        "subgroup_rows": 103
+      }
+    },
+    {
+      "name": "lag_sensitivity",
+      "passed": true,
+      "elapsed_seconds": 0.7275036099999852,
+      "details": {
+        "rows": 6,
+        "lags_days": [
+          1,
+          7,
+          30
+        ],
+        "identical_targets": 8363,
+        "refitting_performed": false
+      }
+    },
+    {
+      "name": "figures",
+      "passed": true,
+      "elapsed_seconds": 0.008229170000049635,
+      "details": {
+        "count": 11,
+        "all_dpi": 300,
+        "files": [
+          {
+            "path": "reports/figures/roc_pr_curves.png",
+            "dpi": 300,
+            "width_px": 3719,
+            "height_px": 1771,
+            "bytes": 390996,
+            "sha256": "88f0ed49efb6bee78939cfa5d98bad17f775adabdda7cd1b0870fd2aaf2c53cc",
+            "aggregate_data": "reports/metrics/figure_model_performance_summary.csv"
+          },
+          {
+            "path": "reports/figures/topk_performance.png",
+            "dpi": 300,
+            "width_px": 3728,
+            "height_px": 1771,
+            "bytes": 387481,
+            "sha256": "d147106832d575dfd82eefe3131b6088710a0c54fcedfd44e1f676ddab6ef351",
+            "aggregate_data": "reports/metrics/figure_topk_performance.csv"
+          },
+          {
+            "path": "reports/figures/daily_capacity_yield.png",
+            "dpi": 300,
+            "width_px": 3725,
+            "height_px": 1828,
+            "bytes": 400083,
+            "sha256": "3e077258a73bcd3ecd87a8a59db76102044555d5d2469b37ff65a898426a33b2",
+            "aggregate_data": "reports/metrics/figure_daily_capacity_yield.csv"
+          },
+          {
+            "path": "reports/figures/shap_global_summary.png",
+            "dpi": 300,
+            "width_px": 3858,
+            "height_px": 2412,
+            "bytes": 684597,
+            "sha256": "691823e2486fb3949d16af5ab5f6649c44b0632128eb2e9c839bddf85bd0a313"
+          },
+          {
+            "path": "reports/figures/shap_feature_dependence.png",
+            "dpi": 300,
+            "width_px": 4275,
+            "height_px": 2752,
+            "bytes": 555808,
+            "sha256": "3dc850e8c3372f1ce6beab584bc7f14a519038685c4e16acb53337351bd9309b"
+          },
+          {
+            "path": "reports/figures/shap_local_fp.png",
+            "dpi": 300,
+            "width_px": 3382,
+            "height_px": 2225,
+            "bytes": 353327,
+            "sha256": "454ddd0dd1cef8fa442eb7093879195f26c743e0c81d65e65ec358ea677fa18e"
+          },
+          {
+            "path": "reports/figures/shap_local_fn.png",
+            "dpi": 300,
+            "width_px": 3382,
+            "height_px": 2225,
+            "bytes": 362407,
+            "sha256": "af629b21becba3ae61e2daa20a9820cc46103cb640968fdfa8327139f79456f8"
+          },
+          {
+            "path": "reports/figures/shap_local_tp.png",
+            "dpi": 300,
+            "width_px": 3382,
+            "height_px": 2225,
+            "bytes": 334891,
+            "sha256": "f52bcda973b59b33adbe6d5acf1c9cbd6a7a0656176be7f2df806a3d375059c9"
+          },
+          {
+            "path": "reports/figures/error_profiles.png",
+            "dpi": 300,
+            "width_px": 3329,
+            "height_px": 1636,
+            "bytes": 345471,
+            "sha256": "67f1e0d534b1af09c843e0156fe23cac63dfe1a067ecc3ae6e1e0a814ae583f2"
+          },
+          {
+            "path": "reports/figures/annual_drift.png",
+            "sha256": "8abd6de57aedea11186735c9b941410a5a980d506a0086953eddb84f45c834f7",
+            "bytes": 336014,
+            "width_px": 3720,
+            "height_px": 2220,
+            "dpi": 300
+          },
+          {
+            "path": "reports/figures/calibration_curves.png",
+            "sha256": "8c2e2d2f13399602bc91aa5ffbbf6c370fac12df7912b56d45f8fe1a04d065fa",
+            "bytes": 561947,
+            "width_px": 3780,
+            "height_px": 2550,
+            "dpi": 300
+          }
+        ]
+      }
+    },
+    {
+      "name": "documents",
+      "passed": true,
+      "elapsed_seconds": 0.013770497999757936,
+      "details": {
+        "documents": [
+          {
+            "path": "README.md",
+            "sha256": "e01dabe7b37403a7c2f415d22340b87b53bdb469e7e2cedc4e57b6a303f6d8a5",
+            "relative_links": 39
+          },
+          {
+            "path": "reports/topic1_report.md",
+            "sha256": "f9172323aca8d55211dd03a691270ca4cf70aa224ab2522555508af7aa3766e3",
+            "relative_links": 91
+          }
+        ],
+        "rounded_metric_values_verified": 48,
+        "feature_dictionary_entries": 39
+      }
+    },
+    {
+      "name": "git_hygiene",
+      "passed": true,
+      "elapsed_seconds": 0.028048230000422336,
+      "details": {
+        "tracked_or_pending_files": 77,
+        "largest_file": {
+          "path": "reports/figures/shap_global_summary.png",
+          "bytes": 684597
+        },
+        "forbidden_files": [],
+        "ignore_rules": {
+          "data/raw/_qa_probe.csv": ".gitignore:9:data/raw/",
+          "data/snapshots/inspections.parquet": ".gitignore:13:*.parquet",
+          "data/snapshots/licenses.parquet": ".gitignore:13:*.parquet",
+          ".local/features.parquet": ".gitignore:20:.local/",
+          ".local/models/logistic_regression.joblib": ".gitignore:20:.local/",
+          ".local/lag_30_features.parquet": ".gitignore:20:.local/"
+        },
+        "core_unchanged_since": "80f92b7c8a2f43cb2478ba15d0574a287fac670e",
+        "core_sha256": {
+          "src/chicago_food/data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+          "src/chicago_food/features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686",
+          "src/chicago_food/models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+          "src/chicago_food/metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663"
+        }
+      }
+    }
+  ],
+  "passed_checks": 9,
+  "total_checks": 9,
+  "scope": "Numerical artifact consistency, current documentation links/tables, PNG integrity, full tests and publication hygiene; no model training.",
+  "limits": "Event-time tests and delay sensitivity do not prove historical publication-time availability or remove retrospective source corrections."
+}
