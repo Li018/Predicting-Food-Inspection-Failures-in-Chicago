@@ -13,7 +13,7 @@ point-in-time features, model selection, calibration and evaluation are reused.
 - [x] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
 - [x] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
 - [x] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
-- [ ] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
+- [x] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
 - [ ] **Step 9:** Evidence-based research and operational analysis (`reports/topic1_report.md`).
 - [ ] **Step 10:** Final README, reproduction command, full pytest, metric/link consistency and tracked-file checks.
 
@@ -89,3 +89,16 @@ back to 39 features, and samples 1,500 test rows for display. Affine calibration
 scaling reconstructs all 8,363 observed test probabilities within 4.45e-16.
 History duration, scored-day counts and failed-day counts dominate attribution;
 correlated predictors can offset one another and are not causal effects.
+
+### Step 8
+
+Completed nine anonymous FP/FN/TP cases, three locally exact SHAP waterfalls,
+full error-group profiles, subgroup metrics and frozen-model lag sensitivity.
+At pooled Top-10%, LR yields TP/FP/FN/TN = 303/534/1,583/5,943; the p>=0.5
+confusion is documented separately. Of missed failures, 68.86% last passed and
+only 0.57% are cold starts; 34.83% of false positives pass with conditions.
+Thirty-day lag changes LR AP from 0.314566 to 0.313942 and retains 96.18% of
+Top-10% allocation weight, while the largest individual probability change is
+12.55 percentage points. Correlated-feature contribution cancellation is measured
+without causal or feature-removal claims. No identities or row-level predictions
+are exported; all four new figures were visually inspected.

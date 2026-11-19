@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "model": "logistic_regression",
+  "probability_kind": "calibrated",
+  "test_year": 2025,
+  "primary_operating_point": {
+    "rule": "Annual pooled Top10% capacity; no outcome-based threshold optimization",
+    "nominal_fraction": 0.1,
+    "capacity": 837,
+    "n": 8363,
+    "boundary_probability": 0.32717122069526555,
+    "fractional_boundary_rows": 0,
+    "tie_policy": "capacity_weights expected fractional allocation at boundary-score ties",
+    "confusion": {
+      "tp": 303.0,
+      "fp": 534.0,
+      "fn": 1583.0,
+      "tn": 5943.0,
+      "selected_n": 837.0,
+      "selected_fraction": 0.10008370202080594,
+      "precision": 0.36200716845878134,
+      "recall": 0.1606574761399788,
+      "false_positive_rate": 0.08244557665585919,
+      "false_negative_rate": 0.8393425238600212
+    },
+    "error_definitions": {
+      "FP": "Non-Fail allocated to priority quota",
+      "FN": "Fail outside priority quota",
+      "TP": "Fail allocated to priority quota",
+      "TN": "Non-Fail outside priority quota"
+    }
+  },
+  "separate_fixed_probability_operating_point": {
+    "rule": "p >= 0.5; supplied as a distinct diagnostic, not used for case or subgroup selection",
+    "confusion": {
+      "tp": 18.0,
+      "fp": 25.0,
+      "fn": 1868.0,
+      "tn": 6452.0,
+      "selected_n": 43.0,
+      "selected_fraction": 0.005141695563792897,
+      "precision": 0.4186046511627907,
+      "recall": 0.009544008483563097,
+      "false_positive_rate": 0.0038598116411919098,
+      "false_negative_rate": 0.9904559915164369
+    }
+  },
+  "case_selection": {
+    "n": 9,
+    "groups": {
+      "FP": 3,
+      "FN": 3,
+      "TP": 3
+    },
+    "method": "Highest-probability FP and TP; lowest-probability FN; stable order; no fractional membership cases",
+    "unique_entities_across_all_cases": 9,
+    "public_identifiers": "Anonymous case_id only; no inspection IDs, entity IDs, names, addresses or licenses exported",
+    "caveat": "Extreme illustrative cases are selected after observing test outcomes; they do not represent group frequencies"
+  },
+  "profile_definitions": {
+    "counts_and_shares": "Weighted by expected global priority allocation when ties occur",
+    "prior_counts": "Entity inspection days, not raw event rows",
+    "recent_pass": "Last observed result is Pass and days since last inspection <=365",
+    "missing_means": "Numeric means use observed values only; corresponding missing fractions are reported",
+    "small_subgroups": "n<100 or fewer than 10 Fail or 10 Non-Fail cases; no comparative ranking claims"
+  },
+  "descriptive_patterns": [
+    {
+      "pattern": "Missed failures and previously observed Pass results",
+      "fn_last_result_pass_fraction": 0.6885660138976627,
+      "tp_last_result_pass_fraction": 0.5379537953795379,
+      "fn_zero_prior_fail_days_fraction": 0.2533164876816172
+    },
+    {
+      "pattern": "Priority false positives retain historical failure evidence",
+      "fp_mean_prior_fail_days": 6.046816479400749,
+      "tn_mean_prior_fail_days": 1.923271075214538,
+      "fp_actual_pass_with_conditions_fraction": 0.34831460674157305
+    },
+    {
+      "pattern": "History coverage and misses despite observed history",
+      "fn_cold_start_fraction": 0.005685407454200884,
+      "fn_license_history_available_fraction": 0.799115603284902,
+      "fp_license_history_available_fraction": 0.8370786516853933
+    }
+  ],
+  "verification": {
+    "local_waterfall_max_logit_closure_error": 8.881784197001252e-16,
+    "all_nine_case_max_probability_reconstruction_error": 2.220446049250313e-16,
+    "all_test_max_probability_reconstruction_error": 4.440892098500626e-16
+  },
+  "figures": [
+    {
+      "path": "reports/figures/shap_local_fp.png",
+      "dpi": 300,
+      "width_px": 3382,
+      "height_px": 2225,
+      "bytes": 353327,
+      "sha256": "454ddd0dd1cef8fa442eb7093879195f26c743e0c81d65e65ec358ea677fa18e"
+    },
+    {
+      "path": "reports/figures/shap_local_fn.png",
+      "dpi": 300,
+      "width_px": 3382,
+      "height_px": 2225,
+      "bytes": 362407,
+      "sha256": "af629b21becba3ae61e2daa20a9820cc46103cb640968fdfa8327139f79456f8"
+    },
+    {
+      "path": "reports/figures/shap_local_tp.png",
+      "dpi": 300,
+      "width_px": 3382,
+      "height_px": 2225,
+      "bytes": 334891,
+      "sha256": "f52bcda973b59b33adbe6d5acf1c9cbd6a7a0656176be7f2df806a3d375059c9"
+    },
+    {
+      "path": "reports/figures/error_profiles.png",
+      "dpi": 300,
+      "width_px": 3329,
+      "height_px": 1636,
+      "bytes": 345471,
+      "sha256": "67f1e0d534b1af09c843e0156fe23cac63dfe1a067ecc3ae6e1e0a814ae583f2"
+    }
+  ],
+  "local_shap_source_sha256": "3f505461a591d5660e94e0babb6036183c2367f3c547130421e6badacbe9f8dc",
+  "limitations": [
+    "SHAP explains the fitted score, not the real-world cause of an inspection result.",
+    "Current outcomes are read only to describe errors and conditional Pass, never as predictive inputs.",
+    "Associations cannot distinguish changed practices, incomplete history, inspector effects or unobserved hazards.",
+    "Capacity misses are not interchangeable with probability-threshold errors or newly proven safety risks."
+  ]
+}

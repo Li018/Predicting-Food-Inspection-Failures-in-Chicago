@@ -1,0 +1,70 @@
+{
+  "correlation_reference": {
+    "split": "train",
+    "n": 27396,
+    "missingness": "Pairwise complete observations"
+  },
+  "groups": {
+    "calendar": [
+      "month_sin",
+      "month_cos"
+    ],
+    "inspection_history": [
+      "prior_inspection_days",
+      "prior_scored_days",
+      "prior_fail_days",
+      "prior_conditions_days",
+      "historical_failure_rate",
+      "historical_conditions_rate",
+      "prior_routine_days",
+      "routine_failure_rate",
+      "last3_failure_rate",
+      "last5_failure_rate",
+      "recency_weighted_failure_rate",
+      "scored_days_365d",
+      "failures_365d",
+      "failure_rate_365d",
+      "observed_history_years",
+      "cold_start",
+      "no_scored_history",
+      "recent_failure_streak",
+      "historical_pre2018_share",
+      "last_result",
+      "last_routine_result"
+    ],
+    "inspection_recency": [
+      "days_since_last_inspection",
+      "days_since_last_scored_inspection",
+      "days_since_last_routine",
+      "days_since_last_failure"
+    ],
+    "license_history": [
+      "license_history_available",
+      "license_observed_tenure_years",
+      "days_since_license_issue",
+      "license_records_observed",
+      "license_terms_observed",
+      "days_to_license_term_end",
+      "license_term_elapsed_days",
+      "license_term_status",
+      "license_category",
+      "license_application_type"
+    ],
+    "prior_facility_and_risk": [
+      "prior_facility_type",
+      "prior_risk"
+    ]
+  },
+  "units": "LR-logit SHAP scaled onto the affine calibration-logit scale",
+  "cancellation_definition": "1 - mean(abs(sum(phi_j within group))) / sum(mean(abs(phi_j)))",
+  "interpretation": [
+    "Summing signed contributions before taking absolute values exposes offsetting terms.",
+    "Correlations and cancellation describe the fitted model and covariate distribution; they are not a causal explanation of coefficient signs.",
+    "These are attribution summaries, not feature-ablation estimates of predictive value.",
+    "In particular, a negative conditional historical-failure-rate coefficient must not be interpreted as a protective effect of failures."
+  ],
+  "feature_sha256": "be7d1ce6df1f697058b8b8435c5d4cd344466d47e92b72f4729ef9b9af51014a",
+  "local_shap_sha256": "3f505461a591d5660e94e0babb6036183c2367f3c547130421e6badacbe9f8dc",
+  "correlation_pairs": 45,
+  "group_summary_rows": 10
+}
