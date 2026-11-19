@@ -8,7 +8,7 @@ point-in-time features, model selection, calibration and evaluation are reused.
 
 - [x] **Step 1:** Inspect the latest remote code; create this checklist; keep data snapshots local and untracked.
 - [x] **Step 2:** Full-data profile, annual drift, rule-change comparison, temporal split sizes and license linkage (`reports/metrics/data_summary.json`).
-- [ ] **Step 3:** Full-data logistic regression, validation selection, 2024 calibration and 2025 evaluation.
+- [x] **Step 3:** Full-data logistic regression, validation selection, 2024 calibration and 2025 evaluation.
 - [ ] **Step 4:** Full-data LightGBM and held-out calibration/evaluation.
 - [ ] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
 - [ ] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
@@ -42,3 +42,12 @@ Verified 304,348 inspection rows and 201,981 relevant license transactions from
 train 27,396; validation 7,277; calibration 8,590; test 8,363. Test Fail rate is
 22.5517%; test point-in-time license availability is 79.5528%. The 2018 first/second
 half Fail rates are 24.0205% / 19.8465%; this is descriptive, not causal.
+
+### Step 3
+
+Full-data prevalence and logistic regression completed with 500 establishment-cluster
+bootstrap replicates. Logistic selection on 2023 AP chose C=0.1 without class
+weighting (validation AP 0.378830). Its 2025 AUC/AP are 0.632637/0.314566;
+calibration improves Brier 0.169531 to 0.168513 and LogLoss 0.517131 to 0.515382.
+Top-10% precision is 0.362007 (lift 1.605231). No convergence warnings; model and
+row-level predictions remain local. Added a thin per-family runner around existing modules.
