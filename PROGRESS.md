@@ -7,7 +7,7 @@ Each numbered step is committed and pushed independently. Existing cleaning,
 point-in-time features, model selection, calibration and evaluation are reused.
 
 - [x] **Step 1:** Inspect the latest remote code; create this checklist; keep data snapshots local and untracked.
-- [ ] **Step 2:** Full-data profile, annual drift, rule-change comparison, temporal split sizes and license linkage (`reports/metrics/data_summary.json`).
+- [x] **Step 2:** Full-data profile, annual drift, rule-change comparison, temporal split sizes and license linkage (`reports/metrics/data_summary.json`).
 - [ ] **Step 3:** Full-data logistic regression, validation selection, 2024 calibration and 2025 evaluation.
 - [ ] **Step 4:** Full-data LightGBM and held-out calibration/evaluation.
 - [ ] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
@@ -34,3 +34,11 @@ strictly historical features, prevalence/logistic/LightGBM model families and he
 The two data snapshots inherited from the remote have been retained locally and
 removed from Git tracking; no history rewriting is performed. Numerical research
 claims remain pending until the full-data runs complete.
+
+### Step 2
+
+Verified 304,348 inspection rows and 201,981 relevant license transactions from
+1,185,058 downloaded license records. The modeling cohort contains 51,626 targets:
+train 27,396; validation 7,277; calibration 8,590; test 8,363. Test Fail rate is
+22.5517%; test point-in-time license availability is 79.5528%. The 2018 first/second
+half Fail rates are 24.0205% / 19.8465%; this is descriptive, not causal.

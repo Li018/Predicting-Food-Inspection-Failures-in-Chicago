@@ -1,0 +1,1315 @@
+{
+  "schema_version": 1,
+  "data_end_date": "2025-12-31",
+  "snapshot_completed_at_utc": "2026-11-19T11:11:20.336442+00:00",
+  "snapshot_kind": "Official retrospective projection; not a historical publication-time archive",
+  "sources": {
+    "inspections": {
+      "dataset": "4ijn-s7e5",
+      "source_url": "https://data.cityofchicago.org/Health-Human-Services/Food-Inspections/4ijn-s7e5",
+      "downloaded_rows": 304348,
+      "retained_rows": 304348,
+      "expected_source_rows": 304348,
+      "selection": {
+        "$select": "inspection_id,dba_name,aka_name,license_,facility_type,risk,address,city,state,zip,inspection_date,inspection_type,results,latitude,longitude",
+        "$where": "inspection_date < '2026-01-01T00:00:00' AND inspection_date >= '2010-01-01T00:00:00'",
+        "$order": "inspection_id ASC"
+      },
+      "snapshot": {
+        "rows": 304348,
+        "columns": 15,
+        "schema": {
+          "inspection_id": "string",
+          "dba_name": "string",
+          "aka_name": "string",
+          "license_": "string",
+          "facility_type": "string",
+          "risk": "string",
+          "address": "string",
+          "city": "string",
+          "state": "string",
+          "zip": "string",
+          "inspection_date": "string",
+          "inspection_type": "string",
+          "results": "string",
+          "latitude": "string",
+          "longitude": "string"
+        },
+        "bytes": 6098957,
+        "sha256": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585"
+      }
+    },
+    "licenses": {
+      "dataset": "r5kz-chrr",
+      "source_url": "https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses/r5kz-chrr",
+      "downloaded_rows": 1185058,
+      "retained_rows": 201981,
+      "expected_source_rows": 1185058,
+      "selection": {
+        "$select": "license_id,license_number,account_number,site_number,legal_name,doing_business_as_name,address,city,state,zip_code,license_code,license_description,application_type,application_created_date,application_requirements_complete,license_start_date,expiration_date,license_approved_for_issuance,date_issued,license_status,license_status_change_date",
+        "$where": "date_issued < '2026-01-01T00:00:00'",
+        "$order": "license_id ASC"
+      },
+      "snapshot": {
+        "rows": 201981,
+        "columns": 21,
+        "schema": {
+          "license_id": "string",
+          "license_number": "string",
+          "account_number": "string",
+          "site_number": "string",
+          "legal_name": "string",
+          "doing_business_as_name": "string",
+          "address": "string",
+          "city": "string",
+          "state": "string",
+          "zip_code": "string",
+          "license_code": "string",
+          "license_description": "string",
+          "application_type": "string",
+          "application_created_date": "string",
+          "application_requirements_complete": "string",
+          "license_start_date": "string",
+          "expiration_date": "string",
+          "license_approved_for_issuance": "string",
+          "date_issued": "string",
+          "license_status": "string",
+          "license_status_change_date": "string"
+        },
+        "bytes": 4985210,
+        "sha256": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272"
+      }
+    }
+  },
+  "source_cleaning_audit": {
+    "inspections": {
+      "input_rows": 304348,
+      "exact_duplicates_removed": 0,
+      "invalid_date_rows_removed": 0,
+      "output_rows": 304348,
+      "missing_license_rows": 813,
+      "missing_address_rows": 3,
+      "isolated_unknown_entity_rows": 3
+    },
+    "licenses": {
+      "input_rows": 201981,
+      "output_rows": 201981,
+      "invalid_identity_or_issue_rows_removed": 0,
+      "missing_term_start_rows": 189,
+      "missing_expiration_rows": 175,
+      "expiration_before_start_rows": 158,
+      "invalid_term_end_dates_masked": 158,
+      "missing_address_rows": 0
+    }
+  },
+  "cleaning_audit": {
+    "inspections": {
+      "input_rows": 304348,
+      "exact_duplicates_removed": 0,
+      "invalid_date_rows_removed": 0,
+      "output_rows": 304348,
+      "missing_license_rows": 813,
+      "missing_address_rows": 3,
+      "isolated_unknown_entity_rows": 3
+    },
+    "licenses": {
+      "input_rows": 201981,
+      "output_rows": 201981,
+      "invalid_identity_or_issue_rows_removed": 0,
+      "missing_term_start_rows": 189,
+      "missing_expiration_rows": 175,
+      "expiration_before_start_rows": 158,
+      "invalid_term_end_dates_masked": 158,
+      "missing_address_rows": 0
+    }
+  },
+  "all_year_target_audit": {
+    "routine_labeled_rows": 127510,
+    "conflicting_target_days": 9,
+    "conflicting_target_rows_excluded": 95,
+    "same_day_same_label_targets_collapsed": 348,
+    "target_count_before_date_filter": 127067,
+    "target_type": "Canvass (exact)",
+    "positive_label": "Fail",
+    "negative_labels": [
+      "Pass",
+      "Pass w/ Conditions"
+    ]
+  },
+  "modeling_feature_audit": {
+    "routine_labeled_rows": 127510,
+    "conflicting_target_days": 9,
+    "conflicting_target_rows_excluded": 95,
+    "same_day_same_label_targets_collapsed": 348,
+    "target_count_before_date_filter": 127067,
+    "target_type": "Canvass (exact)",
+    "positive_label": "Fail",
+    "negative_labels": [
+      "Pass",
+      "Pass w/ Conditions"
+    ],
+    "observation_lag_days": 1,
+    "target_count": 51626,
+    "history_unit": "calendar day; fail if any recognized Fail that day",
+    "feature_count": 39,
+    "numeric_features": [
+      "prior_inspection_days",
+      "prior_scored_days",
+      "prior_fail_days",
+      "prior_conditions_days",
+      "historical_failure_rate",
+      "historical_conditions_rate",
+      "prior_routine_days",
+      "routine_failure_rate",
+      "last3_failure_rate",
+      "last5_failure_rate",
+      "recency_weighted_failure_rate",
+      "scored_days_365d",
+      "failures_365d",
+      "failure_rate_365d",
+      "days_since_last_inspection",
+      "days_since_last_scored_inspection",
+      "days_since_last_routine",
+      "days_since_last_failure",
+      "observed_history_years",
+      "cold_start",
+      "no_scored_history",
+      "recent_failure_streak",
+      "historical_pre2018_share",
+      "license_history_available",
+      "license_observed_tenure_years",
+      "days_since_license_issue",
+      "license_records_observed",
+      "license_terms_observed",
+      "days_to_license_term_end",
+      "license_term_elapsed_days",
+      "month_sin",
+      "month_cos"
+    ],
+    "categorical_features": [
+      "last_result",
+      "last_routine_result",
+      "prior_facility_type",
+      "prior_risk",
+      "license_term_status",
+      "license_category",
+      "license_application_type"
+    ],
+    "cold_start_count": 511,
+    "license_history_available_count": 40700
+  },
+  "overall": {
+    "inspection_records": 304348,
+    "recognized_outcome_records": 261387,
+    "all_recognized_outcomes_fail_rate": 0.2247816456059406,
+    "canvass_records": 157950,
+    "eligible_target_days": 127067,
+    "target_failures": 28826,
+    "target_fail_rate": 0.22685669764769767,
+    "target_entities": 26331
+  },
+  "annual": [
+    {
+      "year": 2010,
+      "inspection_records": 18068,
+      "recognized_outcome_records": 17382,
+      "all_recognized_outcomes_fail_rate": 0.2590610976872627,
+      "canvass_records": 7625,
+      "eligible_target_days": 6834,
+      "target_failures": 1383,
+      "target_fail_rate": 0.20237050043898155,
+      "target_entities": 6305
+    },
+    {
+      "year": 2011,
+      "inspection_records": 18747,
+      "recognized_outcome_records": 17584,
+      "all_recognized_outcomes_fail_rate": 0.2476683348498635,
+      "canvass_records": 8667,
+      "eligible_target_days": 7331,
+      "target_failures": 1477,
+      "target_fail_rate": 0.20147319601691446,
+      "target_entities": 6623
+    },
+    {
+      "year": 2012,
+      "inspection_records": 18866,
+      "recognized_outcome_records": 16018,
+      "all_recognized_outcomes_fail_rate": 0.22736920963915594,
+      "canvass_records": 9560,
+      "eligible_target_days": 6836,
+      "target_failures": 1458,
+      "target_fail_rate": 0.21328262141603277,
+      "target_entities": 6576
+    },
+    {
+      "year": 2013,
+      "inspection_records": 20947,
+      "recognized_outcome_records": 17068,
+      "all_recognized_outcomes_fail_rate": 0.19621513944223107,
+      "canvass_records": 12469,
+      "eligible_target_days": 8829,
+      "target_failures": 1615,
+      "target_fail_rate": 0.18291992298108506,
+      "target_entities": 8434
+    },
+    {
+      "year": 2014,
+      "inspection_records": 21540,
+      "recognized_outcome_records": 18621,
+      "all_recognized_outcomes_fail_rate": 0.19972074539498416,
+      "canvass_records": 12827,
+      "eligible_target_days": 10102,
+      "target_failures": 1916,
+      "target_fail_rate": 0.18966541278954663,
+      "target_entities": 8638
+    },
+    {
+      "year": 2015,
+      "inspection_records": 20911,
+      "recognized_outcome_records": 17892,
+      "all_recognized_outcomes_fail_rate": 0.20159847976749384,
+      "canvass_records": 11506,
+      "eligible_target_days": 8988,
+      "target_failures": 1917,
+      "target_fail_rate": 0.21328437917222964,
+      "target_entities": 8516
+    },
+    {
+      "year": 2016,
+      "inspection_records": 22818,
+      "recognized_outcome_records": 19860,
+      "all_recognized_outcomes_fail_rate": 0.21641490433031219,
+      "canvass_records": 12933,
+      "eligible_target_days": 10525,
+      "target_failures": 2638,
+      "target_fail_rate": 0.25064133016627077,
+      "target_entities": 9203
+    },
+    {
+      "year": 2017,
+      "inspection_records": 21587,
+      "recognized_outcome_records": 18499,
+      "all_recognized_outcomes_fail_rate": 0.22276879831342233,
+      "canvass_records": 11638,
+      "eligible_target_days": 9224,
+      "target_failures": 2261,
+      "target_fail_rate": 0.24512142237640935,
+      "target_entities": 8521
+    },
+    {
+      "year": 2018,
+      "inspection_records": 17191,
+      "recognized_outcome_records": 14849,
+      "all_recognized_outcomes_fail_rate": 0.2234493905313489,
+      "canvass_records": 8388,
+      "eligible_target_days": 6772,
+      "target_failures": 1507,
+      "target_fail_rate": 0.22253396337861783,
+      "target_entities": 6536
+    },
+    {
+      "year": 2019,
+      "inspection_records": 19052,
+      "recognized_outcome_records": 16121,
+      "all_recognized_outcomes_fail_rate": 0.22405557967867998,
+      "canvass_records": 10581,
+      "eligible_target_days": 8352,
+      "target_failures": 1867,
+      "target_fail_rate": 0.22353927203065135,
+      "target_entities": 8157
+    },
+    {
+      "year": 2020,
+      "inspection_records": 15123,
+      "recognized_outcome_records": 12600,
+      "all_recognized_outcomes_fail_rate": 0.23293650793650794,
+      "canvass_records": 7940,
+      "eligible_target_days": 6166,
+      "target_failures": 1550,
+      "target_fail_rate": 0.25137852740836847,
+      "target_entities": 6105
+    },
+    {
+      "year": 2021,
+      "inspection_records": 15868,
+      "recognized_outcome_records": 13139,
+      "all_recognized_outcomes_fail_rate": 0.23099170408706904,
+      "canvass_records": 7522,
+      "eligible_target_days": 6238,
+      "target_failures": 1533,
+      "target_fail_rate": 0.24575184353959603,
+      "target_entities": 6115
+    },
+    {
+      "year": 2022,
+      "inspection_records": 16936,
+      "recognized_outcome_records": 14286,
+      "all_recognized_outcomes_fail_rate": 0.24877502449951,
+      "canvass_records": 7956,
+      "eligible_target_days": 6640,
+      "target_failures": 1811,
+      "target_fail_rate": 0.2727409638554217,
+      "target_entities": 6561
+    },
+    {
+      "year": 2023,
+      "inspection_records": 18261,
+      "recognized_outcome_records": 15413,
+      "all_recognized_outcomes_fail_rate": 0.2488159346006618,
+      "canvass_records": 8624,
+      "eligible_target_days": 7277,
+      "target_failures": 2011,
+      "target_fail_rate": 0.27635014429022947,
+      "target_entities": 7206
+    },
+    {
+      "year": 2024,
+      "inspection_records": 19228,
+      "recognized_outcome_records": 15995,
+      "all_recognized_outcomes_fail_rate": 0.21763050953422944,
+      "canvass_records": 10052,
+      "eligible_target_days": 8590,
+      "target_failures": 1996,
+      "target_fail_rate": 0.23236321303841675,
+      "target_entities": 8320
+    },
+    {
+      "year": 2025,
+      "inspection_records": 19205,
+      "recognized_outcome_records": 16060,
+      "all_recognized_outcomes_fail_rate": 0.21114570361145704,
+      "canvass_records": 9662,
+      "eligible_target_days": 8363,
+      "target_failures": 1886,
+      "target_fail_rate": 0.22551715891426521,
+      "target_entities": 8028
+    }
+  ],
+  "rule_change": {
+    "date": "2018-07-01",
+    "periods": {
+      "all_pre_change": {
+        "start": "2010-01-01",
+        "end": "2018-06-30",
+        "inspection_records": 172879,
+        "recognized_outcome_records": 151220,
+        "all_recognized_outcomes_fail_rate": 0.22175638143102763,
+        "canvass_records": 91880,
+        "eligible_target_days": 72574,
+        "target_failures": 15603,
+        "target_fail_rate": 0.2149943505938766,
+        "target_entities": 19162
+      },
+      "all_post_change": {
+        "start": "2018-07-01",
+        "end": "2025-12-31",
+        "inspection_records": 131469,
+        "recognized_outcome_records": 110167,
+        "all_recognized_outcomes_fail_rate": 0.2289342543592909,
+        "canvass_records": 66070,
+        "eligible_target_days": 54493,
+        "target_failures": 13223,
+        "target_fail_rate": 0.24265501991081423,
+        "target_entities": 15989
+      },
+      "adjacent_12_months_pre": {
+        "start": "2017-07-01",
+        "end": "2018-06-30",
+        "inspection_records": 19628,
+        "recognized_outcome_records": 16816,
+        "all_recognized_outcomes_fail_rate": 0.22882968601332065,
+        "canvass_records": 9964,
+        "eligible_target_days": 7874,
+        "target_failures": 1872,
+        "target_fail_rate": 0.23774447548895097,
+        "target_entities": 6954
+      },
+      "adjacent_12_months_post": {
+        "start": "2018-07-01",
+        "end": "2019-06-30",
+        "inspection_records": 17291,
+        "recognized_outcome_records": 14759,
+        "all_recognized_outcomes_fail_rate": 0.21146419134087674,
+        "canvass_records": 9044,
+        "eligible_target_days": 7242,
+        "target_failures": 1480,
+        "target_fail_rate": 0.2043634355150511,
+        "target_entities": 6570
+      },
+      "2018_first_half": {
+        "start": "2018-01-01",
+        "end": "2018-06-30",
+        "inspection_records": 9395,
+        "recognized_outcome_records": 8296,
+        "all_recognized_outcomes_fail_rate": 0.23384763741562198,
+        "canvass_records": 4655,
+        "eligible_target_days": 3905,
+        "target_failures": 938,
+        "target_fail_rate": 0.24020486555697823,
+        "target_entities": 3851
+      },
+      "2018_second_half": {
+        "start": "2018-07-01",
+        "end": "2018-12-31",
+        "inspection_records": 7796,
+        "recognized_outcome_records": 6553,
+        "all_recognized_outcomes_fail_rate": 0.21028536548145887,
+        "canvass_records": 3733,
+        "eligible_target_days": 2867,
+        "target_failures": 569,
+        "target_fail_rate": 0.19846529473317057,
+        "target_entities": 2857
+      }
+    },
+    "interpretation": "Descriptive comparison, not a causal estimate: rules, inspected population, and time may all differ."
+  },
+  "temporal_config": {
+    "train_start": "2019-01-01",
+    "train_end": "2022-12-31",
+    "validation_start": "2023-01-01",
+    "validation_end": "2023-12-31",
+    "calibration_start": "2024-01-01",
+    "calibration_end": "2024-12-31",
+    "test_start": "2025-01-01",
+    "test_end": "2025-12-31"
+  },
+  "splits": {
+    "train": {
+      "start": "2019-01-01",
+      "end": "2022-12-31",
+      "rows": 27396,
+      "entities": 12372,
+      "failures": 6761,
+      "fail_rate": 0.2467878522412031,
+      "cold_start_rows": 294,
+      "cold_start_rate": 0.01073149364870784,
+      "no_scored_history_rate": 0.011206015476711928,
+      "row_share_with_entity_seen_in_training": 1.0,
+      "license_matching": {
+        "rows": 27396,
+        "license_number_only_matches": 25384,
+        "license_number_only_match_rate": 0.9265586216965981,
+        "license_address_matches_ignoring_time": 21568,
+        "license_address_match_rate_ignoring_time": 0.7872682143378595,
+        "point_in_time_visible_matches": 21494,
+        "point_in_time_visible_match_rate": 0.784567090086144,
+        "lost_to_time_or_missing_term_start": 74
+      },
+      "numeric_feature_missingness": {
+        "prior_inspection_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_scored_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_fail_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_conditions_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_failure_rate": {
+          "missing": 307,
+          "missing_rate": 0.011206015476711928
+        },
+        "historical_conditions_rate": {
+          "missing": 307,
+          "missing_rate": 0.011206015476711928
+        },
+        "prior_routine_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "routine_failure_rate": {
+          "missing": 3764,
+          "missing_rate": 0.13739232004672214
+        },
+        "last3_failure_rate": {
+          "missing": 307,
+          "missing_rate": 0.011206015476711928
+        },
+        "last5_failure_rate": {
+          "missing": 307,
+          "missing_rate": 0.011206015476711928
+        },
+        "recency_weighted_failure_rate": {
+          "missing": 307,
+          "missing_rate": 0.011206015476711928
+        },
+        "scored_days_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failures_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failure_rate_365d": {
+          "missing": 16162,
+          "missing_rate": 0.5899401372463133
+        },
+        "days_since_last_inspection": {
+          "missing": 294,
+          "missing_rate": 0.01073149364870784
+        },
+        "days_since_last_scored_inspection": {
+          "missing": 307,
+          "missing_rate": 0.011206015476711928
+        },
+        "days_since_last_routine": {
+          "missing": 3764,
+          "missing_rate": 0.13739232004672214
+        },
+        "days_since_last_failure": {
+          "missing": 8150,
+          "missing_rate": 0.29748868447948607
+        },
+        "observed_history_years": {
+          "missing": 294,
+          "missing_rate": 0.01073149364870784
+        },
+        "cold_start": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "no_scored_history": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "recent_failure_streak": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_pre2018_share": {
+          "missing": 294,
+          "missing_rate": 0.01073149364870784
+        },
+        "license_history_available": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_observed_tenure_years": {
+          "missing": 5902,
+          "missing_rate": 0.21543290991385602
+        },
+        "days_since_license_issue": {
+          "missing": 5902,
+          "missing_rate": 0.21543290991385602
+        },
+        "license_records_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_terms_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "days_to_license_term_end": {
+          "missing": 5913,
+          "missing_rate": 0.21583442838370565
+        },
+        "license_term_elapsed_days": {
+          "missing": 5902,
+          "missing_rate": 0.21543290991385602
+        },
+        "month_sin": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "month_cos": {
+          "missing": 0,
+          "missing_rate": 0.0
+        }
+      }
+    },
+    "validation": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "rows": 7277,
+      "entities": 7206,
+      "failures": 2011,
+      "fail_rate": 0.27635014429022947,
+      "cold_start_rows": 110,
+      "cold_start_rate": 0.015116119279923046,
+      "no_scored_history_rate": 0.016352892675553114,
+      "row_share_with_entity_seen_in_training": 0.8570839631716367,
+      "license_matching": {
+        "rows": 7277,
+        "license_number_only_matches": 6720,
+        "license_number_only_match_rate": 0.923457468737117,
+        "license_address_matches_ignoring_time": 5725,
+        "license_address_match_rate_ignoring_time": 0.7867252988869039,
+        "point_in_time_visible_matches": 5711,
+        "point_in_time_visible_match_rate": 0.7848014291603683,
+        "lost_to_time_or_missing_term_start": 14
+      },
+      "numeric_feature_missingness": {
+        "prior_inspection_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_scored_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_fail_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_conditions_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_failure_rate": {
+          "missing": 119,
+          "missing_rate": 0.016352892675553114
+        },
+        "historical_conditions_rate": {
+          "missing": 119,
+          "missing_rate": 0.016352892675553114
+        },
+        "prior_routine_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "routine_failure_rate": {
+          "missing": 945,
+          "missing_rate": 0.12986120654115707
+        },
+        "last3_failure_rate": {
+          "missing": 119,
+          "missing_rate": 0.016352892675553114
+        },
+        "last5_failure_rate": {
+          "missing": 119,
+          "missing_rate": 0.016352892675553114
+        },
+        "recency_weighted_failure_rate": {
+          "missing": 119,
+          "missing_rate": 0.016352892675553114
+        },
+        "scored_days_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failures_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failure_rate_365d": {
+          "missing": 3897,
+          "missing_rate": 0.5355228803078191
+        },
+        "days_since_last_inspection": {
+          "missing": 110,
+          "missing_rate": 0.015116119279923046
+        },
+        "days_since_last_scored_inspection": {
+          "missing": 119,
+          "missing_rate": 0.016352892675553114
+        },
+        "days_since_last_routine": {
+          "missing": 945,
+          "missing_rate": 0.12986120654115707
+        },
+        "days_since_last_failure": {
+          "missing": 1914,
+          "missing_rate": 0.263020475470661
+        },
+        "observed_history_years": {
+          "missing": 110,
+          "missing_rate": 0.015116119279923046
+        },
+        "cold_start": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "no_scored_history": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "recent_failure_streak": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_pre2018_share": {
+          "missing": 110,
+          "missing_rate": 0.015116119279923046
+        },
+        "license_history_available": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_observed_tenure_years": {
+          "missing": 1566,
+          "missing_rate": 0.2151985708396317
+        },
+        "days_since_license_issue": {
+          "missing": 1566,
+          "missing_rate": 0.2151985708396317
+        },
+        "license_records_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_terms_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "days_to_license_term_end": {
+          "missing": 1571,
+          "missing_rate": 0.2158856671705373
+        },
+        "license_term_elapsed_days": {
+          "missing": 1566,
+          "missing_rate": 0.2151985708396317
+        },
+        "month_sin": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "month_cos": {
+          "missing": 0,
+          "missing_rate": 0.0
+        }
+      }
+    },
+    "calibration": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "rows": 8590,
+      "entities": 8320,
+      "failures": 1996,
+      "fail_rate": 0.23236321303841675,
+      "cold_start_rows": 63,
+      "cold_start_rate": 0.0073341094295692666,
+      "no_scored_history_rate": 0.00779976717112922,
+      "row_share_with_entity_seen_in_training": 0.7712456344586729,
+      "license_matching": {
+        "rows": 8590,
+        "license_number_only_matches": 8043,
+        "license_number_only_match_rate": 0.9363213038416763,
+        "license_address_matches_ignoring_time": 6856,
+        "license_address_match_rate_ignoring_time": 0.7981373690337602,
+        "point_in_time_visible_matches": 6842,
+        "point_in_time_visible_match_rate": 0.7965075669383004,
+        "lost_to_time_or_missing_term_start": 14
+      },
+      "numeric_feature_missingness": {
+        "prior_inspection_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_scored_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_fail_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_conditions_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_failure_rate": {
+          "missing": 67,
+          "missing_rate": 0.00779976717112922
+        },
+        "historical_conditions_rate": {
+          "missing": 67,
+          "missing_rate": 0.00779976717112922
+        },
+        "prior_routine_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "routine_failure_rate": {
+          "missing": 1113,
+          "missing_rate": 0.12956926658905704
+        },
+        "last3_failure_rate": {
+          "missing": 67,
+          "missing_rate": 0.00779976717112922
+        },
+        "last5_failure_rate": {
+          "missing": 67,
+          "missing_rate": 0.00779976717112922
+        },
+        "recency_weighted_failure_rate": {
+          "missing": 67,
+          "missing_rate": 0.00779976717112922
+        },
+        "scored_days_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failures_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failure_rate_365d": {
+          "missing": 4004,
+          "missing_rate": 0.46612339930151336
+        },
+        "days_since_last_inspection": {
+          "missing": 63,
+          "missing_rate": 0.0073341094295692666
+        },
+        "days_since_last_scored_inspection": {
+          "missing": 67,
+          "missing_rate": 0.00779976717112922
+        },
+        "days_since_last_routine": {
+          "missing": 1113,
+          "missing_rate": 0.12956926658905704
+        },
+        "days_since_last_failure": {
+          "missing": 2258,
+          "missing_rate": 0.2628637951105937
+        },
+        "observed_history_years": {
+          "missing": 63,
+          "missing_rate": 0.0073341094295692666
+        },
+        "cold_start": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "no_scored_history": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "recent_failure_streak": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_pre2018_share": {
+          "missing": 63,
+          "missing_rate": 0.0073341094295692666
+        },
+        "license_history_available": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_observed_tenure_years": {
+          "missing": 1748,
+          "missing_rate": 0.20349243306169965
+        },
+        "days_since_license_issue": {
+          "missing": 1748,
+          "missing_rate": 0.20349243306169965
+        },
+        "license_records_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_terms_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "days_to_license_term_end": {
+          "missing": 1754,
+          "missing_rate": 0.20419091967403957
+        },
+        "license_term_elapsed_days": {
+          "missing": 1748,
+          "missing_rate": 0.20349243306169965
+        },
+        "month_sin": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "month_cos": {
+          "missing": 0,
+          "missing_rate": 0.0
+        }
+      }
+    },
+    "test": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "rows": 8363,
+      "entities": 8028,
+      "failures": 1886,
+      "fail_rate": 0.22551715891426521,
+      "cold_start_rows": 44,
+      "cold_start_rate": 0.005261269879229941,
+      "no_scored_history_rate": 0.005380844194666986,
+      "row_share_with_entity_seen_in_training": 0.7130216429510942,
+      "license_matching": {
+        "rows": 8363,
+        "license_number_only_matches": 7810,
+        "license_number_only_match_rate": 0.9338754035633146,
+        "license_address_matches_ignoring_time": 6668,
+        "license_address_match_rate_ignoring_time": 0.7973215353342102,
+        "point_in_time_visible_matches": 6653,
+        "point_in_time_visible_match_rate": 0.7955279206026545,
+        "lost_to_time_or_missing_term_start": 15
+      },
+      "numeric_feature_missingness": {
+        "prior_inspection_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_scored_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_fail_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "prior_conditions_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_failure_rate": {
+          "missing": 45,
+          "missing_rate": 0.005380844194666986
+        },
+        "historical_conditions_rate": {
+          "missing": 45,
+          "missing_rate": 0.005380844194666986
+        },
+        "prior_routine_days": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "routine_failure_rate": {
+          "missing": 995,
+          "missing_rate": 0.11897644385985891
+        },
+        "last3_failure_rate": {
+          "missing": 45,
+          "missing_rate": 0.005380844194666986
+        },
+        "last5_failure_rate": {
+          "missing": 45,
+          "missing_rate": 0.005380844194666986
+        },
+        "recency_weighted_failure_rate": {
+          "missing": 45,
+          "missing_rate": 0.005380844194666986
+        },
+        "scored_days_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failures_365d": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "failure_rate_365d": {
+          "missing": 3275,
+          "missing_rate": 0.3916058830563195
+        },
+        "days_since_last_inspection": {
+          "missing": 44,
+          "missing_rate": 0.005261269879229941
+        },
+        "days_since_last_scored_inspection": {
+          "missing": 45,
+          "missing_rate": 0.005380844194666986
+        },
+        "days_since_last_routine": {
+          "missing": 995,
+          "missing_rate": 0.11897644385985891
+        },
+        "days_since_last_failure": {
+          "missing": 2142,
+          "missing_rate": 0.25612818366614853
+        },
+        "observed_history_years": {
+          "missing": 44,
+          "missing_rate": 0.005261269879229941
+        },
+        "cold_start": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "no_scored_history": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "recent_failure_streak": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "historical_pre2018_share": {
+          "missing": 44,
+          "missing_rate": 0.005261269879229941
+        },
+        "license_history_available": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_observed_tenure_years": {
+          "missing": 1710,
+          "missing_rate": 0.20447207939734546
+        },
+        "days_since_license_issue": {
+          "missing": 1710,
+          "missing_rate": 0.20447207939734546
+        },
+        "license_records_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "license_terms_observed": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "days_to_license_term_end": {
+          "missing": 1711,
+          "missing_rate": 0.20459165371278248
+        },
+        "license_term_elapsed_days": {
+          "missing": 1710,
+          "missing_rate": 0.20447207939734546
+        },
+        "month_sin": {
+          "missing": 0,
+          "missing_rate": 0.0
+        },
+        "month_cos": {
+          "missing": 0,
+          "missing_rate": 0.0
+        }
+      }
+    }
+  },
+  "license_matching_modeling_cohort": {
+    "rows": 51626,
+    "license_number_only_matches": 47957,
+    "license_number_only_match_rate": 0.9289311587184752,
+    "license_address_matches_ignoring_time": 40817,
+    "license_address_match_rate_ignoring_time": 0.790628752953938,
+    "point_in_time_visible_matches": 40700,
+    "point_in_time_visible_match_rate": 0.7883624530275443,
+    "lost_to_time_or_missing_term_start": 117
+  },
+  "license_matching_definition": {
+    "number_only": "License number appears anywhere in the cleaned retained source; ignores address and time.",
+    "number_and_address": "Exact normalized license number plus address appears in the source; ignores visibility time.",
+    "point_in_time": "Exact number/address match with issue date <= scoring date minus lag and term start <= scoring date.",
+    "denominator": "Eligible Canvass entity-day targets in the named split, including unmatched and cold-start targets.",
+    "tenure": "Years since earliest visible recorded term start; a left-censored proxy, not verified business age."
+  },
+  "feature_columns": [
+    "prior_inspection_days",
+    "prior_scored_days",
+    "prior_fail_days",
+    "prior_conditions_days",
+    "historical_failure_rate",
+    "historical_conditions_rate",
+    "prior_routine_days",
+    "routine_failure_rate",
+    "last3_failure_rate",
+    "last5_failure_rate",
+    "recency_weighted_failure_rate",
+    "scored_days_365d",
+    "failures_365d",
+    "failure_rate_365d",
+    "days_since_last_inspection",
+    "days_since_last_scored_inspection",
+    "days_since_last_routine",
+    "days_since_last_failure",
+    "observed_history_years",
+    "cold_start",
+    "no_scored_history",
+    "recent_failure_streak",
+    "historical_pre2018_share",
+    "license_history_available",
+    "license_observed_tenure_years",
+    "days_since_license_issue",
+    "license_records_observed",
+    "license_terms_observed",
+    "days_to_license_term_end",
+    "license_term_elapsed_days",
+    "month_sin",
+    "month_cos",
+    "last_result",
+    "last_routine_result",
+    "prior_facility_type",
+    "prior_risk",
+    "license_term_status",
+    "license_category",
+    "license_application_type"
+  ],
+  "numeric_feature_missingness": {
+    "prior_inspection_days": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "prior_scored_days": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "prior_fail_days": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "prior_conditions_days": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "historical_failure_rate": {
+      "missing": 538,
+      "missing_rate": 0.010421105644442723
+    },
+    "historical_conditions_rate": {
+      "missing": 538,
+      "missing_rate": 0.010421105644442723
+    },
+    "prior_routine_days": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "routine_failure_rate": {
+      "missing": 6817,
+      "missing_rate": 0.13204586836090343
+    },
+    "last3_failure_rate": {
+      "missing": 538,
+      "missing_rate": 0.010421105644442723
+    },
+    "last5_failure_rate": {
+      "missing": 538,
+      "missing_rate": 0.010421105644442723
+    },
+    "recency_weighted_failure_rate": {
+      "missing": 538,
+      "missing_rate": 0.010421105644442723
+    },
+    "scored_days_365d": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "failures_365d": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "failure_rate_365d": {
+      "missing": 27338,
+      "missing_rate": 0.5295393793824817
+    },
+    "days_since_last_inspection": {
+      "missing": 511,
+      "missing_rate": 0.00989811335373649
+    },
+    "days_since_last_scored_inspection": {
+      "missing": 538,
+      "missing_rate": 0.010421105644442723
+    },
+    "days_since_last_routine": {
+      "missing": 6817,
+      "missing_rate": 0.13204586836090343
+    },
+    "days_since_last_failure": {
+      "missing": 14464,
+      "missing_rate": 0.2801689071398133
+    },
+    "observed_history_years": {
+      "missing": 511,
+      "missing_rate": 0.00989811335373649
+    },
+    "cold_start": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "no_scored_history": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "recent_failure_streak": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "historical_pre2018_share": {
+      "missing": 511,
+      "missing_rate": 0.00989811335373649
+    },
+    "license_history_available": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "license_observed_tenure_years": {
+      "missing": 10926,
+      "missing_rate": 0.21163754697245574
+    },
+    "days_since_license_issue": {
+      "missing": 10926,
+      "missing_rate": 0.21163754697245574
+    },
+    "license_records_observed": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "license_terms_observed": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "days_to_license_term_end": {
+      "missing": 10949,
+      "missing_rate": 0.21208305892379808
+    },
+    "license_term_elapsed_days": {
+      "missing": 10926,
+      "missing_rate": 0.21163754697245574
+    },
+    "month_sin": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "month_cos": {
+      "missing": 0,
+      "missing_rate": 0.0
+    }
+  },
+  "categorical_missingness": {
+    "last_result": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "last_routine_result": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "prior_facility_type": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "prior_risk": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "license_term_status": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "license_category": {
+      "missing": 0,
+      "missing_rate": 0.0
+    },
+    "license_application_type": {
+      "missing": 0,
+      "missing_rate": 0.0
+    }
+  },
+  "limitations": [
+    "Event and issue dates do not establish public availability dates.",
+    "The City backfilled additional license addresses on 2025-09-25 (pnmi-a3z5).",
+    "License term start is not a verified business opening date.",
+    "Final license status is retained for auditing only and must not be backfilled into features.",
+    "Violation definitions changed on 2018-07-01; violation text is not downloaded or modeled.",
+    "Fresh downloads may differ after retrospective source corrections.",
+    "Publication timestamps are unavailable: event-time correctness cannot prove historical publication-time availability.",
+    "Observed failure risk is conditional on an inspection taking place; annual Top-K is retrospective, not a prospective scheduling trial."
+  ]
+}
