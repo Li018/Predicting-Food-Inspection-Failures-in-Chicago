@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "figure": "reports/figures/annual_drift.png",
+  "source": "reports/metrics/data_summary.json",
+  "source_sha256": "94b94791054e136af854a613b792c0a40bd26f22f9f7bcf4a3c1a0950869130a",
+  "aggregate_csv": "reports/metrics/annual_drift.csv",
+  "aggregate_csv_sha256": "c40e51104f3813185f74e5e286b6ce13976b6f9955f76bed517cd0c11f553a08",
+  "figure_sha256": "8abd6de57aedea11186735c9b941410a5a980d506a0086953eddb84f45c834f7",
+  "figure_bytes": 336014,
+  "pixel_dimensions": [
+    3720,
+    2220
+  ],
+  "dpi": 300,
+  "calendar_years": [
+    2010,
+    2025
+  ],
+  "annual_rows": 16,
+  "rule_change_date": "2018-07-01",
+  "year_geometry": "Annual bars and rates are centered at year + 0.5; period boundaries are integer years.",
+  "validation": "Annual record/target/failure sums match overall and all four split aggregates.",
+  "interpretation": "Descriptive observed-inspection drift; not a causal rule-change estimate."
+}

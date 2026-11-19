@@ -11,7 +11,7 @@ point-in-time features, model selection, calibration and evaluation are reused.
 - [x] **Step 3:** Full-data logistic regression, validation selection, 2024 calibration and 2025 evaluation.
 - [x] **Step 4:** Full-data LightGBM and held-out calibration/evaluation.
 - [x] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
-- [ ] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
+- [x] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
 - [ ] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
 - [ ] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
 - [ ] **Step 9:** Evidence-based research and operational analysis (`reports/topic1_report.md`).
@@ -69,3 +69,12 @@ repository and were not added. The validation-selected primary model is calibrat
 logistic regression. Paired 2025 LightGBM-minus-LR AP is +0.006925, with 95% CI
 [-0.003442, 0.016447]; all five paired metric intervals include zero. The small
 test advantage does not support declaring LightGBM superior.
+
+### Step 6
+
+Four 300-dpi figures now cover annual drift, ROC/PR, pooled Top-K, and daily
+capacity/yield; underlying aggregate tables are saved. At nominal daily Top-10%,
+rounding allocates 948 slots (11.34% of the observed cohort): primary LR finds
+341 failures versus 214.22 expected under same-day random allocation (+59.18%).
+This is conditional retrospective yield; no causal or days-earlier claim is made.
+All charts were inspected for labels, clipping and metric consistency.

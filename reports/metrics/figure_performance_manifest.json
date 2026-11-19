@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "selected_model": "logistic_regression",
+  "selection_year": 2023,
+  "calibration_year": 2024,
+  "evaluation_year": 2025,
+  "probability_kind": "calibrated",
+  "figures": [
+    {
+      "path": "reports/figures/roc_pr_curves.png",
+      "dpi": 300,
+      "width_px": 3719,
+      "height_px": 1771,
+      "bytes": 390996,
+      "sha256": "88f0ed49efb6bee78939cfa5d98bad17f775adabdda7cd1b0870fd2aaf2c53cc",
+      "aggregate_data": "reports/metrics/figure_model_performance_summary.csv"
+    },
+    {
+      "path": "reports/figures/topk_performance.png",
+      "dpi": 300,
+      "width_px": 3728,
+      "height_px": 1771,
+      "bytes": 387481,
+      "sha256": "d147106832d575dfd82eefe3131b6088710a0c54fcedfd44e1f676ddab6ef351",
+      "aggregate_data": "reports/metrics/figure_topk_performance.csv"
+    },
+    {
+      "path": "reports/figures/daily_capacity_yield.png",
+      "dpi": 300,
+      "width_px": 3725,
+      "height_px": 1828,
+      "bytes": 400083,
+      "sha256": "3e077258a73bcd3ecd87a8a59db76102044555d5d2469b37ff65a898426a33b2",
+      "aggregate_data": "reports/metrics/figure_daily_capacity_yield.csv"
+    }
+  ],
+  "source_files": {
+    "model_comparison.csv": "74c74c94e433ec61516a4abdb71271598f4a1553ceae1d760b747eb7b14fad90",
+    "model_selection.json": "727b3dbabb808152373e00901e1ba7a42f0cd2ebc1ccb9df23b16c036d4ac954"
+  },
+  "local_prediction_hashes": {
+    "logistic_regression": "b6f923256dfc72f1dff7ac8e3c12ea080333612fe2047bcf5d82ef84431e03fc",
+    "lightgbm": "e2c4aa3bc3a40cba9ae1b79d20e2f97438a2adbc139b6731f107b741871c76ff",
+    "prevalence": "8af6315f50931089c1943b041bc87d76ee1ce9566d4959c3747de4f2b0e25cd9"
+  },
+  "curve_data_policy": "Full ROC/PR curves are calculated locally; only scalar summaries are exported",
+  "topk_uncertainty": "Existing 500-replicate establishment-cluster intervals at 5%, 10%, 20%; annual pooled ranking only"
+}

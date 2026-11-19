@@ -1,0 +1,4 @@
+model,n,failures,prevalence,roc_auc,average_precision,roc_curve_points_rendered,pr_curve_points_rendered,probability_kind
+logistic_regression,8363,1886,0.22551715891426521,0.6326369627350944,0.3145662333646357,8341,8341,calibrated
+lightgbm,8363,1886,0.22551715891426521,0.6357300921721383,0.321491202669751,8307,8307,calibrated
+prevalence,8363,1886,0.22551715891426521,0.5,0.2255171589142652,2,2,calibrated
