@@ -3,7 +3,7 @@
 Average precision is sklearn's non-interpolated AP, not trapezoidal PR area.
 At a score tie crossing the capacity boundary, every tied observation receives the
 same fractional selection weight. This is the expectation over random tie-breaking;
-in particular a constant prevalence predictor never acquires spurious ranking lift.
+in particular a constant prevalence predictor has pooled ranking lift exactly one.
 """
 
 from __future__ import annotations
@@ -115,12 +115,25 @@ def evaluate_probabilities(
             result[f"top_{label}_{key}"] = value
         if day_indices is not None:
             daily_weights = np.zeros(len(y))
+            daily_random_weights = np.zeros(len(y))
             for indices in day_indices:
+                capacity = int(np.ceil(fraction * len(indices)))
                 daily_weights[indices] = capacity_weights(
-                    p[indices], int(np.ceil(fraction * len(indices)))
+                    p[indices], capacity
                 )
+                daily_random_weights[indices] = capacity / len(indices)
             for key, value in _capacity_result(y, daily_weights).items():
                 result[f"daily_top_{label}_{key}"] = value
+            random_result = _capacity_result(y, daily_random_weights)
+            random_precision = random_result["precision"]
+            result[f"daily_top_{label}_random_expected_precision"] = random_precision
+            result[f"daily_top_{label}_random_expected_failures_found"] = random_result[
+                "expected_failures_found"
+            ]
+            result[f"daily_top_{label}_lift_vs_daily_random"] = (
+                result[f"daily_top_{label}_precision"] / random_precision
+                if random_precision else None
+            )
     return result
 
 

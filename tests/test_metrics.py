@@ -33,6 +33,15 @@ class MetricsTests(unittest.TestCase):
         self.assertEqual(result["daily_top_25pct_selected_n"], 2)
         self.assertEqual(result["daily_top_25pct_selected_fraction"], 0.5)
         self.assertEqual(result["daily_top_25pct_recall"], 1.0)
+        self.assertAlmostEqual(result["daily_top_25pct_random_expected_precision"], 2 / 3)
+        self.assertAlmostEqual(result["daily_top_25pct_lift_vs_daily_random"], 1.5)
+
+    def test_daily_constant_baseline_matches_daily_random_budget(self):
+        result = evaluate_probabilities(
+            [1, 0, 0, 1], [0.3] * 4,
+            dates=["2025-01-01"] * 3 + ["2025-01-02"], top_fractions=[0.25],
+        )
+        self.assertAlmostEqual(result["daily_top_25pct_lift_vs_daily_random"], 1.0)
 
     def test_single_class_metric_is_explicitly_undefined(self):
         result = evaluate_probabilities([0, 0], [0.2, 0.4])
