@@ -12,7 +12,7 @@ point-in-time features, model selection, calibration and evaluation are reused.
 - [x] **Step 4:** Full-data LightGBM and held-out calibration/evaluation.
 - [x] **Step 5:** Existing XGBoost/CatBoost implementations and a unified model comparison with confidence intervals.
 - [x] **Step 6:** Publication-quality annual drift, ROC/PR and Top-K figures.
-- [ ] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
+- [x] **Step 7:** Calibration, global SHAP and key-feature dependence figures.
 - [ ] **Step 8:** High-score false positives, missed failures, true positives and local SHAP explanations.
 - [ ] **Step 9:** Evidence-based research and operational analysis (`reports/topic1_report.md`).
 - [ ] **Step 10:** Final README, reproduction command, full pytest, metric/link consistency and tracked-file checks.
@@ -78,3 +78,14 @@ rounding allocates 948 slots (11.34% of the observed cohort): primary LR finds
 341 failures versus 214.22 expected under same-day random allocation (+59.18%).
 This is conditional retrospective yield; no causal or days-earlier claim is made.
 All charts were inspected for labels, clipping and metric consistency.
+
+### Step 7
+
+Added held-out calibration curves and primary-model global/dependence SHAP figures.
+LightGBM mean probability falls from 44.9878% to 22.6518% after 2024 calibration
+(2025 actual 22.5517%); LR falls from 24.7029% to 22.9894%. Exact LR-logit
+SHAP uses all 27,396 training rows as reference, groups 100 transformed columns
+back to 39 features, and samples 1,500 test rows for display. Affine calibration
+scaling reconstructs all 8,363 observed test probabilities within 4.45e-16.
+History duration, scored-day counts and failed-day counts dominate attribution;
+correlated predictors can offset one another and are not causal effects.

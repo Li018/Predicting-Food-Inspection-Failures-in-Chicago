@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "model": "logistic_regression",
+  "selected_on": "2023 validation AP",
+  "explanation_method": "Exact interventional LR-logit SHAP with affine calibration-logit scaling, checked with shap.LinearExplainer",
+  "units": "Calibrated log-odds; not probability percentage points",
+  "reference": {
+    "period": [
+      "2019-01-01",
+      "2022-12-31"
+    ],
+    "n": 27396,
+    "statistic": "Mean transformed training covariates; no background subsampling",
+    "test_data_used_to_fit_reference": false
+  },
+  "sample": {
+    "year": 2025,
+    "available_n": 8363,
+    "n": 1500,
+    "seed": 20261119,
+    "method": "Uniform random sample without replacement; sorted indices"
+  },
+  "features": {
+    "original": 39,
+    "transformed": 100,
+    "numeric": 32,
+    "categorical": 7,
+    "missing_indicators": 17,
+    "grouping_rule": "Sum signed one-hot/missing-indicator contributions into original features, then take mean absolute values"
+  },
+  "affine_calibration": {
+    "slope": 0.7638521818775824,
+    "intercept": -0.3489492018577143,
+    "raw_logit_base": -1.1758889459390562,
+    "calibrated_logit_base": -1.247154538858993,
+    "formula": "phi_cal=a*phi_raw; base_cal=a*base_raw+b; p=expit(base_cal+sum(phi_cal))",
+    "base_interpretation": "Expected calibrated logit under the training reference; expit(base) is not mean predicted probability"
+  },
+  "verification": {
+    "shap_library_max_absolute_error": 0.0,
+    "shap_library_base_absolute_error": 0.0,
+    "calibrated_logit_max_absolute_error": 1.9984014443252818e-15,
+    "calibrated_probability_max_absolute_error": 4.440892098500626e-16,
+    "saved_probability_max_absolute_error": 1.6653345369377348e-16,
+    "test_calibration_clip_count": 0,
+    "test_raw_probability_min": 0.025070174827503282,
+    "test_raw_probability_max": 0.8409158086717055
+  },
+  "top_features": [
+    {
+      "rank": 1,
+      "feature": "observed_history_years",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.30456397723044343,
+      "mean_shap": 0.10414672707316269
+    },
+    {
+      "rank": 2,
+      "feature": "prior_scored_days",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.24387136260926945,
+      "mean_shap": -0.07652823855883163
+    },
+    {
+      "rank": 3,
+      "feature": "prior_fail_days",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.23229265020739565,
+      "mean_shap": 0.06583550957011869
+    },
+    {
+      "rank": 4,
+      "feature": "prior_routine_days",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.23078721032690264,
+      "mean_shap": -0.05892185259850387
+    },
+    {
+      "rank": 5,
+      "feature": "license_term_elapsed_days",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.2059318497287508,
+      "mean_shap": -0.00959754407294953
+    },
+    {
+      "rank": 6,
+      "feature": "days_since_license_issue",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.14674104664214146,
+      "mean_shap": 0.007868569570524052
+    },
+    {
+      "rank": 7,
+      "feature": "license_category",
+      "feature_type": "categorical",
+      "mean_abs_shap": 0.11288722261949731,
+      "mean_shap": 0.0029773974119817813
+    },
+    {
+      "rank": 8,
+      "feature": "last_result",
+      "feature_type": "categorical",
+      "mean_abs_shap": 0.10792569754564457,
+      "mean_shap": -0.05329863238295559
+    },
+    {
+      "rank": 9,
+      "feature": "days_to_license_term_end",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.10125625020559668,
+      "mean_shap": -0.010214501511456232
+    },
+    {
+      "rank": 10,
+      "feature": "prior_conditions_days",
+      "feature_type": "numeric",
+      "mean_abs_shap": 0.08769775621494363,
+      "mean_shap": 0.02719446445503748
+    }
+  ],
+  "dependence_features": [
+    "historical_failure_rate",
+    "days_since_last_inspection",
+    "license_observed_tenure_years",
+    "observed_history_years",
+    "prior_scored_days",
+    "prior_fail_days"
+  ],
+  "figures": [
+    {
+      "path": "reports/figures/shap_global_summary.png",
+      "dpi": 300,
+      "width_px": 3858,
+      "height_px": 2412,
+      "bytes": 684597,
+      "sha256": "691823e2486fb3949d16af5ab5f6649c44b0632128eb2e9c839bddf85bd0a313"
+    },
+    {
+      "path": "reports/figures/shap_feature_dependence.png",
+      "dpi": 300,
+      "width_px": 4275,
+      "height_px": 2752,
+      "bytes": 555808,
+      "sha256": "3dc850e8c3372f1ce6beab584bc7f14a519038685c4e16acb53337351bd9309b"
+    }
+  ],
+  "shap_version": "0.49.1",
+  "provenance": {
+    "feature_cache": ".local/features.parquet",
+    "feature_sha256": "be7d1ce6df1f697058b8b8435c5d4cd344466d47e92b72f4729ef9b9af51014a",
+    "source_sha256": {
+      "inspections.parquet": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+      "licenses.parquet": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272"
+    },
+    "feature_code_sha256": {
+      "data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+      "features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686"
+    },
+    "model_code_sha256": {
+      "models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+      "metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663"
+    },
+    "config_sha256": "c4c687c1264ec5044f127e80c75ae51824101fbe04734235706e408d0b0ce289",
+    "runner_sha256": "6ee725ce0c296478f62f7f233dc088dbac792685df3bd142a79e3553e5e5a70a",
+    "source_commit": "20884784d7bca6d063fee575ea45d6487f2e9f3a"
+  },
+  "limitations": [
+    "Interventional feature contributions use a training reference, not a causal intervention model.",
+    "The affine-logit explanation is exact on all explained test inputs; clipping makes the calibrator non-affine outside its unclipped input domain.",
+    "Correlated predictors can divide or offset credit; coefficient direction is not a marginal causal effect.",
+    "Global ranking is descriptive on a seeded 1500-row held-out sample and is not a refit or feature-selection step."
+  ]
+}
