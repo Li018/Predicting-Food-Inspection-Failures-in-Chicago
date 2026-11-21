@@ -24,6 +24,8 @@ from PIL import Image
 from scipy.special import expit
 from sklearn.metrics import average_precision_score, precision_recall_curve
 
+from chicago_food.slide_validation import presentation_metric, validate_metric_contract
+
 
 ROOT = Path(__file__).resolve().parents[1]
 FAMILIES = ("logistic_regression", "lightgbm", "prevalence")
@@ -432,16 +434,10 @@ def rounded(value):
 
 
 def build_slide_metrics(data: dict, figures: list[dict], tests_passed: int | None = None) -> dict:
-    values, display, refs = {}, {}, {}
+    values, display, refs, format_specs = {}, {}, {}, {}
 
-    def put(key, value, fmt=".3f", source=""):
-        values[key] = rounded(value)
-        if value is None or (isinstance(value, (float, np.floating)) and not np.isfinite(value)):
-            display[key] = "—"
-        elif fmt == "text":
-            display[key] = str(value)
-        else:
-            display[key] = format(value, fmt).replace("-", "−")
+    def put(key, value, fmt=".3f", source="", *, scale=1, suffix=""):
+        values[key], display[key], format_specs[key] = presentation_metric(value, fmt, scale=scale, suffix=suffix)
         refs[key] = source
 
     summary = data["data_summary"]
@@ -574,19 +570,20 @@ def build_slide_metrics(data: dict, figures: list[dict], tests_passed: int | Non
         for key, column, fmt in (("ap", "average_precision", ".4f"), ("delta_ap", "delta_average_precision_vs_lag_1", "+.4f"),
                                  ("retention", "top_10pct_member_retention_vs_lag_1", ".1%"),
                                  ("max_probability_delta", "prediction_max_absolute_change_vs_lag_1", ".1%")):
-            put(f"lag.{int(row.lag_days)}.{key}", getattr(row, column), fmt, f"lag_sensitivity.csv:logistic_regression/{row.lag_days}/{column}")
+            binding = f"lag.{int(row.lag_days)}.{key}"
+            source = f"lag_sensitivity.csv:logistic_regression/{row.lag_days}/{column}"
             if key == "max_probability_delta":
-                binding = f"lag.{int(row.lag_days)}.{key}"
-                display[binding] = f"{100 * getattr(row, column):.1f} pp"
-                refs[binding] += "; values retain absolute probability units; display multiplies by 100 to show percentage points"
+                put(binding, getattr(row, column), ".1f", source, scale=100, suffix=" pp")
+            else:
+                put(binding, getattr(row, column), fmt, source)
     put("literature.purple_or", float(np.exp(1.555)), ".2f", "Kannan et al. (2019), Table 3: exp(Purple coefficient 1.555)")
     put("literature.official_year", 2015, "d", "Chicago/food-inspections-evaluation")
     put("literature.audit_year", 2019, "d", "Kannan, Shapiro & Bilgic (2019)")
     put("validation.original_tests", 55, "d", "Original unmodified tests/test_{data,features,metrics,models}.py")
     put("validation.tests_passed", tests_passed, "d", "Verified pytest result supplied through --tests-passed")
-    return {
-        "schema_version": 1, "primary_model": "logistic_regression", "test_year": 2025,
-        "display": display, "values": values, "source_refs": refs,
+    result = {
+        "schema_version": 2, "primary_model": "logistic_regression", "test_year": 2025,
+        "display": display, "values": values, "source_refs": refs, "format_specs": format_specs,
         "figures": figures, "source_hashes": data["source_hashes"],
         "figure_data": {
             "annual_fail_rates": data["inspection_type_annual_table"][["inspection_type", "year", "n", "failures", "fail_rate"]].to_dict("records"),
@@ -606,9 +603,11 @@ def build_slide_metrics(data: dict, figures: list[dict], tests_passed: int | Non
             "subgroup_selection": "One overall annual Top 10% allocation, not a separate top decile within each group.",
             "days_earlier": "Retrospective fixed-window reference using original-day scores; time-invariant outcomes and earlier feature availability are not established.",
             "no_inspector_features": "No sanitarian identifiers or clusters are inputs. Label and proxy bias may remain.",
-            "rounding": "Numeric values retain at most four decimal places; display contains the authoritative slide text.",
+            "rounding": "Values are quantized once from full source metrics at each field's display precision, in the original units. format_specs derives display from values; percentage and probability-change displays apply scale=100. Exact research values remain in source_refs. Figure-data summaries separately retain at most four decimals.",
         },
     }
+    validate_metric_contract(result)
+    return result
 
 
 def main() -> None:
@@ -635,7 +634,11 @@ def main() -> None:
         raise RuntimeError("Frozen inputs or original figures changed during projection export")
     metrics["protected_inputs_unchanged"] = True
     metric_output.parent.mkdir(parents=True, exist_ok=True)
-    metric_output.write_text(json.dumps(rounded(metrics), indent=2, ensure_ascii=False, allow_nan=False) + "\n")
+    payload = rounded(metrics)
+    # Presentation values already have their declared precision; do not round them again.
+    payload["values"], payload["format_specs"] = metrics["values"], metrics["format_specs"]
+    validate_metric_contract(payload)
+    metric_output.write_text(json.dumps(payload, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
     print(f"Exported {len(figures)} projection figures; {len(metrics['display'])} rounded display bindings.")
     print("Frozen models, source snapshots and original figures: unchanged.")
     for figure in figures:

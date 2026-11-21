@@ -210,3 +210,27 @@ python -m pytest -q
 原 `scripts/reproduce.py` 及主模型拟合流程保持不变。新克隆即使不含本地逐行产物，仍可运行已发布汇总的一致性测试；精确重算继续要求原冻结快照，不能用新下载覆盖来源哈希。
 
 本节补充阶段（2026-11-21，Commit 3）的完整测试为 **90 passed，1 warning**，包含原 55 项基线；该警告仍来自第三方 pytest 插件。后续演示文稿阶段的新增验证数量单独记录于 [PROGRESS](PROGRESS.md)。
+
+## 10. 投影版图表、13 页英文演示与独立 HTML
+
+[英文 HTML](Predicting-Food-Inspection-Failures-in-Chicago-EN.html) 已沿用原演示模板扩为 13 页，按 Context / Evidence / Decision / Audit / Pilot 五幕导航。九张清晰图单独存放在 [reports/slide_figures](reports/slide_figures/)；原 `reports/figures/` 保持不变。每日收益提前到 S8，S11 新增子群体切片和文献对照。全部 12 段原 Speaker Notes 按原页归属重排并逐字保留，新增 S11 不改写或伪造旧 Notes。
+
+所有研究数值均通过 `data-metric` 绑定到 [slide_metrics.json](reports/metrics/slide_metrics.json)，三条原生 AP 柱也使用同一份数据。`display`、按最终展示精度舍入的 `values`、`format_specs` 与 `source_refs` 共同明确数值、单位和来源；百分比及百分点仍以原概率单位存储。精确研究结果继续以原 CSV/JSON 为准，避免先统一舍入再格式化引起的双重舍入。
+
+在原冻结快照、预测、SHAP 及上述补充分析均已就绪的 Git 仓库中执行：
+
+```bash
+python -m pytest -q
+# 本次最终完整测试为 122 passed；以后修改测试时应传入当次真实通过数。
+PYTHONPATH=src python scripts/make_slide_figures.py --tests-passed 122
+PYTHONPATH=src python scripts/bind_slide_metrics.py
+PYTHONPATH=src python scripts/validate_slides.py --report reports/metrics/slide_validation.json
+PYTHONPATH=src python scripts/export_standalone_html.py
+PYTHONPATH=src python scripts/validate_slides.py \
+  --html .local/exports/Chicago-Food-Inspections-EN-standalone.html \
+  --standalone --report reports/metrics/slide_standalone_validation.json
+```
+
+出图脚本只读取已拟合产物，不重训主模型或重新计算 SHAP。绑定和交付校验只需已发布汇总、图像与 Git 历史，不读取逐行本地数据。校验同时检查 13 页／9 图、图像与汇总源哈希、全部展示格式、未绑定数字、占位符／`Source figure`／六位以上小数，以及 Notes 相对于原 Git 提交的完整字节哈希。
+
+独立文件默认输出至 `.local/exports/Chicago-Food-Inspections-EN-standalone.html`：九图内嵌，CSS、JavaScript 和 Notes 保留；本地参考文档链接转换为当前 GitHub 分支链接。下载后演示本身可离线打开，查看外部参考文档仍需网络。版式已通过逐页离线渲染检查；原交互脚本字节保持不变并通过 JavaScript 语法检查。当前环境禁止浏览器直接打开本地 HTML，因此未声称完成浏览器端交互测试。

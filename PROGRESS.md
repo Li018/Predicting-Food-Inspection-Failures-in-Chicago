@@ -239,3 +239,32 @@ all thirteen pages through an offline CSS/PDF render, including enlarged individ
 checks of the cover, SHAP and error pages. The browser disallowed local-file URLs,
 so no browser interaction result is claimed. All 33 protected baseline files remain
 unchanged.
+
+### Commit 6 — Exact metric binding and standalone HTML delivery
+
+Bound all thirteen slides to the measured findings and native ablation bars. Added
+independent binding, validation and standalone-export commands. The metric contract
+now validates all 213 display/value/format/source keys, including percentage-point
+units, and avoids double rounding by quantizing complete source values directly to
+the final display precision. Only the verified test-count display changes from the
+figure-export step; the other 212 display strings and all nine image bytes remain
+identical.
+
+Both the relative-image source deck and the standalone export pass the same checks:
+13 slides, 9 verified image assets, 12 byte-identical original notes, 139 bindings
+using 123 distinct keys, 213 validated format contracts, 3 AP bars and 100% numeric
+binding coverage. There are zero unbound visible numbers, placeholder frames,
+`Source figure` remnants or six-digit decimals. The CLI also verifies 24 aggregate
+source hashes and checks the notes against the original Git commit. Compact results
+are committed as `slide_validation.json` and `slide_standalone_validation.json`.
+
+The standalone HTML embeds all nine images and preserves inline CSS, JavaScript
+and notes; document references resolve to the working GitHub branch. Re-rendered
+the final standalone file offline as thirteen pages and reviewed the final layout.
+README now documents generation, binding, both validation modes and export.
+
+Validation before this commit: **122 passed, 1 warning**; Ruff, JavaScript syntax
+and whitespace checks passed. Twenty-two delivery tests cover bad paths/assets,
+numeric coverage, both one-sided value/display mutations, unit formatting, stale
+aggregate sources, note tampering, page structure and export preservation. All 33
+protected original file hashes remain unchanged; no primary model was refitted.

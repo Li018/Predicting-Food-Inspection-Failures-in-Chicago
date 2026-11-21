@@ -1,0 +1,18 @@
+{
+  "valid": true,
+  "slide_count": 13,
+  "image_count": 9,
+  "speaker_notes_preserved": 12,
+  "metric_binding_count": 139,
+  "unique_metric_keys": 123,
+  "metric_contract_keys_verified": 213,
+  "metric_binding_coverage": 1.0,
+  "unbound_visible_numbers": 0,
+  "ablation_bar_count": 3,
+  "placeholders": 0,
+  "long_decimals": 0,
+  "standalone": true,
+  "html_sha256": "82dcd9dd89cd2b348774d96efbfa9e6ec6d4e750109cb507e3e23833f72ced0c",
+  "notes_verified_against_git": "176c1ebdc2f1856cd209ca31ff029806106a8e74",
+  "aggregate_sources_verified": 24
+}
