@@ -215,3 +215,27 @@ Validation before this commit: **94 passed, 1 warning**; Ruff and whitespace che
 passed. New regressions cover signed waterfall closure, output-directory isolation,
 finite rounded serialization and projection font sizes. All nine figure hashes
 and the 33 protected baseline files were checked; all originals remain unchanged.
+
+### Commit 5 — Thirteen-slide layout and five-act navigation
+
+Reworked the existing English deck into thirteen slides while retaining its
+presentation shell and its original JavaScript byte-for-byte. Added five-act
+navigation, consistent typography, timeline/check cards, native ablation bars,
+the daily-yield page before interpretation, and the new subgroup/literature page.
+The nine figure images use real relative paths; the remaining titlebar image
+placeholder is an inline SVG. Cover metadata says "No Sanitarian Inputs" because
+the absence of inspector features cannot establish zero label or proxy bias.
+
+All twelve original Speaker Notes are unchanged as complete raw aside blocks,
+mapped to their corresponding reordered slides. The new subgroup page has no
+invented original note. A committed manifest and independent golden hashes protect
+this mapping. Numerical spans and AP bars are prepared for the separate binding
+step, rather than mixing the layout and exporter implementation commits.
+
+Validation before this commit: **100 passed, 1 warning**; Ruff and whitespace checks
+passed. Six added layout checks cover page order, nine real figures, five-act route
+targets, exact notes, placeholder removal and required native components. Reviewed
+all thirteen pages through an offline CSS/PDF render, including enlarged individual
+checks of the cover, SHAP and error pages. The browser disallowed local-file URLs,
+so no browser interaction result is claimed. All 33 protected baseline files remain
+unchanged.
