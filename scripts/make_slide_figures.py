@@ -24,6 +24,7 @@ from PIL import Image
 from scipy.special import expit
 from sklearn.metrics import average_precision_score, precision_recall_curve
 
+from chicago_food.heuristics import add_heuristic_slide_metrics
 from chicago_food.slide_validation import presentation_metric, validate_metric_contract
 
 
@@ -433,7 +434,7 @@ def rounded(value):
     return value
 
 
-def build_slide_metrics(data: dict, figures: list[dict], tests_passed: int | None = None) -> dict:
+def build_slide_metrics(data: dict, figures: list[dict], tests_passed: int | None = None, *, root: Path = ROOT) -> dict:
     values, display, refs, format_specs = {}, {}, {}, {}
 
     def put(key, value, fmt=".3f", source="", *, scale=1, suffix=""):
@@ -606,6 +607,7 @@ def build_slide_metrics(data: dict, figures: list[dict], tests_passed: int | Non
             "rounding": "Values are quantized once from full source metrics at each field's display precision, in the original units. format_specs derives display from values; percentage and probability-change displays apply scale=100. Exact research values remain in source_refs. Figure-data summaries separately retain at most four decimals.",
         },
     }
+    result = add_heuristic_slide_metrics(result, root)
     validate_metric_contract(result)
     return result
 
@@ -629,7 +631,7 @@ def main() -> None:
                 dependence_figure, lambda data: waterfall_figure(data, "FP-01"),
                 lambda data: waterfall_figure(data, "FN-01"), subgroup_figure)
     figures = [save(builder(data), output, name, root) for builder, name in zip(builders, FIGURE_NAMES, strict=True)]
-    metrics = build_slide_metrics(data, figures, args.tests_passed)
+    metrics = build_slide_metrics(data, figures, args.tests_passed, root=root)
     if baseline != protected_hashes(root):
         raise RuntimeError("Frozen inputs or original figures changed during projection export")
     metrics["protected_inputs_unchanged"] = True

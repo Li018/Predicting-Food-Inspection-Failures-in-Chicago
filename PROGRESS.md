@@ -268,3 +268,35 @@ and whitespace checks passed. Twenty-two delivery tests cover bad paths/assets,
 numeric coverage, both one-sided value/display mutations, unit formatting, stale
 aggregate sources, note tampering, page structure and export preservation. All 33
 protected original file hashes remain unchanged; no primary model was refitted.
+
+### Closing supplement — Tie-aware business-rule baselines
+
+Added an independent, no-fit evaluator for last-inspection Fail, historical Fail
+rate, and cumulative failed inspection days. All rules use the frozen LR's exact
+2025 test cohort (8,363 inspections / 1,886 Fail), 837 annual priority slots and
+948 daily slots. Capacity-boundary ties use uniform fractional weights, giving
+exact expected hits independently of row order. Score-only rules have no Brier
+or log-loss values. Existing calibrated LR metrics are checked against the
+original comparison before writing the new aggregate CSV/JSON.
+
+Rule B has the highest rule AP (0.283158), with 31.6458% annual precision and
+307.107 daily expected Fail hits / 1.433602 times the same-day random yield.
+The frozen LR remains at AP 0.314566, 36.2007% annual precision and 341 daily
+hits / 1.591817 times random. The best-rule choice selects the presentation row
+only; primary-model selection remains based on the original 2023 validation.
+
+README and the report include all three rules. The HTML model page adds Rule B
+between base rate and LR, the exact-tie note and a direct evidence statement.
+Only that page's table spacing was compacted to retain the original PR image
+size. Eighteen new slide-metric contracts and their two aggregate source hashes
+are appended by a shared metric-only hook, so later exports retain the rules.
+The verified displayed test count is updated to 133.
+
+Validation before this commit: **133 passed, 1 existing dependency warning**;
+Ruff and whitespace checks pass. The eleven new tests cover tie expectation,
+permutation invariance, exact cohort alignment, original capacity conventions,
+published-result parity and idempotent metric integration. Deck validation passes
+all 231 metric contracts, 142 bindings, 26 aggregate hashes, 13 pages, 9 images
+and 12 unchanged original note blocks. The updated model page was rendered and
+visually reviewed offline. All 42 protected original/model/data/figure hashes
+remain unchanged; no model was retrained and no figure was regenerated.
