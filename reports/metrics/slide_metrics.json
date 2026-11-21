@@ -215,7 +215,25 @@
     "literature.official_year": "2015",
     "literature.audit_year": "2019",
     "validation.original_tests": "55",
-    "validation.tests_passed": "122"
+    "validation.tests_passed": "133",
+    "heuristics.prior_last_fail.auc": "0.500",
+    "heuristics.prior_last_fail.ap": "0.225",
+    "heuristics.prior_last_fail.top10_precision": "22.4%",
+    "heuristics.prior_last_fail.daily_top10_failures": "213.2",
+    "heuristics.prior_last_fail.daily_top10_lift_gain": "−0.5%",
+    "heuristics.prior_fail_rate.auc": "0.583",
+    "heuristics.prior_fail_rate.ap": "0.283",
+    "heuristics.prior_fail_rate.top10_precision": "31.6%",
+    "heuristics.prior_fail_rate.daily_top10_failures": "307.1",
+    "heuristics.prior_fail_rate.daily_top10_lift_gain": "+43.4%",
+    "heuristics.prior_failed_days.auc": "0.549",
+    "heuristics.prior_failed_days.ap": "0.260",
+    "heuristics.prior_failed_days.top10_precision": "30.2%",
+    "heuristics.prior_failed_days.daily_top10_failures": "293.8",
+    "heuristics.prior_failed_days.daily_top10_lift_gain": "+37.2%",
+    "heuristics.rule_count": "3",
+    "heuristics.best_rule": "prior_fail_rate",
+    "heuristics.best_label": "Rule B: Historical Fail rate"
   },
   "values": {
     "data.targets": 51626,
@@ -430,7 +448,25 @@
     "literature.official_year": 2015,
     "literature.audit_year": 2019,
     "validation.original_tests": 55,
-    "validation.tests_passed": 122
+    "validation.tests_passed": 133,
+    "heuristics.prior_last_fail.auc": 0.5,
+    "heuristics.prior_last_fail.ap": 0.225,
+    "heuristics.prior_last_fail.top10_precision": 0.224,
+    "heuristics.prior_last_fail.daily_top10_failures": 213.2,
+    "heuristics.prior_last_fail.daily_top10_lift_gain": -0.005,
+    "heuristics.prior_fail_rate.auc": 0.583,
+    "heuristics.prior_fail_rate.ap": 0.283,
+    "heuristics.prior_fail_rate.top10_precision": 0.316,
+    "heuristics.prior_fail_rate.daily_top10_failures": 307.1,
+    "heuristics.prior_fail_rate.daily_top10_lift_gain": 0.434,
+    "heuristics.prior_failed_days.auc": 0.549,
+    "heuristics.prior_failed_days.ap": 0.26,
+    "heuristics.prior_failed_days.top10_precision": 0.302,
+    "heuristics.prior_failed_days.daily_top10_failures": 293.8,
+    "heuristics.prior_failed_days.daily_top10_lift_gain": 0.372,
+    "heuristics.rule_count": 3,
+    "heuristics.best_rule": "prior_fail_rate",
+    "heuristics.best_label": "Rule B: Historical Fail rate"
   },
   "source_refs": {
     "data.targets": "data_summary.json:splits.*.rows",
@@ -645,7 +681,25 @@
     "literature.official_year": "Chicago/food-inspections-evaluation",
     "literature.audit_year": "Kannan, Shapiro & Bilgic (2019)",
     "validation.original_tests": "Original unmodified tests/test_{data,features,metrics,models}.py",
-    "validation.tests_passed": "Verified pytest result supplied through --tests-passed"
+    "validation.tests_passed": "Verified pytest result supplied through --tests-passed",
+    "heuristics.prior_last_fail.auc": "heuristic_baselines.json:records:prior_last_fail/roc_auc",
+    "heuristics.prior_last_fail.ap": "heuristic_baselines.json:records:prior_last_fail/average_precision",
+    "heuristics.prior_last_fail.top10_precision": "heuristic_baselines.json:records:prior_last_fail/top_10pct_precision",
+    "heuristics.prior_last_fail.daily_top10_failures": "heuristic_baselines.json:records:prior_last_fail/daily_top_10pct_expected_failures_found",
+    "heuristics.prior_last_fail.daily_top10_lift_gain": "heuristic_baselines.json:records:prior_last_fail/daily_top_10pct_lift_gain",
+    "heuristics.prior_fail_rate.auc": "heuristic_baselines.json:records:prior_fail_rate/roc_auc",
+    "heuristics.prior_fail_rate.ap": "heuristic_baselines.json:records:prior_fail_rate/average_precision",
+    "heuristics.prior_fail_rate.top10_precision": "heuristic_baselines.json:records:prior_fail_rate/top_10pct_precision",
+    "heuristics.prior_fail_rate.daily_top10_failures": "heuristic_baselines.json:records:prior_fail_rate/daily_top_10pct_expected_failures_found",
+    "heuristics.prior_fail_rate.daily_top10_lift_gain": "heuristic_baselines.json:records:prior_fail_rate/daily_top_10pct_lift_gain",
+    "heuristics.prior_failed_days.auc": "heuristic_baselines.json:records:prior_failed_days/roc_auc",
+    "heuristics.prior_failed_days.ap": "heuristic_baselines.json:records:prior_failed_days/average_precision",
+    "heuristics.prior_failed_days.top10_precision": "heuristic_baselines.json:records:prior_failed_days/top_10pct_precision",
+    "heuristics.prior_failed_days.daily_top10_failures": "heuristic_baselines.json:records:prior_failed_days/daily_top_10pct_expected_failures_found",
+    "heuristics.prior_failed_days.daily_top10_lift_gain": "heuristic_baselines.json:records:prior_failed_days/daily_top_10pct_lift_gain",
+    "heuristics.rule_count": "heuristic_baselines.json:history_policy:count",
+    "heuristics.best_rule": "heuristic_baselines.json:best_heuristic",
+    "heuristics.best_label": "heuristic_baselines.json:best_heuristic_label"
   },
   "format_specs": {
     "data.targets": {
@@ -2138,6 +2192,132 @@
       "suffix": "",
       "text": null,
       "null_text": "—"
+    },
+    "heuristics.prior_last_fail.auc": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_last_fail.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_last_fail.top10_precision": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_last_fail.daily_top10_failures": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_last_fail.daily_top10_lift_gain": {
+      "format": "+.1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_fail_rate.auc": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_fail_rate.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_fail_rate.top10_precision": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_fail_rate.daily_top10_failures": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_fail_rate.daily_top10_lift_gain": {
+      "format": "+.1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_failed_days.auc": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_failed_days.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_failed_days.top10_precision": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_failed_days.daily_top10_failures": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.prior_failed_days.daily_top10_lift_gain": {
+      "format": "+.1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.rule_count": {
+      "format": "d",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "heuristics.best_rule": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "prior_fail_rate",
+      "null_text": "—"
+    },
+    "heuristics.best_label": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Rule B: Historical Fail rate",
+      "null_text": "—"
     }
   },
   "figures": [
@@ -2238,7 +2418,9 @@
     "reports/metrics/grouped_shap_importance.csv": "fb1fad9788204e1f4c45bb9dbf237b2a5892842a8088f80ae71f5a7135c5d41f",
     "reports/metrics/lr_standardized_odds_ratios.csv": "54e85bd80bc8256db5142941d5073b2ec1e5df4fbc1f3dfc7fed6f6ea71a257d",
     "reports/metrics/subgroup_audit.csv": "6b28e0653b1e47ecae0bc4422427bcf054c29fa5183c69df8ab85bc943e0b169",
-    "reports/metrics/days_earlier_windows.csv": "718683fefe1785942542489c869fbc01334dd6e87f88fec05b74c7a3416b5431"
+    "reports/metrics/days_earlier_windows.csv": "718683fefe1785942542489c869fbc01334dd6e87f88fec05b74c7a3416b5431",
+    "reports/metrics/heuristic_baselines.csv": "25b5735a04a2cf8b35e3243c48d08e27aac7bddd6e47e8e738b2186f24a8e3bb",
+    "reports/metrics/heuristic_baselines.json": "bfc96f45256f6ac5e24de9a8ce9372b86c21d9a6f250c8f404ce1c57da8f30fa"
   },
   "figure_data": {
     "annual_fail_rates": [

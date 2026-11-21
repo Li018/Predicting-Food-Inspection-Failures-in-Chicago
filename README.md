@@ -8,13 +8,20 @@
 
 ## 1. 主要结果
 
-2025 年测试集包含 **8,363 次合格检查、8,028 个实体、1,886 次 Fail**，Fail 率为 **22.55%**。下表均为 2024 年校准后的留出测试结果。
+2025 年测试集包含 **8,363 次合格检查、8,028 个实体、1,886 次 Fail**，Fail 率为 **22.55%**。下表包含 2024 年校准后的概率模型，以及直接按可见历史排序的三条业务规则。
 
-| 模型 | ROC-AUC | PR-AUC（AP） | Brier ↓ | LogLoss ↓ | 年度 Top10% Precision |
-|---|---:|---:|---:|---:|---:|
-| 校准基率 | 0.5000 | 0.2255 | 0.174706 | 0.533935 | 22.55% |
-| **校准 LR：验证选定的主模型** | **0.6326** | **0.3146** | **0.168513** | **0.515382** | **36.20%** |
-| 校准 LightGBM | 0.6357 | 0.3215 | 0.168129 | 0.514865 | 37.87% |
+| 模型 | ROC-AUC | PR-AUC（AP） | Brier ↓ | LogLoss ↓ | 年度 Top10% Precision | 每日 Top10% 预期 Fail | 每日 Lift（同日随机） |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 校准基率 | 0.5000 | 0.2255 | 0.174706 | 0.533935 | 22.55% | 214.221 | 1.000× |
+| Rule A：上次检查 Fail | 0.4997 | 0.2254 | — | — | 22.45% | 213.183 | 0.995× |
+| Rule B：历史 Fail 率 | 0.5826 | 0.2832 | — | — | 31.65% | 307.107 | 1.434× |
+| Rule C：累计失败检查日数 | 0.5492 | 0.2605 | — | — | 30.21% | 293.842 | 1.372× |
+| **校准 LR：验证选定的主模型** | **0.6326** | **0.3146** | **0.168513** | **0.515382** | **36.20%** | **341.000** | **1.592×** |
+| 校准 LightGBM | 0.6357 | 0.3215 | 0.168129 | 0.514865 | 37.87% | 357.000 | 1.667× |
+
+三条规则与 LR 使用相同的 2025 测试集（8,363 条、1,886 次 Fail），年度容量为 837 槽位，每日向上取整后共 948 槽位。边界并列分数均分剩余槽位，命中数为不受行顺序影响的精确期望；每日 Lift 以同日随机期望 214.221 次 Fail 为基准。规则仅列排序／容量点估计，概率损失列为 —。
+
+规则 A／B／C 分别对应 `last_result == "Fail"`、`historical_failure_rate`、`prior_fail_days`；无评分历史的 Fail 率记为 0。HTML 按 2025 AP 展示最优规则 B，主模型 LR 仍由 2023 验证集选定。LR 综合失败次数、检查频次等历史信号，AP 比规则 B 高 **0.0314**，并提供连续排序与可用于排班规划的校准概率。 [规则完整结果](reports/metrics/heuristic_baselines.csv) · [字段、并列策略与展示选择](reports/metrics/heuristic_baselines.json)
 
 AP 使用非插值 Average Precision 定义。主模型 ROC-AUC 的 95% 实体聚类区间为 **[0.6197, 0.6470]**，AP 为 **[0.2968, 0.3352]**，Top10% Precision 为 **[32.91%, 39.75%]**；使用 500 次实体聚类 bootstrap，区间条件于已固定的拟合模型。
 
@@ -204,6 +211,7 @@ python scripts/qa_delivery.py
 PYTHONPATH=src python scripts/analyze_ablation.py
 PYTHONPATH=src python scripts/analyze_seasonality.py
 PYTHONPATH=src python scripts/analyze_model_audit.py
+PYTHONPATH=src python scripts/analyze_heuristic_baselines.py
 python -m pytest -q
 ```
 
@@ -221,8 +229,8 @@ python -m pytest -q
 
 ```bash
 python -m pytest -q
-# 本次最终完整测试为 122 passed；以后修改测试时应传入当次真实通过数。
-PYTHONPATH=src python scripts/make_slide_figures.py --tests-passed 122
+# 本次最终完整测试为 133 passed；以后修改测试时应传入当次真实通过数。
+PYTHONPATH=src python scripts/make_slide_figures.py --tests-passed 133
 PYTHONPATH=src python scripts/bind_slide_metrics.py
 PYTHONPATH=src python scripts/validate_slides.py --report reports/metrics/slide_validation.json
 PYTHONPATH=src python scripts/export_standalone_html.py
