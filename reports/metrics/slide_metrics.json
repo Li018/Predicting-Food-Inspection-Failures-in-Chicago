@@ -1,0 +1,2971 @@
+{
+  "schema_version": 2,
+  "primary_model": "logistic_regression",
+  "test_year": 2025,
+  "display": {
+    "data.targets": "51,626",
+    "data.test_n": "8,363",
+    "data.test_failures": "1,886",
+    "data.source_inspections": "304,348",
+    "data.numeric_features": "32",
+    "data.categorical_features": "7",
+    "data.features": "39",
+    "data.sanitarian_features": "0",
+    "data.license_transactions": "1,185,058",
+    "data.license_retained": "201,981",
+    "data.fail_rate": "22.6%",
+    "data.match_number": "93.4%",
+    "data.match_address": "79.7%",
+    "data.match_visible": "79.6%",
+    "data.rule_change": "2018-07-01",
+    "data.backfill_date": "2025-09-25",
+    "data.study_years": "2019–2025",
+    "data.test_year": "2025",
+    "data.history_years": "2010–2025",
+    "labels.post_code": "Post-2018 Food Code",
+    "labels.top5": "Top 5%",
+    "labels.top10": "Top 10%",
+    "labels.top20": "Top 20%",
+    "labels.history_lag": "≥1 day",
+    "labels.complaints": "311 complaint signals",
+    "errors.fp01_id": "FP-01",
+    "errors.fn01_id": "FN-01",
+    "labels.bootstrap_replicates": "500",
+    "presentation.slide_count": "13",
+    "presentation.slide_01": "01 / 13",
+    "presentation.slide_02": "02 / 13",
+    "presentation.slide_03": "03 / 13",
+    "presentation.slide_04": "04 / 13",
+    "presentation.slide_05": "05 / 13",
+    "presentation.slide_06": "06 / 13",
+    "presentation.slide_07": "07 / 13",
+    "presentation.slide_08": "08 / 13",
+    "presentation.slide_09": "09 / 13",
+    "presentation.slide_10": "10 / 13",
+    "presentation.slide_11": "11 / 13",
+    "presentation.slide_12": "12 / 13",
+    "presentation.slide_13": "13 / 13",
+    "presentation.step_01": "01",
+    "presentation.step_02": "02",
+    "presentation.step_03": "03",
+    "lag.1.days": "1 day",
+    "lag.7.days": "7 days",
+    "lag.30.days": "30 days",
+    "data.rule_pre_fail_rate": "24.0%",
+    "data.rule_post_fail_rate": "19.8%",
+    "splits.train.years": "2019–2022",
+    "splits.train.n": "27,396",
+    "splits.train.fail_rate": "24.7%",
+    "splits.validation.years": "2023",
+    "splits.validation.n": "7,277",
+    "splits.validation.fail_rate": "27.6%",
+    "splits.calibration.years": "2024",
+    "splits.calibration.n": "8,590",
+    "splits.calibration.fail_rate": "23.2%",
+    "splits.test.years": "2025",
+    "splits.test.n": "8,363",
+    "splits.test.fail_rate": "22.6%",
+    "lr.ap": "0.315",
+    "lr.auc": "0.633",
+    "lr.brier": "0.169",
+    "lr.log_loss": "0.515",
+    "lr.top10_precision": "36.2%",
+    "lr.validation_ap": "0.3788",
+    "lgbm.ap": "0.321",
+    "lgbm.auc": "0.636",
+    "lgbm.brier": "0.168",
+    "lgbm.log_loss": "0.515",
+    "lgbm.top10_precision": "37.9%",
+    "lgbm.validation_ap": "0.3781",
+    "prevalence.ap": "0.226",
+    "prevalence.auc": "0.500",
+    "prevalence.brier": "0.175",
+    "prevalence.log_loss": "0.534",
+    "prevalence.top10_precision": "22.6%",
+    "prevalence.validation_ap": "0.2764",
+    "paired.ap_delta": "+0.0069",
+    "paired.ap_ci_lower": "−0.0034",
+    "paired.ap_ci_upper": "+0.0164",
+    "calibration.lr.raw_mean_p": "24.7%",
+    "calibration.lr.raw_brier": "0.1695",
+    "calibration.lr.raw_ece": "2.6%",
+    "calibration.lr.cal_mean_p": "23.0%",
+    "calibration.lr.cal_brier": "0.1685",
+    "calibration.lr.cal_ece": "2.1%",
+    "calibration.lgbm.raw_mean_p": "45.0%",
+    "calibration.lgbm.raw_brier": "0.2208",
+    "calibration.lgbm.raw_ece": "22.4%",
+    "calibration.lgbm.cal_mean_p": "22.7%",
+    "calibration.lgbm.cal_brier": "0.1681",
+    "calibration.lgbm.cal_ece": "1.8%",
+    "capacity.daily5.slots": "539",
+    "capacity.daily5.selected_rate": "6.4%",
+    "capacity.daily5.failures": "201",
+    "capacity.daily5.random_expected": "122.1",
+    "capacity.daily5.random_rounded": "122",
+    "capacity.daily5.extra_failures": "78.9",
+    "capacity.daily5.lift_gain": "+64.6%",
+    "capacity.daily5.recall": "10.7%",
+    "capacity.daily10.slots": "948",
+    "capacity.daily10.selected_rate": "11.3%",
+    "capacity.daily10.failures": "341",
+    "capacity.daily10.random_expected": "214.2",
+    "capacity.daily10.random_rounded": "214",
+    "capacity.daily10.extra_failures": "126.8",
+    "capacity.daily10.lift_gain": "+59.2%",
+    "capacity.daily10.recall": "18.1%",
+    "capacity.daily20.slots": "1,777",
+    "capacity.daily20.selected_rate": "21.2%",
+    "capacity.daily20.failures": "587",
+    "capacity.daily20.random_expected": "400.9",
+    "capacity.daily20.random_rounded": "401",
+    "capacity.daily20.extra_failures": "186.1",
+    "capacity.daily20.lift_gain": "+46.4%",
+    "capacity.daily20.recall": "31.1%",
+    "ablation.history.ap": "0.3107",
+    "ablation.history.auc": "0.6217",
+    "ablation.history.brier": "0.1693",
+    "ablation.history.delta_ap": "—",
+    "ablation.history.count": "13",
+    "ablation.exposure.ap": "0.3088",
+    "ablation.exposure.auc": "0.6247",
+    "ablation.exposure.brier": "0.1693",
+    "ablation.exposure.delta_ap": "−0.0019",
+    "ablation.exposure.count": "27",
+    "ablation.license.ap": "0.3118",
+    "ablation.license.auc": "0.6280",
+    "ablation.license.brier": "0.1690",
+    "ablation.license.delta_ap": "+0.0030",
+    "ablation.license.count": "37",
+    "ablation.reference.ap": "0.3146",
+    "ablation.reference.auc": "0.6326",
+    "ablation.reference.brier": "0.1685",
+    "ablation.reference.delta_ap": "—",
+    "ablation.reference.count": "39",
+    "seasonality.canvass.low_rate": "20.6%",
+    "seasonality.canvass.high_rate": "27.4%",
+    "seasonality.canvass.range_pp": "6.8",
+    "seasonality.canvass.change_2019_2025_pp": "+0.2",
+    "seasonality.canvass.change_2023_2025_pp": "−5.1",
+    "seasonality.canvass.low_month": "Dec",
+    "seasonality.canvass.high_month": "Aug",
+    "seasonality.complaint.low_rate": "33.2%",
+    "seasonality.complaint.high_rate": "41.1%",
+    "seasonality.complaint.range_pp": "7.9",
+    "seasonality.complaint.change_2019_2025_pp": "−4.2",
+    "seasonality.complaint.change_2023_2025_pp": "−2.9",
+    "seasonality.complaint.low_month": "Dec",
+    "seasonality.complaint.high_month": "Aug",
+    "groups.historical_failure_evidence.count": "13",
+    "groups.historical_failure_evidence.mean_abs": "0.333",
+    "groups.historical_failure_evidence.cancellation": "52.0%",
+    "groups.inspection_exposure_time.count": "14",
+    "groups.inspection_exposure_time.mean_abs": "0.244",
+    "groups.inspection_exposure_time.cancellation": "74.5%",
+    "groups.facility_risk.count": "2",
+    "groups.facility_risk.mean_abs": "0.081",
+    "groups.facility_risk.cancellation": "42.4%",
+    "groups.license_background.count": "10",
+    "groups.license_background.mean_abs": "0.071",
+    "groups.license_background.cancellation": "90.7%",
+    "or.prior_fail_days.raw": "1.38",
+    "or.prior_fail_days.calibrated": "1.28",
+    "or.prior_scored_days.raw": "0.76",
+    "or.prior_scored_days.calibrated": "0.81",
+    "or.observed_history_years.raw": "1.34",
+    "or.observed_history_years.calibrated": "1.25",
+    "or.historical_failure_rate.raw": "0.96",
+    "or.historical_failure_rate.calibrated": "0.97",
+    "or.license_observed_tenure_years.raw": "1.04",
+    "or.license_observed_tenure_years.calibrated": "1.03",
+    "subgroups.risk1.n": "7,322",
+    "subgroups.risk1.ap": "0.320",
+    "subgroups.risk1.ece": "2.1%",
+    "subgroups.risk1.selection": "9.6%",
+    "subgroups.risk2.n": "918",
+    "subgroups.risk2.ap": "0.294",
+    "subgroups.risk2.ece": "2.8%",
+    "subgroups.risk2.selection": "13.3%",
+    "subgroups.risk3.n": "76",
+    "subgroups.risk3.ap": "0.266",
+    "subgroups.risk3.ece": "6.4%",
+    "subgroups.risk3.selection": "17.1%",
+    "days_earlier.mean": "+5.95",
+    "days_earlier.delayed_fraction": "38.1%",
+    "days_earlier.windows": "6",
+    "errors.fn_last_pass": "68.9%",
+    "errors.fn_cold_start": "0.6%",
+    "errors.fp_conditions": "34.8%",
+    "errors.annual_slots": "837",
+    "errors.fp01_probability": "66.1%",
+    "errors.fn01_probability": "6.8%",
+    "lag.1.ap": "0.3146",
+    "lag.1.delta_ap": "+0.0000",
+    "lag.1.retention": "100.0%",
+    "lag.1.max_probability_delta": "0.0 pp",
+    "lag.7.ap": "0.3142",
+    "lag.7.delta_ap": "−0.0003",
+    "lag.7.retention": "98.9%",
+    "lag.7.max_probability_delta": "12.6 pp",
+    "lag.30.ap": "0.3139",
+    "lag.30.delta_ap": "−0.0006",
+    "lag.30.retention": "96.2%",
+    "lag.30.max_probability_delta": "12.6 pp",
+    "literature.purple_or": "4.74",
+    "literature.official_year": "2015",
+    "literature.audit_year": "2019",
+    "validation.original_tests": "55",
+    "validation.tests_passed": "122"
+  },
+  "values": {
+    "data.targets": 51626,
+    "data.test_n": 8363,
+    "data.test_failures": 1886,
+    "data.source_inspections": 304348,
+    "data.numeric_features": 32,
+    "data.categorical_features": 7,
+    "data.features": 39,
+    "data.sanitarian_features": 0,
+    "data.license_transactions": 1185058,
+    "data.license_retained": 201981,
+    "data.fail_rate": 0.226,
+    "data.match_number": 0.934,
+    "data.match_address": 0.797,
+    "data.match_visible": 0.796,
+    "data.rule_change": "2018-07-01",
+    "data.backfill_date": "2025-09-25",
+    "data.study_years": "2019–2025",
+    "data.test_year": "2025",
+    "data.history_years": "2010–2025",
+    "labels.post_code": "Post-2018 Food Code",
+    "labels.top5": "Top 5%",
+    "labels.top10": "Top 10%",
+    "labels.top20": "Top 20%",
+    "labels.history_lag": "≥1 day",
+    "labels.complaints": "311 complaint signals",
+    "errors.fp01_id": "FP-01",
+    "errors.fn01_id": "FN-01",
+    "labels.bootstrap_replicates": "500",
+    "presentation.slide_count": "13",
+    "presentation.slide_01": "01 / 13",
+    "presentation.slide_02": "02 / 13",
+    "presentation.slide_03": "03 / 13",
+    "presentation.slide_04": "04 / 13",
+    "presentation.slide_05": "05 / 13",
+    "presentation.slide_06": "06 / 13",
+    "presentation.slide_07": "07 / 13",
+    "presentation.slide_08": "08 / 13",
+    "presentation.slide_09": "09 / 13",
+    "presentation.slide_10": "10 / 13",
+    "presentation.slide_11": "11 / 13",
+    "presentation.slide_12": "12 / 13",
+    "presentation.slide_13": "13 / 13",
+    "presentation.step_01": "01",
+    "presentation.step_02": "02",
+    "presentation.step_03": "03",
+    "lag.1.days": "1 day",
+    "lag.7.days": "7 days",
+    "lag.30.days": "30 days",
+    "data.rule_pre_fail_rate": 0.24,
+    "data.rule_post_fail_rate": 0.198,
+    "splits.train.years": "2019–2022",
+    "splits.train.n": 27396,
+    "splits.train.fail_rate": 0.247,
+    "splits.validation.years": "2023",
+    "splits.validation.n": 7277,
+    "splits.validation.fail_rate": 0.276,
+    "splits.calibration.years": "2024",
+    "splits.calibration.n": 8590,
+    "splits.calibration.fail_rate": 0.232,
+    "splits.test.years": "2025",
+    "splits.test.n": 8363,
+    "splits.test.fail_rate": 0.226,
+    "lr.ap": 0.315,
+    "lr.auc": 0.633,
+    "lr.brier": 0.169,
+    "lr.log_loss": 0.515,
+    "lr.top10_precision": 0.362,
+    "lr.validation_ap": 0.3788,
+    "lgbm.ap": 0.321,
+    "lgbm.auc": 0.636,
+    "lgbm.brier": 0.168,
+    "lgbm.log_loss": 0.515,
+    "lgbm.top10_precision": 0.379,
+    "lgbm.validation_ap": 0.3781,
+    "prevalence.ap": 0.226,
+    "prevalence.auc": 0.5,
+    "prevalence.brier": 0.175,
+    "prevalence.log_loss": 0.534,
+    "prevalence.top10_precision": 0.226,
+    "prevalence.validation_ap": 0.2764,
+    "paired.ap_delta": 0.0069,
+    "paired.ap_ci_lower": -0.0034,
+    "paired.ap_ci_upper": 0.0164,
+    "calibration.lr.raw_mean_p": 0.247,
+    "calibration.lr.raw_brier": 0.1695,
+    "calibration.lr.raw_ece": 0.026,
+    "calibration.lr.cal_mean_p": 0.23,
+    "calibration.lr.cal_brier": 0.1685,
+    "calibration.lr.cal_ece": 0.021,
+    "calibration.lgbm.raw_mean_p": 0.45,
+    "calibration.lgbm.raw_brier": 0.2208,
+    "calibration.lgbm.raw_ece": 0.224,
+    "calibration.lgbm.cal_mean_p": 0.227,
+    "calibration.lgbm.cal_brier": 0.1681,
+    "calibration.lgbm.cal_ece": 0.018,
+    "capacity.daily5.slots": 539,
+    "capacity.daily5.selected_rate": 0.064,
+    "capacity.daily5.failures": 201,
+    "capacity.daily5.random_expected": 122.1,
+    "capacity.daily5.random_rounded": 122,
+    "capacity.daily5.extra_failures": 78.9,
+    "capacity.daily5.lift_gain": 0.646,
+    "capacity.daily5.recall": 0.107,
+    "capacity.daily10.slots": 948,
+    "capacity.daily10.selected_rate": 0.113,
+    "capacity.daily10.failures": 341,
+    "capacity.daily10.random_expected": 214.2,
+    "capacity.daily10.random_rounded": 214,
+    "capacity.daily10.extra_failures": 126.8,
+    "capacity.daily10.lift_gain": 0.592,
+    "capacity.daily10.recall": 0.181,
+    "capacity.daily20.slots": 1777,
+    "capacity.daily20.selected_rate": 0.212,
+    "capacity.daily20.failures": 587,
+    "capacity.daily20.random_expected": 400.9,
+    "capacity.daily20.random_rounded": 401,
+    "capacity.daily20.extra_failures": 186.1,
+    "capacity.daily20.lift_gain": 0.464,
+    "capacity.daily20.recall": 0.311,
+    "ablation.history.ap": 0.3107,
+    "ablation.history.auc": 0.6217,
+    "ablation.history.brier": 0.1693,
+    "ablation.history.delta_ap": null,
+    "ablation.history.count": 13,
+    "ablation.exposure.ap": 0.3088,
+    "ablation.exposure.auc": 0.6247,
+    "ablation.exposure.brier": 0.1693,
+    "ablation.exposure.delta_ap": -0.0019,
+    "ablation.exposure.count": 27,
+    "ablation.license.ap": 0.3118,
+    "ablation.license.auc": 0.628,
+    "ablation.license.brier": 0.169,
+    "ablation.license.delta_ap": 0.003,
+    "ablation.license.count": 37,
+    "ablation.reference.ap": 0.3146,
+    "ablation.reference.auc": 0.6326,
+    "ablation.reference.brier": 0.1685,
+    "ablation.reference.delta_ap": null,
+    "ablation.reference.count": 39,
+    "seasonality.canvass.low_rate": 0.206,
+    "seasonality.canvass.high_rate": 0.274,
+    "seasonality.canvass.range_pp": 6.8,
+    "seasonality.canvass.change_2019_2025_pp": 0.2,
+    "seasonality.canvass.change_2023_2025_pp": -5.1,
+    "seasonality.canvass.low_month": "Dec",
+    "seasonality.canvass.high_month": "Aug",
+    "seasonality.complaint.low_rate": 0.332,
+    "seasonality.complaint.high_rate": 0.411,
+    "seasonality.complaint.range_pp": 7.9,
+    "seasonality.complaint.change_2019_2025_pp": -4.2,
+    "seasonality.complaint.change_2023_2025_pp": -2.9,
+    "seasonality.complaint.low_month": "Dec",
+    "seasonality.complaint.high_month": "Aug",
+    "groups.historical_failure_evidence.count": 13,
+    "groups.historical_failure_evidence.mean_abs": 0.333,
+    "groups.historical_failure_evidence.cancellation": 0.52,
+    "groups.inspection_exposure_time.count": 14,
+    "groups.inspection_exposure_time.mean_abs": 0.244,
+    "groups.inspection_exposure_time.cancellation": 0.745,
+    "groups.facility_risk.count": 2,
+    "groups.facility_risk.mean_abs": 0.081,
+    "groups.facility_risk.cancellation": 0.424,
+    "groups.license_background.count": 10,
+    "groups.license_background.mean_abs": 0.071,
+    "groups.license_background.cancellation": 0.907,
+    "or.prior_fail_days.raw": 1.38,
+    "or.prior_fail_days.calibrated": 1.28,
+    "or.prior_scored_days.raw": 0.76,
+    "or.prior_scored_days.calibrated": 0.81,
+    "or.observed_history_years.raw": 1.34,
+    "or.observed_history_years.calibrated": 1.25,
+    "or.historical_failure_rate.raw": 0.96,
+    "or.historical_failure_rate.calibrated": 0.97,
+    "or.license_observed_tenure_years.raw": 1.04,
+    "or.license_observed_tenure_years.calibrated": 1.03,
+    "subgroups.risk1.n": 7322,
+    "subgroups.risk1.ap": 0.32,
+    "subgroups.risk1.ece": 0.021,
+    "subgroups.risk1.selection": 0.096,
+    "subgroups.risk2.n": 918,
+    "subgroups.risk2.ap": 0.294,
+    "subgroups.risk2.ece": 0.028,
+    "subgroups.risk2.selection": 0.133,
+    "subgroups.risk3.n": 76,
+    "subgroups.risk3.ap": 0.266,
+    "subgroups.risk3.ece": 0.064,
+    "subgroups.risk3.selection": 0.171,
+    "days_earlier.mean": 5.95,
+    "days_earlier.delayed_fraction": 0.381,
+    "days_earlier.windows": 6,
+    "errors.fn_last_pass": 0.689,
+    "errors.fn_cold_start": 0.006,
+    "errors.fp_conditions": 0.348,
+    "errors.annual_slots": 837,
+    "errors.fp01_probability": 0.661,
+    "errors.fn01_probability": 0.068,
+    "lag.1.ap": 0.3146,
+    "lag.1.delta_ap": 0,
+    "lag.1.retention": 1,
+    "lag.1.max_probability_delta": 0,
+    "lag.7.ap": 0.3142,
+    "lag.7.delta_ap": -0.0003,
+    "lag.7.retention": 0.989,
+    "lag.7.max_probability_delta": 0.126,
+    "lag.30.ap": 0.3139,
+    "lag.30.delta_ap": -0.0006,
+    "lag.30.retention": 0.962,
+    "lag.30.max_probability_delta": 0.126,
+    "literature.purple_or": 4.74,
+    "literature.official_year": 2015,
+    "literature.audit_year": 2019,
+    "validation.original_tests": 55,
+    "validation.tests_passed": 122
+  },
+  "source_refs": {
+    "data.targets": "data_summary.json:splits.*.rows",
+    "data.test_n": "data_summary.json",
+    "data.test_failures": "data_summary.json",
+    "data.source_inspections": "data_summary.json",
+    "data.numeric_features": "data_summary.json",
+    "data.categorical_features": "data_summary.json",
+    "data.features": "data_summary.json",
+    "data.sanitarian_features": "data_summary.json",
+    "data.license_transactions": "data_summary.json:sources.licenses",
+    "data.license_retained": "data_summary.json:sources.licenses",
+    "data.fail_rate": "data_summary.json:splits.test.fail_rate",
+    "data.match_number": "data_summary.json:splits.test.license_matching.license_number_only_match_rate",
+    "data.match_address": "data_summary.json:splits.test.license_matching.license_address_match_rate_ignoring_time",
+    "data.match_visible": "data_summary.json:splits.test.license_matching.point_in_time_visible_match_rate",
+    "data.rule_change": "data_summary.json:rule_change.date",
+    "data.backfill_date": "data/snapshots/manifest.json:sources.licenses.source_description",
+    "data.study_years": "config/topic1.json:train_start/test_end",
+    "data.test_year": "config/topic1.json:test_start/test_end",
+    "data.history_years": "config/topic1.json:history_start/data_end_date",
+    "labels.post_code": "data_summary.json:rule_change.date; config/topic1.json:train_start",
+    "labels.top5": "config/topic1.json:top_fractions",
+    "labels.top10": "config/topic1.json:top_fractions",
+    "labels.top20": "config/topic1.json:top_fractions",
+    "labels.history_lag": "config/topic1.json:observation_lag_days",
+    "labels.complaints": "reports/topic1_report.md:future work",
+    "errors.fp01_id": "error_case_summary.csv:case_id",
+    "errors.fn01_id": "error_case_summary.csv:case_id",
+    "labels.bootstrap_replicates": "config/topic1.json:bootstrap_replicates",
+    "presentation.slide_count": "User-specified presentation layout",
+    "presentation.slide_01": "Presentation navigation metadata",
+    "presentation.slide_02": "Presentation navigation metadata",
+    "presentation.slide_03": "Presentation navigation metadata",
+    "presentation.slide_04": "Presentation navigation metadata",
+    "presentation.slide_05": "Presentation navigation metadata",
+    "presentation.slide_06": "Presentation navigation metadata",
+    "presentation.slide_07": "Presentation navigation metadata",
+    "presentation.slide_08": "Presentation navigation metadata",
+    "presentation.slide_09": "Presentation navigation metadata",
+    "presentation.slide_10": "Presentation navigation metadata",
+    "presentation.slide_11": "Presentation navigation metadata",
+    "presentation.slide_12": "Presentation navigation metadata",
+    "presentation.slide_13": "Presentation navigation metadata",
+    "presentation.step_01": "Presentation roadmap metadata",
+    "presentation.step_02": "Presentation roadmap metadata",
+    "presentation.step_03": "Presentation roadmap metadata",
+    "lag.1.days": "config/topic1.json:observation_lag_days/sensitivity_lags",
+    "lag.7.days": "config/topic1.json:observation_lag_days/sensitivity_lags",
+    "lag.30.days": "config/topic1.json:observation_lag_days/sensitivity_lags",
+    "data.rule_pre_fail_rate": "data_summary.json:rule_change.periods",
+    "data.rule_post_fail_rate": "data_summary.json:rule_change.periods",
+    "splits.train.years": "data_summary.json:splits.train",
+    "splits.train.n": "data_summary.json:splits.train.rows",
+    "splits.train.fail_rate": "data_summary.json:splits.train.fail_rate",
+    "splits.validation.years": "data_summary.json:splits.validation",
+    "splits.validation.n": "data_summary.json:splits.validation.rows",
+    "splits.validation.fail_rate": "data_summary.json:splits.validation.fail_rate",
+    "splits.calibration.years": "data_summary.json:splits.calibration",
+    "splits.calibration.n": "data_summary.json:splits.calibration.rows",
+    "splits.calibration.fail_rate": "data_summary.json:splits.calibration.fail_rate",
+    "splits.test.years": "data_summary.json:splits.test",
+    "splits.test.n": "data_summary.json:splits.test.rows",
+    "splits.test.fail_rate": "data_summary.json:splits.test.fail_rate",
+    "lr.ap": "model_comparison.csv:logistic_regression/calibrated/average_precision",
+    "lr.auc": "model_comparison.csv:logistic_regression/calibrated/roc_auc",
+    "lr.brier": "model_comparison.csv:logistic_regression/calibrated/brier_score",
+    "lr.log_loss": "model_comparison.csv:logistic_regression/calibrated/log_loss",
+    "lr.top10_precision": "model_comparison.csv:logistic_regression/calibrated/top_10pct_precision",
+    "lr.validation_ap": "model_selection.json:validation_average_precision_by_family",
+    "lgbm.ap": "model_comparison.csv:lightgbm/calibrated/average_precision",
+    "lgbm.auc": "model_comparison.csv:lightgbm/calibrated/roc_auc",
+    "lgbm.brier": "model_comparison.csv:lightgbm/calibrated/brier_score",
+    "lgbm.log_loss": "model_comparison.csv:lightgbm/calibrated/log_loss",
+    "lgbm.top10_precision": "model_comparison.csv:lightgbm/calibrated/top_10pct_precision",
+    "lgbm.validation_ap": "model_selection.json:validation_average_precision_by_family",
+    "prevalence.ap": "model_comparison.csv:prevalence/calibrated/average_precision",
+    "prevalence.auc": "model_comparison.csv:prevalence/calibrated/roc_auc",
+    "prevalence.brier": "model_comparison.csv:prevalence/calibrated/brier_score",
+    "prevalence.log_loss": "model_comparison.csv:prevalence/calibrated/log_loss",
+    "prevalence.top10_precision": "model_comparison.csv:prevalence/calibrated/top_10pct_precision",
+    "prevalence.validation_ap": "model_selection.json:validation_average_precision_by_family",
+    "paired.ap_delta": "paired_model_differences.json:intervals.average_precision.estimate",
+    "paired.ap_ci_lower": "paired_model_differences.json:intervals.average_precision.lower",
+    "paired.ap_ci_upper": "paired_model_differences.json:intervals.average_precision.upper",
+    "calibration.lr.raw_mean_p": "calibration_summary.json:models.logistic_regression.probability_variants.raw.mean_probability",
+    "calibration.lr.raw_brier": "calibration_summary.json:models.logistic_regression.probability_variants.raw.brier_score",
+    "calibration.lr.raw_ece": "calibration_summary.json:models.logistic_regression.probability_variants.raw.ece_on_raw_score_deciles",
+    "calibration.lr.cal_mean_p": "calibration_summary.json:models.logistic_regression.probability_variants.calibrated.mean_probability",
+    "calibration.lr.cal_brier": "calibration_summary.json:models.logistic_regression.probability_variants.calibrated.brier_score",
+    "calibration.lr.cal_ece": "calibration_summary.json:models.logistic_regression.probability_variants.calibrated.ece_on_raw_score_deciles",
+    "calibration.lgbm.raw_mean_p": "calibration_summary.json:models.lightgbm.probability_variants.raw.mean_probability",
+    "calibration.lgbm.raw_brier": "calibration_summary.json:models.lightgbm.probability_variants.raw.brier_score",
+    "calibration.lgbm.raw_ece": "calibration_summary.json:models.lightgbm.probability_variants.raw.ece_on_raw_score_deciles",
+    "calibration.lgbm.cal_mean_p": "calibration_summary.json:models.lightgbm.probability_variants.calibrated.mean_probability",
+    "calibration.lgbm.cal_brier": "calibration_summary.json:models.lightgbm.probability_variants.calibrated.brier_score",
+    "calibration.lgbm.cal_ece": "calibration_summary.json:models.lightgbm.probability_variants.calibrated.ece_on_raw_score_deciles",
+    "capacity.daily5.slots": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.selected_rate": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.failures": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.random_expected": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.random_rounded": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.extra_failures": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.lift_gain": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily5.recall": "figure_daily_capacity_yield.csv:logistic_regression/5%",
+    "capacity.daily10.slots": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.selected_rate": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.failures": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.random_expected": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.random_rounded": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.extra_failures": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.lift_gain": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily10.recall": "figure_daily_capacity_yield.csv:logistic_regression/10%",
+    "capacity.daily20.slots": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.selected_rate": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.failures": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.random_expected": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.random_rounded": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.extra_failures": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.lift_gain": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "capacity.daily20.recall": "figure_daily_capacity_yield.csv:logistic_regression/20%",
+    "ablation.history.ap": "feature_ablation.csv:history_only/test/calibrated/average_precision",
+    "ablation.history.auc": "feature_ablation.csv:history_only/test/calibrated/roc_auc",
+    "ablation.history.brier": "feature_ablation.csv:history_only/test/calibrated/brier_score",
+    "ablation.history.delta_ap": "feature_ablation.csv:history_only/test/calibrated/delta_average_precision",
+    "ablation.history.count": "feature_ablation.csv:history_only/test/calibrated/feature_count",
+    "ablation.exposure.ap": "feature_ablation.csv:history_time/test/calibrated/average_precision",
+    "ablation.exposure.auc": "feature_ablation.csv:history_time/test/calibrated/roc_auc",
+    "ablation.exposure.brier": "feature_ablation.csv:history_time/test/calibrated/brier_score",
+    "ablation.exposure.delta_ap": "feature_ablation.csv:history_time/test/calibrated/delta_average_precision",
+    "ablation.exposure.count": "feature_ablation.csv:history_time/test/calibrated/feature_count",
+    "ablation.license.ap": "feature_ablation.csv:history_time_license/test/calibrated/average_precision",
+    "ablation.license.auc": "feature_ablation.csv:history_time_license/test/calibrated/roc_auc",
+    "ablation.license.brier": "feature_ablation.csv:history_time_license/test/calibrated/brier_score",
+    "ablation.license.delta_ap": "feature_ablation.csv:history_time_license/test/calibrated/delta_average_precision",
+    "ablation.license.count": "feature_ablation.csv:history_time_license/test/calibrated/feature_count",
+    "ablation.reference.ap": "feature_ablation.csv:frozen_primary_39/test/calibrated/average_precision",
+    "ablation.reference.auc": "feature_ablation.csv:frozen_primary_39/test/calibrated/roc_auc",
+    "ablation.reference.brier": "feature_ablation.csv:frozen_primary_39/test/calibrated/brier_score",
+    "ablation.reference.delta_ap": "feature_ablation.csv:frozen_primary_39/test/calibrated/delta_average_precision",
+    "ablation.reference.count": "feature_ablation.csv:frozen_primary_39/test/calibrated/feature_count",
+    "seasonality.canvass.low_rate": "seasonality_complaint.json:seasonality.Canvass.pooled_min_fail_rate",
+    "seasonality.canvass.high_rate": "seasonality_complaint.json:seasonality.Canvass.pooled_max_fail_rate",
+    "seasonality.canvass.range_pp": "seasonality_complaint.json:seasonality.Canvass.pooled_month_range_pp",
+    "seasonality.canvass.change_2019_2025_pp": "seasonality_complaint.json:seasonality.Canvass.fail_rate_change_2019_2025_pp",
+    "seasonality.canvass.change_2023_2025_pp": "seasonality_complaint.json:seasonality.Canvass.fail_rate_change_2023_2025_pp",
+    "seasonality.canvass.low_month": "seasonality_complaint.json:seasonality.Canvass.pooled_min_month",
+    "seasonality.canvass.high_month": "seasonality_complaint.json:seasonality.Canvass.pooled_max_month",
+    "seasonality.complaint.low_rate": "seasonality_complaint.json:seasonality.Complaint.pooled_min_fail_rate",
+    "seasonality.complaint.high_rate": "seasonality_complaint.json:seasonality.Complaint.pooled_max_fail_rate",
+    "seasonality.complaint.range_pp": "seasonality_complaint.json:seasonality.Complaint.pooled_month_range_pp",
+    "seasonality.complaint.change_2019_2025_pp": "seasonality_complaint.json:seasonality.Complaint.fail_rate_change_2019_2025_pp",
+    "seasonality.complaint.change_2023_2025_pp": "seasonality_complaint.json:seasonality.Complaint.fail_rate_change_2023_2025_pp",
+    "seasonality.complaint.low_month": "seasonality_complaint.json:seasonality.Complaint.pooled_min_month",
+    "seasonality.complaint.high_month": "seasonality_complaint.json:seasonality.Complaint.pooled_max_month",
+    "groups.historical_failure_evidence.count": "grouped_shap_importance.csv:historical_failure_evidence/feature_count",
+    "groups.historical_failure_evidence.mean_abs": "grouped_shap_importance.csv:historical_failure_evidence/mean_abs_group_shap",
+    "groups.historical_failure_evidence.cancellation": "grouped_shap_importance.csv:historical_failure_evidence/within_group_cancellation_fraction",
+    "groups.inspection_exposure_time.count": "grouped_shap_importance.csv:inspection_exposure_time/feature_count",
+    "groups.inspection_exposure_time.mean_abs": "grouped_shap_importance.csv:inspection_exposure_time/mean_abs_group_shap",
+    "groups.inspection_exposure_time.cancellation": "grouped_shap_importance.csv:inspection_exposure_time/within_group_cancellation_fraction",
+    "groups.facility_risk.count": "grouped_shap_importance.csv:facility_risk/feature_count",
+    "groups.facility_risk.mean_abs": "grouped_shap_importance.csv:facility_risk/mean_abs_group_shap",
+    "groups.facility_risk.cancellation": "grouped_shap_importance.csv:facility_risk/within_group_cancellation_fraction",
+    "groups.license_background.count": "grouped_shap_importance.csv:license_background/feature_count",
+    "groups.license_background.mean_abs": "grouped_shap_importance.csv:license_background/mean_abs_group_shap",
+    "groups.license_background.cancellation": "grouped_shap_importance.csv:license_background/within_group_cancellation_fraction",
+    "or.prior_fail_days.raw": "lr_standardized_odds_ratios.csv:prior_fail_days/raw",
+    "or.prior_fail_days.calibrated": "lr_standardized_odds_ratios.csv:prior_fail_days/calibrated",
+    "or.prior_scored_days.raw": "lr_standardized_odds_ratios.csv:prior_scored_days/raw",
+    "or.prior_scored_days.calibrated": "lr_standardized_odds_ratios.csv:prior_scored_days/calibrated",
+    "or.observed_history_years.raw": "lr_standardized_odds_ratios.csv:observed_history_years/raw",
+    "or.observed_history_years.calibrated": "lr_standardized_odds_ratios.csv:observed_history_years/calibrated",
+    "or.historical_failure_rate.raw": "lr_standardized_odds_ratios.csv:historical_failure_rate/raw",
+    "or.historical_failure_rate.calibrated": "lr_standardized_odds_ratios.csv:historical_failure_rate/calibrated",
+    "or.license_observed_tenure_years.raw": "lr_standardized_odds_ratios.csv:license_observed_tenure_years/raw",
+    "or.license_observed_tenure_years.calibrated": "lr_standardized_odds_ratios.csv:license_observed_tenure_years/calibrated",
+    "subgroups.risk1.n": "subgroup_audit.csv:Risk 1 (High)/n",
+    "subgroups.risk1.ap": "subgroup_audit.csv:Risk 1 (High)/average_precision",
+    "subgroups.risk1.ece": "subgroup_audit.csv:Risk 1 (High)/ece_10_equal_width",
+    "subgroups.risk1.selection": "subgroup_audit.csv:Risk 1 (High)/global_top10_selected_rate",
+    "subgroups.risk2.n": "subgroup_audit.csv:Risk 2 (Medium)/n",
+    "subgroups.risk2.ap": "subgroup_audit.csv:Risk 2 (Medium)/average_precision",
+    "subgroups.risk2.ece": "subgroup_audit.csv:Risk 2 (Medium)/ece_10_equal_width",
+    "subgroups.risk2.selection": "subgroup_audit.csv:Risk 2 (Medium)/global_top10_selected_rate",
+    "subgroups.risk3.n": "subgroup_audit.csv:Risk 3 (Low)/n",
+    "subgroups.risk3.ap": "subgroup_audit.csv:Risk 3 (Low)/average_precision",
+    "subgroups.risk3.ece": "subgroup_audit.csv:Risk 3 (Low)/ece_10_equal_width",
+    "subgroups.risk3.selection": "subgroup_audit.csv:Risk 3 (Low)/global_top10_selected_rate",
+    "days_earlier.mean": "days_earlier_summary.json:pooled_days_earlier",
+    "days_earlier.delayed_fraction": "days_earlier_windows.csv:Fail-weighted delayed_positive_fraction",
+    "days_earlier.windows": "days_earlier_windows.csv:window count",
+    "errors.fn_last_pass": "error_group_summary.csv:FN/last_result_pass_fraction",
+    "errors.fn_cold_start": "error_group_summary.csv:FN/cold_start_fraction",
+    "errors.fp_conditions": "error_group_summary.csv:FP/actual_pass_with_conditions_fraction",
+    "errors.annual_slots": "error_analysis.json:primary_operating_point.confusion.selected_n",
+    "errors.fp01_probability": "error_case_summary.csv:FP-01/probability",
+    "errors.fn01_probability": "error_case_summary.csv:FN-01/probability",
+    "lag.1.ap": "lag_sensitivity.csv:logistic_regression/1/average_precision",
+    "lag.1.delta_ap": "lag_sensitivity.csv:logistic_regression/1/delta_average_precision_vs_lag_1",
+    "lag.1.retention": "lag_sensitivity.csv:logistic_regression/1/top_10pct_member_retention_vs_lag_1",
+    "lag.1.max_probability_delta": "lag_sensitivity.csv:logistic_regression/1/prediction_max_absolute_change_vs_lag_1",
+    "lag.7.ap": "lag_sensitivity.csv:logistic_regression/7/average_precision",
+    "lag.7.delta_ap": "lag_sensitivity.csv:logistic_regression/7/delta_average_precision_vs_lag_1",
+    "lag.7.retention": "lag_sensitivity.csv:logistic_regression/7/top_10pct_member_retention_vs_lag_1",
+    "lag.7.max_probability_delta": "lag_sensitivity.csv:logistic_regression/7/prediction_max_absolute_change_vs_lag_1",
+    "lag.30.ap": "lag_sensitivity.csv:logistic_regression/30/average_precision",
+    "lag.30.delta_ap": "lag_sensitivity.csv:logistic_regression/30/delta_average_precision_vs_lag_1",
+    "lag.30.retention": "lag_sensitivity.csv:logistic_regression/30/top_10pct_member_retention_vs_lag_1",
+    "lag.30.max_probability_delta": "lag_sensitivity.csv:logistic_regression/30/prediction_max_absolute_change_vs_lag_1",
+    "literature.purple_or": "Kannan et al. (2019), Table 3: exp(Purple coefficient 1.555)",
+    "literature.official_year": "Chicago/food-inspections-evaluation",
+    "literature.audit_year": "Kannan, Shapiro & Bilgic (2019)",
+    "validation.original_tests": "Original unmodified tests/test_{data,features,metrics,models}.py",
+    "validation.tests_passed": "Verified pytest result supplied through --tests-passed"
+  },
+  "format_specs": {
+    "data.targets": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.test_n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.test_failures": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.source_inspections": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.numeric_features": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.categorical_features": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.features": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.sanitarian_features": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.license_transactions": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.license_retained": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.match_number": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.match_address": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.match_visible": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.rule_change": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2018-07-01",
+      "null_text": "—"
+    },
+    "data.backfill_date": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2025-09-25",
+      "null_text": "—"
+    },
+    "data.study_years": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2019–2025",
+      "null_text": "—"
+    },
+    "data.test_year": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2025",
+      "null_text": "—"
+    },
+    "data.history_years": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2010–2025",
+      "null_text": "—"
+    },
+    "labels.post_code": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Post-2018 Food Code",
+      "null_text": "—"
+    },
+    "labels.top5": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Top 5%",
+      "null_text": "—"
+    },
+    "labels.top10": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Top 10%",
+      "null_text": "—"
+    },
+    "labels.top20": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Top 20%",
+      "null_text": "—"
+    },
+    "labels.history_lag": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "≥1 day",
+      "null_text": "—"
+    },
+    "labels.complaints": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "311 complaint signals",
+      "null_text": "—"
+    },
+    "errors.fp01_id": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "FP-01",
+      "null_text": "—"
+    },
+    "errors.fn01_id": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "FN-01",
+      "null_text": "—"
+    },
+    "labels.bootstrap_replicates": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "500",
+      "null_text": "—"
+    },
+    "presentation.slide_count": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "13",
+      "null_text": "—"
+    },
+    "presentation.slide_01": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "01 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_02": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "02 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_03": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "03 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_04": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "04 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_05": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "05 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_06": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "06 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_07": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "07 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_08": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "08 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_09": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "09 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_10": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "10 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_11": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "11 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_12": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "12 / 13",
+      "null_text": "—"
+    },
+    "presentation.slide_13": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "13 / 13",
+      "null_text": "—"
+    },
+    "presentation.step_01": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "01",
+      "null_text": "—"
+    },
+    "presentation.step_02": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "02",
+      "null_text": "—"
+    },
+    "presentation.step_03": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "03",
+      "null_text": "—"
+    },
+    "lag.1.days": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "1 day",
+      "null_text": "—"
+    },
+    "lag.7.days": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "7 days",
+      "null_text": "—"
+    },
+    "lag.30.days": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "30 days",
+      "null_text": "—"
+    },
+    "data.rule_pre_fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "data.rule_post_fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.train.years": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2019–2022",
+      "null_text": "—"
+    },
+    "splits.train.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.train.fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.validation.years": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2023",
+      "null_text": "—"
+    },
+    "splits.validation.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.validation.fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.calibration.years": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2024",
+      "null_text": "—"
+    },
+    "splits.calibration.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.calibration.fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.test.years": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "2025",
+      "null_text": "—"
+    },
+    "splits.test.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "splits.test.fail_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lr.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lr.auc": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lr.brier": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lr.log_loss": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lr.top10_precision": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lr.validation_ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lgbm.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lgbm.auc": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lgbm.brier": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lgbm.log_loss": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lgbm.top10_precision": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lgbm.validation_ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "prevalence.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "prevalence.auc": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "prevalence.brier": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "prevalence.log_loss": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "prevalence.top10_precision": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "prevalence.validation_ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "paired.ap_delta": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "paired.ap_ci_lower": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "paired.ap_ci_upper": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lr.raw_mean_p": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lr.raw_brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lr.raw_ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lr.cal_mean_p": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lr.cal_brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lr.cal_ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lgbm.raw_mean_p": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lgbm.raw_brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lgbm.raw_ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lgbm.cal_mean_p": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lgbm.cal_brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "calibration.lgbm.cal_ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.slots": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.selected_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.failures": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.random_expected": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.random_rounded": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.extra_failures": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.lift_gain": {
+      "format": "+.1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily5.recall": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.slots": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.selected_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.failures": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.random_expected": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.random_rounded": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.extra_failures": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.lift_gain": {
+      "format": "+.1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily10.recall": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.slots": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.selected_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.failures": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.random_expected": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.random_rounded": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.extra_failures": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.lift_gain": {
+      "format": "+.1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "capacity.daily20.recall": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.history.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.history.auc": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.history.brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.history.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.history.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.exposure.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.exposure.auc": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.exposure.brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.exposure.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.exposure.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.license.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.license.auc": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.license.brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.license.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.license.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.reference.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.reference.auc": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.reference.brier": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.reference.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "ablation.reference.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.canvass.low_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.canvass.high_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.canvass.range_pp": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.canvass.change_2019_2025_pp": {
+      "format": "+.1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.canvass.change_2023_2025_pp": {
+      "format": "+.1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.canvass.low_month": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Dec",
+      "null_text": "—"
+    },
+    "seasonality.canvass.high_month": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Aug",
+      "null_text": "—"
+    },
+    "seasonality.complaint.low_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.complaint.high_rate": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.complaint.range_pp": {
+      "format": ".1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.complaint.change_2019_2025_pp": {
+      "format": "+.1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.complaint.change_2023_2025_pp": {
+      "format": "+.1f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "seasonality.complaint.low_month": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Dec",
+      "null_text": "—"
+    },
+    "seasonality.complaint.high_month": {
+      "format": "text",
+      "scale": 1,
+      "suffix": "",
+      "text": "Aug",
+      "null_text": "—"
+    },
+    "groups.historical_failure_evidence.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.historical_failure_evidence.mean_abs": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.historical_failure_evidence.cancellation": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.inspection_exposure_time.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.inspection_exposure_time.mean_abs": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.inspection_exposure_time.cancellation": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.facility_risk.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.facility_risk.mean_abs": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.facility_risk.cancellation": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.license_background.count": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.license_background.mean_abs": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "groups.license_background.cancellation": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.prior_fail_days.raw": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.prior_fail_days.calibrated": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.prior_scored_days.raw": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.prior_scored_days.calibrated": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.observed_history_years.raw": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.observed_history_years.calibrated": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.historical_failure_rate.raw": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.historical_failure_rate.calibrated": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.license_observed_tenure_years.raw": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "or.license_observed_tenure_years.calibrated": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk1.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk1.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk1.ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk1.selection": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk2.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk2.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk2.ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk2.selection": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk3.n": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk3.ap": {
+      "format": ".3f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk3.ece": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "subgroups.risk3.selection": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "days_earlier.mean": {
+      "format": "+.2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "days_earlier.delayed_fraction": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "days_earlier.windows": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "errors.fn_last_pass": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "errors.fn_cold_start": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "errors.fp_conditions": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "errors.annual_slots": {
+      "format": ",.0f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "errors.fp01_probability": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "errors.fn01_probability": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.1.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.1.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.1.retention": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.1.max_probability_delta": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": " pp",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.7.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.7.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.7.retention": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.7.max_probability_delta": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": " pp",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.30.ap": {
+      "format": ".4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.30.delta_ap": {
+      "format": "+.4f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.30.retention": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": "%",
+      "text": null,
+      "null_text": "—"
+    },
+    "lag.30.max_probability_delta": {
+      "format": ".1f",
+      "scale": 100,
+      "suffix": " pp",
+      "text": null,
+      "null_text": "—"
+    },
+    "literature.purple_or": {
+      "format": ".2f",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "literature.official_year": {
+      "format": "d",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "literature.audit_year": {
+      "format": "d",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "validation.original_tests": {
+      "format": "d",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    },
+    "validation.tests_passed": {
+      "format": "d",
+      "scale": 1,
+      "suffix": "",
+      "text": null,
+      "null_text": "—"
+    }
+  },
+  "figures": [
+    {
+      "path": "reports/slide_figures/01_seasonality_drift.png",
+      "width_px": 1530,
+      "height_px": 954,
+      "dpi": 180,
+      "sha256": "8ee4990c21fe6419f625b6e82e7ec9f2036aa734739d9508c4ac55c53255db48",
+      "bytes": 105408
+    },
+    {
+      "path": "reports/slide_figures/02_precision_recall.png",
+      "width_px": 1440,
+      "height_px": 711,
+      "dpi": 180,
+      "sha256": "4ff7f78fc4183fe636c53571b69df5dcd931fce0dd5a7978f3646039316ddc6f",
+      "bytes": 88636
+    },
+    {
+      "path": "reports/slide_figures/03_calibration.png",
+      "width_px": 1620,
+      "height_px": 917,
+      "dpi": 180,
+      "sha256": "5afcad850fe5ebe6a2e4537c6dc216c2781eb836908137ab34b6d414fb4ba09e",
+      "bytes": 108529
+    },
+    {
+      "path": "reports/slide_figures/04_daily_capacity.png",
+      "width_px": 1584,
+      "height_px": 962,
+      "dpi": 180,
+      "sha256": "29b918b5b245e2fdf9b58c451e76fbbf2ed1f9684905665ceaf8f14f0ccc597c",
+      "bytes": 105291
+    },
+    {
+      "path": "reports/slide_figures/05_grouped_shap.png",
+      "width_px": 1278,
+      "height_px": 909,
+      "dpi": 180,
+      "sha256": "d840a6329561afe1bafcd81782442a9b3289e319e6c34f8b48442230b96ba982",
+      "bytes": 138187
+    },
+    {
+      "path": "reports/slide_figures/06_shap_dependence.png",
+      "width_px": 1278,
+      "height_px": 909,
+      "dpi": 180,
+      "sha256": "a578241a80dd569c9299549b2b7260594b3a0cff7c5bbc5f7fea505eefc00a63",
+      "bytes": 112287
+    },
+    {
+      "path": "reports/slide_figures/07_error_fp.png",
+      "width_px": 1242,
+      "height_px": 720,
+      "dpi": 180,
+      "sha256": "8891cc1ffca256359dbb6363bde23eca13f4c120e4f8add988035c7bdd4d74cb",
+      "bytes": 93918
+    },
+    {
+      "path": "reports/slide_figures/08_error_fn.png",
+      "width_px": 1242,
+      "height_px": 720,
+      "dpi": 180,
+      "sha256": "9a396eb77c78b085e8a5b47074af179d866d5b8c557e82036a7333cbdd264c31",
+      "bytes": 90287
+    },
+    {
+      "path": "reports/slide_figures/09_subgroup_audit.png",
+      "width_px": 1404,
+      "height_px": 945,
+      "dpi": 180,
+      "sha256": "2c1f48f9712e70ea9fc5605956803564b0b73a7cca2ab8ce7a160a96b004d6fd",
+      "bytes": 196993
+    }
+  ],
+  "source_hashes": {
+    "reports/metrics/data_summary.json": "94b94791054e136af854a613b792c0a40bd26f22f9f7bcf4a3c1a0950869130a",
+    "reports/metrics/model_selection.json": "727b3dbabb808152373e00901e1ba7a42f0cd2ebc1ccb9df23b16c036d4ac954",
+    "reports/metrics/calibration_summary.json": "e5d0eb9d9bccc5ead7c9779f15d9cba86d01de3480473654b0d260bf7173dab8",
+    "reports/metrics/paired_model_differences.json": "2fa51310b0a48b68aaae039dd46d46fbcf50c86f5f66c3a50cb0c821c3904b93",
+    "reports/metrics/error_analysis.json": "596184a56d1208df765dc213450209c228698704bb669ee9cdab7b7695ad05fb",
+    "reports/metrics/feature_ablation.json": "4b2629a5e538910ce7e514a2f386bdf72b9c9f346e404f71d630fb9d291bdc9e",
+    "reports/metrics/seasonality_complaint.json": "b2cbea3ff29d2f4664418c3b0c556aff06173097a777db871c049aee4640d2d1",
+    "reports/metrics/grouped_shap_summary.json": "6075b7ed5463fc65ab77feeaea742c562247cd4ac22ec6110cf7dd0aecc8ec1f",
+    "reports/metrics/subgroup_audit_summary.json": "42eb070db4360fdf78a803c54eeb52e864d53e9e3c02cc96049c60d1a7dcae97",
+    "reports/metrics/days_earlier_summary.json": "75949da6179e338225c36d8f7de549c00a0762b5ab268d748444afa955d2c36f",
+    "reports/metrics/model_comparison.csv": "74c74c94e433ec61516a4abdb71271598f4a1553ceae1d760b747eb7b14fad90",
+    "reports/metrics/calibration_bins.csv": "6aad6077082457d8957a997746ae6505b1904a45d738f80b73ff0f3ab28274a7",
+    "reports/metrics/error_case_summary.csv": "e37269c6f0fa7dd5f466fd60311f0d184dcfc822d0839435527fb4ecf0273b64",
+    "reports/metrics/error_group_summary.csv": "fa6138413c679e8d83ea1db3e71abb409e04550826305a6752616b8f6f0f8b16",
+    "reports/metrics/lag_sensitivity.csv": "97b7e160d0b79a0470ac736e0cd8e7d2f054b3b003f3daf9a55a44610c4ba73e",
+    "reports/metrics/figure_daily_capacity_yield.csv": "f73b53d092965adbfd5a17818069e950d062d586395a368a0319886b50c8bd6d",
+    "reports/metrics/shap_global_importance.csv": "4e0c5deeac50da668e9ac06013d5f3670e3644edb00bd8c0cfc061be7b0ec519",
+    "reports/metrics/feature_ablation.csv": "47721abe16309ffa2a6931d7cedc2386b820adc2cfcd93b710a89887bf85ae7a",
+    "reports/metrics/inspection_type_annual.csv": "0d08b2db25acbdd27b3dc4c199e3ab059a1b8c811ffc27de651841e69e9f5541",
+    "reports/metrics/inspection_type_seasonality.csv": "27a7c5b1a4ac60cea44ce140fcc2528ca03f1a3acacf0fea6654275a5bfc5627",
+    "reports/metrics/grouped_shap_importance.csv": "fb1fad9788204e1f4c45bb9dbf237b2a5892842a8088f80ae71f5a7135c5d41f",
+    "reports/metrics/lr_standardized_odds_ratios.csv": "54e85bd80bc8256db5142941d5073b2ec1e5df4fbc1f3dfc7fed6f6ea71a257d",
+    "reports/metrics/subgroup_audit.csv": "6b28e0653b1e47ecae0bc4422427bcf054c29fa5183c69df8ab85bc943e0b169",
+    "reports/metrics/days_earlier_windows.csv": "718683fefe1785942542489c869fbc01334dd6e87f88fec05b74c7a3416b5431"
+  },
+  "figure_data": {
+    "annual_fail_rates": [
+      {
+        "inspection_type": "Canvass",
+        "year": 2010,
+        "n": 6834,
+        "failures": 1383,
+        "fail_rate": 0.2024
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2011,
+        "n": 7331,
+        "failures": 1477,
+        "fail_rate": 0.2015
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2012,
+        "n": 6836,
+        "failures": 1458,
+        "fail_rate": 0.2133
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2013,
+        "n": 8829,
+        "failures": 1615,
+        "fail_rate": 0.1829
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2014,
+        "n": 10102,
+        "failures": 1916,
+        "fail_rate": 0.1897
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2015,
+        "n": 8988,
+        "failures": 1917,
+        "fail_rate": 0.2133
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2016,
+        "n": 10525,
+        "failures": 2638,
+        "fail_rate": 0.2506
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2017,
+        "n": 9224,
+        "failures": 2261,
+        "fail_rate": 0.2451
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2018,
+        "n": 6772,
+        "failures": 1507,
+        "fail_rate": 0.2225
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2019,
+        "n": 8352,
+        "failures": 1867,
+        "fail_rate": 0.2235
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2020,
+        "n": 6166,
+        "failures": 1550,
+        "fail_rate": 0.2514
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2021,
+        "n": 6238,
+        "failures": 1533,
+        "fail_rate": 0.2458
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2022,
+        "n": 6640,
+        "failures": 1811,
+        "fail_rate": 0.2727
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2023,
+        "n": 7277,
+        "failures": 2011,
+        "fail_rate": 0.2764
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2024,
+        "n": 8590,
+        "failures": 1996,
+        "fail_rate": 0.2324
+      },
+      {
+        "inspection_type": "Canvass",
+        "year": 2025,
+        "n": 8363,
+        "failures": 1886,
+        "fail_rate": 0.2255
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2010,
+        "n": 1851,
+        "failures": 600,
+        "fail_rate": 0.3241
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2011,
+        "n": 1736,
+        "failures": 597,
+        "fail_rate": 0.3439
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2012,
+        "n": 1840,
+        "failures": 654,
+        "fail_rate": 0.3554
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2013,
+        "n": 1496,
+        "failures": 491,
+        "fail_rate": 0.3282
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2014,
+        "n": 1612,
+        "failures": 514,
+        "fail_rate": 0.3189
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2015,
+        "n": 1850,
+        "failures": 626,
+        "fail_rate": 0.3384
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2016,
+        "n": 1782,
+        "failures": 614,
+        "fail_rate": 0.3446
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2017,
+        "n": 2008,
+        "failures": 694,
+        "fail_rate": 0.3456
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2018,
+        "n": 1920,
+        "failures": 631,
+        "fail_rate": 0.3286
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2019,
+        "n": 1458,
+        "failures": 573,
+        "fail_rate": 0.393
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2020,
+        "n": 1382,
+        "failures": 469,
+        "fail_rate": 0.3394
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2021,
+        "n": 1351,
+        "failures": 513,
+        "fail_rate": 0.3797
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2022,
+        "n": 1728,
+        "failures": 686,
+        "fail_rate": 0.397
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2023,
+        "n": 1806,
+        "failures": 687,
+        "fail_rate": 0.3804
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2024,
+        "n": 1437,
+        "failures": 539,
+        "fail_rate": 0.3751
+      },
+      {
+        "inspection_type": "Complaint",
+        "year": 2025,
+        "n": 1655,
+        "failures": 581,
+        "fail_rate": 0.3511
+      }
+    ],
+    "calibration_bins": [
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 1,
+        "n": 837,
+        "observed_fail_rate": 0.098,
+        "raw_mean_probability": 0.1085,
+        "calibrated_mean_probability": 0.1231
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 2,
+        "n": 836,
+        "observed_fail_rate": 0.1304,
+        "raw_mean_probability": 0.1491,
+        "calibrated_mean_probability": 0.1571
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 3,
+        "n": 836,
+        "observed_fail_rate": 0.1292,
+        "raw_mean_probability": 0.1739,
+        "calibrated_mean_probability": 0.1766
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 4,
+        "n": 836,
+        "observed_fail_rate": 0.2022,
+        "raw_mean_probability": 0.198,
+        "calibrated_mean_probability": 0.195
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 5,
+        "n": 837,
+        "observed_fail_rate": 0.2282,
+        "raw_mean_probability": 0.22,
+        "calibrated_mean_probability": 0.2115
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 6,
+        "n": 836,
+        "observed_fail_rate": 0.2476,
+        "raw_mean_probability": 0.2434,
+        "calibrated_mean_probability": 0.2288
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 7,
+        "n": 836,
+        "observed_fail_rate": 0.2763,
+        "raw_mean_probability": 0.2698,
+        "calibrated_mean_probability": 0.2479
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 8,
+        "n": 836,
+        "observed_fail_rate": 0.2823,
+        "raw_mean_probability": 0.301,
+        "calibrated_mean_probability": 0.2704
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 9,
+        "n": 836,
+        "observed_fail_rate": 0.299,
+        "raw_mean_probability": 0.3462,
+        "calibrated_mean_probability": 0.3027
+      },
+      {
+        "model": "logistic_regression",
+        "raw_score_decile": 10,
+        "n": 837,
+        "observed_fail_rate": 0.362,
+        "raw_mean_probability": 0.4603,
+        "calibrated_mean_probability": 0.3857
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 1,
+        "n": 837,
+        "observed_fail_rate": 0.1027,
+        "raw_mean_probability": 0.2162,
+        "calibrated_mean_probability": 0.1222
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 2,
+        "n": 836,
+        "observed_fail_rate": 0.134,
+        "raw_mean_probability": 0.3069,
+        "calibrated_mean_probability": 0.1599
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 3,
+        "n": 836,
+        "observed_fail_rate": 0.1364,
+        "raw_mean_probability": 0.3548,
+        "calibrated_mean_probability": 0.18
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 4,
+        "n": 836,
+        "observed_fail_rate": 0.2033,
+        "raw_mean_probability": 0.3958,
+        "calibrated_mean_probability": 0.1976
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 5,
+        "n": 837,
+        "observed_fail_rate": 0.2067,
+        "raw_mean_probability": 0.4319,
+        "calibrated_mean_probability": 0.2136
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 6,
+        "n": 836,
+        "observed_fail_rate": 0.2452,
+        "raw_mean_probability": 0.4672,
+        "calibrated_mean_probability": 0.2298
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 7,
+        "n": 836,
+        "observed_fail_rate": 0.25,
+        "raw_mean_probability": 0.5046,
+        "calibrated_mean_probability": 0.2476
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 8,
+        "n": 836,
+        "observed_fail_rate": 0.2955,
+        "raw_mean_probability": 0.5446,
+        "calibrated_mean_probability": 0.2678
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 9,
+        "n": 836,
+        "observed_fail_rate": 0.3026,
+        "raw_mean_probability": 0.5944,
+        "calibrated_mean_probability": 0.2949
+      },
+      {
+        "model": "lightgbm",
+        "raw_score_decile": 10,
+        "n": 837,
+        "observed_fail_rate": 0.3787,
+        "raw_mean_probability": 0.6825,
+        "calibrated_mean_probability": 0.3518
+      }
+    ],
+    "daily_capacity": [
+      {
+        "model": "logistic_regression",
+        "nominal_budget_fraction": 0.05,
+        "inspection_days": 245,
+        "selected_n": 539,
+        "selected_fraction": 0.0645,
+        "expected_failures_found": 201.0,
+        "precision": 0.3729,
+        "recall": 0.1066,
+        "random_expected_failures_found": 122.0878,
+        "lift_vs_daily_random": 1.6464
+      },
+      {
+        "model": "logistic_regression",
+        "nominal_budget_fraction": 0.1,
+        "inspection_days": 245,
+        "selected_n": 948,
+        "selected_fraction": 0.1134,
+        "expected_failures_found": 341.0,
+        "precision": 0.3597,
+        "recall": 0.1808,
+        "random_expected_failures_found": 214.2206,
+        "lift_vs_daily_random": 1.5918
+      },
+      {
+        "model": "logistic_regression",
+        "nominal_budget_fraction": 0.2,
+        "inspection_days": 245,
+        "selected_n": 1777,
+        "selected_fraction": 0.2125,
+        "expected_failures_found": 587.0,
+        "precision": 0.3303,
+        "recall": 0.3112,
+        "random_expected_failures_found": 400.931,
+        "lift_vs_daily_random": 1.4641
+      }
+    ],
+    "shap_top8": [
+      {
+        "feature": "observed_history_years",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.3046
+      },
+      {
+        "feature": "prior_scored_days",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.2439
+      },
+      {
+        "feature": "prior_fail_days",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.2323
+      },
+      {
+        "feature": "prior_routine_days",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.2308
+      },
+      {
+        "feature": "license_term_elapsed_days",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.2059
+      },
+      {
+        "feature": "days_since_license_issue",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.1467
+      },
+      {
+        "feature": "license_category",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.1129
+      },
+      {
+        "feature": "last_result",
+        "sample_n": 1500,
+        "mean_abs_shap": 0.1079
+      }
+    ],
+    "grouped_shap": [
+      {
+        "scope": "fixed_explanation_sample",
+        "group": "historical_failure_evidence",
+        "label": "Historical failure evidence",
+        "feature_count": 13,
+        "n": 1500,
+        "mean_abs_group_shap": 0.3327,
+        "sum_feature_mean_abs_shap": 0.6934,
+        "within_group_cancellation_fraction": 0.5203,
+        "mean_signed_shap": 0.033
+      },
+      {
+        "scope": "fixed_explanation_sample",
+        "group": "inspection_exposure_time",
+        "label": "Inspection exposure and time",
+        "feature_count": 14,
+        "n": 1500,
+        "mean_abs_group_shap": 0.2439,
+        "sum_feature_mean_abs_shap": 0.9561,
+        "within_group_cancellation_fraction": 0.7449,
+        "mean_signed_shap": -0.0497
+      },
+      {
+        "scope": "fixed_explanation_sample",
+        "group": "facility_risk",
+        "label": "Facility type and risk",
+        "feature_count": 2,
+        "n": 1500,
+        "mean_abs_group_shap": 0.0814,
+        "sum_feature_mean_abs_shap": 0.1413,
+        "within_group_cancellation_fraction": 0.4239,
+        "mean_signed_shap": 0.0029
+      },
+      {
+        "scope": "fixed_explanation_sample",
+        "group": "license_background",
+        "label": "Business license background",
+        "feature_count": 10,
+        "n": 1500,
+        "mean_abs_group_shap": 0.0709,
+        "sum_feature_mean_abs_shap": 0.7639,
+        "within_group_cancellation_fraction": 0.9072,
+        "mean_signed_shap": -0.0064
+      }
+    ],
+    "subgroup_rows": [
+      {
+        "feature": "prior_risk",
+        "value": "Risk 1 (High)",
+        "n": 7322,
+        "failures": 1678,
+        "entities": 7002,
+        "prevalence": 0.2292,
+        "average_precision": 0.32,
+        "roc_auc": 0.6318,
+        "brier_score": 0.1704,
+        "ece_10_equal_width": 0.0208,
+        "mean_probability": 0.2302,
+        "calibration_bias": 0.001,
+        "global_top10_selected_n": 701,
+        "global_top10_selected_rate": 0.0957,
+        "global_top10_recall": 0.1549,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_risk",
+        "value": "Risk 2 (Medium)",
+        "n": 918,
+        "failures": 184,
+        "entities": 904,
+        "prevalence": 0.2004,
+        "average_precision": 0.2936,
+        "roc_auc": 0.637,
+        "brier_score": 0.1553,
+        "ece_10_equal_width": 0.0282,
+        "mean_probability": 0.2264,
+        "calibration_bias": 0.0259,
+        "global_top10_selected_n": 122,
+        "global_top10_selected_rate": 0.1329,
+        "global_top10_recall": 0.2174,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_risk",
+        "value": "Risk 3 (Low)",
+        "n": 76,
+        "failures": 15,
+        "entities": 75,
+        "prevalence": 0.1974,
+        "average_precision": 0.2655,
+        "roc_auc": 0.6492,
+        "brier_score": 0.1598,
+        "ece_10_equal_width": 0.0636,
+        "mean_probability": 0.2383,
+        "calibration_bias": 0.041,
+        "global_top10_selected_n": 13,
+        "global_top10_selected_rate": 0.1711,
+        "global_top10_recall": 0.2,
+        "small_sample": true,
+        "major_group": true
+      },
+      {
+        "feature": "prior_risk",
+        "value": "Unknown",
+        "n": 44,
+        "failures": 9,
+        "entities": 44,
+        "prevalence": 0.2045,
+        "average_precision": 0.4905,
+        "roc_auc": 0.7651,
+        "brier_score": 0.1556,
+        "ece_10_equal_width": 0.0588,
+        "mean_probability": 0.2459,
+        "calibration_bias": 0.0413,
+        "global_top10_selected_n": 0,
+        "global_top10_selected_rate": 0.0,
+        "global_top10_recall": 0.0,
+        "small_sample": true,
+        "major_group": true
+      },
+      {
+        "feature": "prior_facility_type",
+        "value": "Restaurant",
+        "n": 5950,
+        "failures": 1382,
+        "entities": 5657,
+        "prevalence": 0.2323,
+        "average_precision": 0.3254,
+        "roc_auc": 0.6384,
+        "brier_score": 0.1717,
+        "ece_10_equal_width": 0.0281,
+        "mean_probability": 0.228,
+        "calibration_bias": -0.0043,
+        "global_top10_selected_n": 519,
+        "global_top10_selected_rate": 0.0872,
+        "global_top10_recall": 0.144,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_facility_type",
+        "value": "School",
+        "n": 810,
+        "failures": 188,
+        "entities": 801,
+        "prevalence": 0.2321,
+        "average_precision": 0.2926,
+        "roc_auc": 0.5819,
+        "brier_score": 0.1761,
+        "ece_10_equal_width": 0.0169,
+        "mean_probability": 0.2485,
+        "calibration_bias": 0.0164,
+        "global_top10_selected_n": 102,
+        "global_top10_selected_rate": 0.1259,
+        "global_top10_recall": 0.1649,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_facility_type",
+        "value": "Grocery Store",
+        "n": 515,
+        "failures": 111,
+        "entities": 498,
+        "prevalence": 0.2155,
+        "average_precision": 0.317,
+        "roc_auc": 0.6418,
+        "brier_score": 0.1648,
+        "ece_10_equal_width": 0.0506,
+        "mean_probability": 0.2662,
+        "calibration_bias": 0.0506,
+        "global_top10_selected_n": 117,
+        "global_top10_selected_rate": 0.2272,
+        "global_top10_recall": 0.3243,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_facility_type",
+        "value": "Children's Services Facility",
+        "n": 274,
+        "failures": 39,
+        "entities": 274,
+        "prevalence": 0.1423,
+        "average_precision": 0.1855,
+        "roc_auc": 0.5487,
+        "brier_score": 0.1231,
+        "ece_10_equal_width": 0.031,
+        "mean_probability": 0.1701,
+        "calibration_bias": 0.0278,
+        "global_top10_selected_n": 5,
+        "global_top10_selected_rate": 0.0182,
+        "global_top10_recall": 0.0256,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_facility_type",
+        "value": "Bakery",
+        "n": 128,
+        "failures": 28,
+        "entities": 123,
+        "prevalence": 0.2188,
+        "average_precision": 0.3597,
+        "roc_auc": 0.6761,
+        "brier_score": 0.165,
+        "ece_10_equal_width": 0.0603,
+        "mean_probability": 0.2791,
+        "calibration_bias": 0.0603,
+        "global_top10_selected_n": 34,
+        "global_top10_selected_rate": 0.2656,
+        "global_top10_recall": 0.3929,
+        "small_sample": false,
+        "major_group": true
+      },
+      {
+        "feature": "prior_facility_type",
+        "value": "Unknown",
+        "n": 53,
+        "failures": 12,
+        "entities": 53,
+        "prevalence": 0.2264,
+        "average_precision": 0.5094,
+        "roc_auc": 0.7541,
+        "brier_score": 0.1635,
+        "ece_10_equal_width": 0.0486,
+        "mean_probability": 0.2339,
+        "calibration_bias": 0.0075,
+        "global_top10_selected_n": 0,
+        "global_top10_selected_rate": 0.0,
+        "global_top10_recall": 0.0,
+        "small_sample": true,
+        "major_group": true
+      }
+    ],
+    "pr_curves": "Full curves are rendered directly from the frozen prediction files; per-row values remain local."
+  },
+  "font_sizes_pt": {
+    "title": 18,
+    "label": 15,
+    "tick": 13.5,
+    "legend": 13,
+    "annotation": 13
+  },
+  "method": {
+    "fit_performed": false,
+    "analytic_shap_recomputed": false,
+    "shap_sample_n": 1500,
+    "grouped_shap": "Signed within-row sums of the existing 39 analytic feature contributions, then mean absolute group contribution.",
+    "waterfalls": "Five largest absolute feature contributions plus the signed sum of all remaining features.",
+    "subgroup_selection": "One overall annual Top 10% allocation, not a separate top decile within each group.",
+    "days_earlier": "Retrospective fixed-window reference using original-day scores; time-invariant outcomes and earlier feature availability are not established.",
+    "no_inspector_features": "No sanitarian identifiers or clusters are inputs. Label and proxy bias may remain.",
+    "rounding": "Values are quantized once from full source metrics at each field's display precision, in the original units. format_specs derives display from values; percentage and probability-change displays apply scale=100. Exact research values remain in source_refs. Figure-data summaries separately retain at most four decimals."
+  },
+  "protected_inputs_unchanged": true
+}

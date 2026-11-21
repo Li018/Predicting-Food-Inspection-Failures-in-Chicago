@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "model": "logistic_regression",
+  "refitted": false,
+  "input_sha256": {
+    ".local/features.parquet": "be7d1ce6df1f697058b8b8435c5d4cd344466d47e92b72f4729ef9b9af51014a",
+    "config/topic1.json": "c4c687c1264ec5044f127e80c75ae51824101fbe04734235706e408d0b0ce289",
+    "scripts/run_model.py": "6ee725ce0c296478f62f7f233dc088dbac792685df3bd142a79e3553e5e5a70a",
+    "src/chicago_food/data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+    "src/chicago_food/features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686",
+    "src/chicago_food/models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+    "src/chicago_food/metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663",
+    "data/snapshots/inspections.parquet": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+    "data/snapshots/licenses.parquet": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272",
+    ".local/models/logistic_regression.joblib": "ff1fb87e241f37a141da3486e9638b4d6b16c50c8bf8d1578426c527db943a69",
+    ".local/shap/logistic_regression.joblib": "3f505461a591d5660e94e0babb6036183c2367f3c547130421e6badacbe9f8dc",
+    ".local/predictions/logistic_regression.parquet": "b6f923256dfc72f1dff7ac8e3c12ea080333612fe2047bcf5d82ef84431e03fc",
+    "data/snapshots/manifest.json": "9b778d4b57805b5ebd8364a22f4aa298e51ae38bf6b17cac47de554b4d89b35a"
+  },
+  "numeric_count": 32,
+  "transformed_count": 100,
+  "calibrator_slope": 0.7638521818775824,
+  "numeric_unit": "One training SD of the numeric coordinate after training-median imputation",
+  "missing_indicator_unit": "0 to 1 after undoing the fitted scaler",
+  "categorical_unit": "Single encoded coordinate 0 to 1; full one-hot has no omitted reference",
+  "interpretation": "Conditional associations holding other coordinates fixed; not risk ratios or causal effects",
+  "uncertainty": "No coefficient confidence intervals are estimated for this regularized frozen model",
+  "historical_context": {
+    "purple_cluster_coefficient": 1.555,
+    "purple_cluster_odds_multiplier": 4.735086525159423,
+    "source": "https://arxiv.org/abs/1910.04906",
+    "scope": "2019 Table 3 audit of the old official model; dummy-coordinate OR, not a probability multiplier or Purple-vs-Brown contrast",
+    "comparison": "Modern numeric one-SD ORs use different units, outcome and period; compare model inputs rather than effect-size rankings"
+  }
+}

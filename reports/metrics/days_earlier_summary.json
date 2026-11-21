@@ -1,0 +1,43 @@
+{
+  "year": 2025,
+  "window_count": 6,
+  "n": 8363,
+  "positive_count": 1886,
+  "pooled_days_earlier": 5.952633439377872,
+  "pooled_delayed_positive_fraction": 0.3812301166489926,
+  "pooled_advanced_positive_fraction": 0.5890774125132555,
+  "random_days_earlier": -0.04153015710006597,
+  "daily_capacity_max_absolute_error": 0.0,
+  "calendar_window": "Jan-Feb, Mar-Apr, May-Jun, Jul-Aug, Sep-Oct, Nov-Dec; calendar months",
+  "definition": "Mean actual date minus expected rescheduled date over every Fail; calendar days",
+  "pooling": "Positive-count weighted mean of six windows; negative advances retained",
+  "tie_policy": "Uniform expected date-slot assignment within exact score ties",
+  "original_day_score_retrospective": true,
+  "official_reference": "https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/functions/simulated_date_diff_mean.R",
+  "audit_reference": "https://arxiv.org/abs/1910.04906",
+  "limitations": [
+    "2015 used Sep-Oct 2014 and critical violations; this is a 2025 Fail-label adaptation, not a performance contest.",
+    "2019 Finding 2: an inspection's outcome need not remain unchanged after moving its date.",
+    "Scores use each actual inspection date's information; an earlier assigned date may precede input availability.",
+    "The observed inspection pool excludes uninspected candidates and ignores routing, legal and staffing constraints.",
+    "This is a retrospective reference, not evidence of realized earlier detection or public-health benefit."
+  ],
+  "schema_version": 1,
+  "model": "logistic_regression",
+  "refitted": false,
+  "input_sha256": {
+    ".local/features.parquet": "be7d1ce6df1f697058b8b8435c5d4cd344466d47e92b72f4729ef9b9af51014a",
+    "config/topic1.json": "c4c687c1264ec5044f127e80c75ae51824101fbe04734235706e408d0b0ce289",
+    "scripts/run_model.py": "6ee725ce0c296478f62f7f233dc088dbac792685df3bd142a79e3553e5e5a70a",
+    "src/chicago_food/data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+    "src/chicago_food/features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686",
+    "src/chicago_food/models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+    "src/chicago_food/metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663",
+    "data/snapshots/inspections.parquet": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+    "data/snapshots/licenses.parquet": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272",
+    ".local/models/logistic_regression.joblib": "ff1fb87e241f37a141da3486e9638b4d6b16c50c8bf8d1578426c527db943a69",
+    ".local/shap/logistic_regression.joblib": "3f505461a591d5660e94e0babb6036183c2367f3c547130421e6badacbe9f8dc",
+    ".local/predictions/logistic_regression.parquet": "b6f923256dfc72f1dff7ac8e3c12ea080333612fe2047bcf5d82ef84431e03fc",
+    "data/snapshots/manifest.json": "9b778d4b57805b5ebd8364a22f4aa298e51ae38bf6b17cac47de554b4d89b35a"
+  }
+}

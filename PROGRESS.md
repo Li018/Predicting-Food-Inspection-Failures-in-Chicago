@@ -125,3 +125,146 @@ The four reused core modules remain byte-identical to the starting remote commit
 The 13-stage reproduction plan passed its actual dry run, including frozen source
 hashes; full analysis stages were already executed individually during Steps 2–8.
 The new wrapper was not represented as a second end-to-end training run.
+
+## Incremental literature and presentation extension · 2026-11-21
+
+### Commit 1 — Feature-group ablation and seasonality / Complaint check
+
+Reviewed the existing core package, reproduction entry point, README and full report
+before adding work. Existing annual drift, individual SHAP and error slices remain intact.
+Added a shared four-group partition of all 39 fields, three nested LR ablations
+(13 → 27 → 37 fields), and a separately loaded, never-refitted 39-field primary reference.
+Each ablation selects among the original four LR candidates on 2023 AP, fits only
+on 2019–2022, calibrates only on 2024, and reports 2025 AP / ROC-AUC / Brier.
+Test calibrated AP: 0.310701 → 0.308815 → 0.311790; frozen primary AP 0.314566.
+The non-monotonic AP result is retained rather than presented as an automatic gain.
+
+Added exact-type Canvass versus Complaint annual, year-month and month-of-year
+aggregates using recognized outcomes, same-label entity-day collapsing and conflict
+exclusion. In 2019–2025, pooled monthly Fail-rate ranges are 6.79 and 7.94 percentage
+points respectively; both peak in August and reach their minimum in December.
+Equal-year summaries and the July 2018 break are separate descriptive diagnostics,
+not causal effects or an exact replication of old-code critical-violation findings.
+
+Validation before this commit: **63 passed, 1 warning** (all original 55 plus 8 new
+regressions); Ruff and `git diff --check` passed. All 33 protected original files,
+including frozen snapshots, fitted models, predictions, SHAP, core source, existing
+tests and original figures, retain their initial SHA-256. No original model fit,
+source manifest, reproduction command or Speaker Notes was changed.
+
+### Commit 2 — Grouped SHAP, standardized odds ratios and subgroup audit
+
+Loaded the original LR, analytic SHAP and predictions without fitting. Signed
+per-observation group sums cover all 39 fields and reconstruct original probabilities
+within 3.33e-16. Both the original fixed 1,500-case explanation sample and the full
+8,363-case test set are reported. Numeric ORs distinguish raw and calibrated
+coefficients per training SD; encoded coordinates have separately stated units.
+
+Added historical Risk / Facility slices with AP, Brier, calibration bias, 10 fixed
+equal-width-bin ECE and selection under the same global annual 837-slot allocation.
+Risk 3 has 76 observations and is explicitly small-sample. The audit describes
+operational disparities, not a guarantee that excluding sanitarian inputs removes
+label or proxy bias. The new ECE convention is distinct from the old equal-frequency
+calibration-plot diagnostic.
+
+The official calendar-slot calculation is adapted to six fixed 2025 two-month
+windows: mean Days Earlier 5.9526; 38.123% of Fail outcomes are delayed. Negative
+advances remain in the mean and exact-score ties use uniform expected date slots;
+per-day expected capacity error is zero. The output explicitly records both the
+2019 time-invariance limitation and the use of actual-date features that might not
+be available on a simulated earlier date. This is a retrospective reference.
+
+Validation before this commit: **77 passed, 1 warning** (original 55 retained);
+Ruff/new-file whitespace checks passed, protected 33-file baseline unchanged.
+Added 14 tests for signed cancellation, OR units, common subgroup capacity,
+calibration bins, negative advances, ties/window pooling and prediction alignment.
+
+### Commit 3 — CDPH 2015 / Kannan 2019 report comparison
+
+Incrementally extended README and the research report with measured ablation,
+seasonality/comparison trends, signed four-group SHAP, standardized ORs, historical
+Risk/Facility slices and fixed-window Days Earlier. Added a concise three-way
+comparison of eras, targets, inspector inputs, evaluation methods and interpretation
+limits. Prior 55-test statements now explicitly identify the frozen research baseline.
+The original study results and all original figures remain intact.
+
+Validation before this commit: **90 passed, 1 warning**; Ruff and whitespace checks
+passed. Thirteen new public-artifact checks reconcile source hashes, primary-model
+reference metrics, nested deltas, seasonal denominators, grouped cancellation, ORs,
+subgroup calibration bins/capacity and positive-weighted reordering. Documentation
+tables are checked against their CSV/JSON evidence. These checks work without the
+private local row-level artifacts. All 33 protected baseline hashes remain unchanged.
+
+### Commit 4 — Readable projection figures and rounded slide facts
+
+Added an independent read-only exporter for nine projection figures in
+`reports/slide_figures/`: annual comparison drift, one large PR plot, two calibration
+panels, daily yield bars, grouped SHAP with the Top 8 fields, two enlarged dependence
+plots, two Top 5 + signed Other error waterfalls, and the historical subgroup audit.
+Original figures are not output destinations and remain byte-identical. Plot titles
+are at least 18 pt and all plotted labels are at least 12 pt; long in-chart footnotes
+and miniature multi-panel layouts are removed.
+
+Exported `slide_metrics.json` with 213 rounded display bindings, source references,
+figure hashes and aggregate plot data. Daily versus annual selection denominators
+remain separate. Days Earlier displays +5.95 and absolute score changes use
+percentage-point units. The exporter reads frozen predictions and analytic SHAP;
+it does not fit a model or recompute explanations.
+
+Validation before this commit: **94 passed, 1 warning**; Ruff and whitespace checks
+passed. New regressions cover signed waterfall closure, output-directory isolation,
+finite rounded serialization and projection font sizes. All nine figure hashes
+and the 33 protected baseline files were checked; all originals remain unchanged.
+
+### Commit 5 — Thirteen-slide layout and five-act navigation
+
+Reworked the existing English deck into thirteen slides while retaining its
+presentation shell and its original JavaScript byte-for-byte. Added five-act
+navigation, consistent typography, timeline/check cards, native ablation bars,
+the daily-yield page before interpretation, and the new subgroup/literature page.
+The nine figure images use real relative paths; the remaining titlebar image
+placeholder is an inline SVG. Cover metadata says "No Sanitarian Inputs" because
+the absence of inspector features cannot establish zero label or proxy bias.
+
+All twelve original Speaker Notes are unchanged as complete raw aside blocks,
+mapped to their corresponding reordered slides. The new subgroup page has no
+invented original note. A committed manifest and independent golden hashes protect
+this mapping. Numerical spans and AP bars are prepared for the separate binding
+step, rather than mixing the layout and exporter implementation commits.
+
+Validation before this commit: **100 passed, 1 warning**; Ruff and whitespace checks
+passed. Six added layout checks cover page order, nine real figures, five-act route
+targets, exact notes, placeholder removal and required native components. Reviewed
+all thirteen pages through an offline CSS/PDF render, including enlarged individual
+checks of the cover, SHAP and error pages. The browser disallowed local-file URLs,
+so no browser interaction result is claimed. All 33 protected baseline files remain
+unchanged.
+
+### Commit 6 — Exact metric binding and standalone HTML delivery
+
+Bound all thirteen slides to the measured findings and native ablation bars. Added
+independent binding, validation and standalone-export commands. The metric contract
+now validates all 213 display/value/format/source keys, including percentage-point
+units, and avoids double rounding by quantizing complete source values directly to
+the final display precision. Only the verified test-count display changes from the
+figure-export step; the other 212 display strings and all nine image bytes remain
+identical.
+
+Both the relative-image source deck and the standalone export pass the same checks:
+13 slides, 9 verified image assets, 12 byte-identical original notes, 139 bindings
+using 123 distinct keys, 213 validated format contracts, 3 AP bars and 100% numeric
+binding coverage. There are zero unbound visible numbers, placeholder frames,
+`Source figure` remnants or six-digit decimals. The CLI also verifies 24 aggregate
+source hashes and checks the notes against the original Git commit. Compact results
+are committed as `slide_validation.json` and `slide_standalone_validation.json`.
+
+The standalone HTML embeds all nine images and preserves inline CSS, JavaScript
+and notes; document references resolve to the working GitHub branch. Re-rendered
+the final standalone file offline as thirteen pages and reviewed the final layout.
+README now documents generation, binding, both validation modes and export.
+
+Validation before this commit: **122 passed, 1 warning**; Ruff, JavaScript syntax
+and whitespace checks passed. Twenty-two delivery tests cover bad paths/assets,
+numeric coverage, both one-sided value/display mutations, unit formatting, stale
+aggregate sources, note tampering, page structure and export preservation. All 33
+protected original file hashes remain unchanged; no primary model was refitted.

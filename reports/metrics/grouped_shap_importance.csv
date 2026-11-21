@@ -1,0 +1,9 @@
+scope,group,label,feature_count,n,mean_abs_group_shap,sum_feature_mean_abs_shap,within_group_cancellation_fraction,mean_signed_shap
+fixed_explanation_sample,historical_failure_evidence,Historical failure evidence,13,1500,0.33267104352,0.693430748423,0.520253400535,0.032983045922
+fixed_explanation_sample,inspection_exposure_time,Inspection exposure and time,14,1500,0.243903833719,0.956095336045,0.744895906795,-0.049705509794
+fixed_explanation_sample,facility_risk,Facility type and risk,2,1500,0.0813910422633,0.141283494157,0.423916836506,0.0028707282685
+fixed_explanation_sample,license_background,Business license background,10,1500,0.0708887494868,0.763938346715,0.907206190406,-0.0063701193558
+full_test,historical_failure_evidence,Historical failure evidence,13,8363,0.328005663591,0.691769129564,0.525845185088,0.0454323117609
+full_test,inspection_exposure_time,Inspection exposure and time,14,8363,0.248217980725,0.963849146284,0.742472168304,-0.0504054431202
+full_test,facility_risk,Facility type and risk,2,8363,0.0824787621193,0.141597022801,0.417510619308,0.00287591546341
+full_test,license_background,Business license background,10,8363,0.0706225844778,0.783201731203,0.909828360097,-0.00677479549812
