@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "estimator_training": "2019-2022 only",
+    "parameter_selection": "2023 raw non-interpolated AP; original four LR candidates",
+    "probability_calibration": "2024 only; separate positive-slope sigmoid per ablation",
+    "evaluation": "2025 only; no test-driven feature or hyperparameter selection",
+    "validation_probability_kind": "raw only; the later 2024 calibrator is not applied to 2023",
+    "nested_feature_counts": [
+      13,
+      27,
+      37
+    ],
+    "reference_feature_count": 39,
+    "reference_policy": "Load the frozen 39-field primary LR, never fit or overwrite it",
+    "facility_risk_policy": "Excluded from all three nested ablations; present only in frozen reference",
+    "delta_policy": "Current minus previous nested stage, same split/probability kind; lower Brier is better",
+    "uncertainty": "Descriptive point estimates; no significance or causal license-effect claim"
+  },
+  "feature_groups": {
+    "historical_failure_evidence": {
+      "label": "Historical failure evidence",
+      "features": [
+        "prior_fail_days",
+        "prior_conditions_days",
+        "historical_failure_rate",
+        "historical_conditions_rate",
+        "routine_failure_rate",
+        "last3_failure_rate",
+        "last5_failure_rate",
+        "recency_weighted_failure_rate",
+        "failures_365d",
+        "failure_rate_365d",
+        "recent_failure_streak",
+        "last_result",
+        "last_routine_result"
+      ]
+    },
+    "inspection_exposure_time": {
+      "label": "Inspection exposure and time",
+      "features": [
+        "prior_inspection_days",
+        "prior_scored_days",
+        "prior_routine_days",
+        "scored_days_365d",
+        "days_since_last_inspection",
+        "days_since_last_scored_inspection",
+        "days_since_last_routine",
+        "days_since_last_failure",
+        "observed_history_years",
+        "cold_start",
+        "no_scored_history",
+        "historical_pre2018_share",
+        "month_sin",
+        "month_cos"
+      ]
+    },
+    "facility_risk": {
+      "label": "Facility type and risk",
+      "features": [
+        "prior_facility_type",
+        "prior_risk"
+      ]
+    },
+    "license_background": {
+      "label": "Business license background",
+      "features": [
+        "license_history_available",
+        "license_observed_tenure_years",
+        "days_since_license_issue",
+        "license_records_observed",
+        "license_terms_observed",
+        "days_to_license_term_end",
+        "license_term_elapsed_days",
+        "license_term_status",
+        "license_category",
+        "license_application_type"
+      ]
+    }
+  },
+  "selections": [
+    {
+      "stage": "history_only",
+      "stage_label": "Historical outcomes",
+      "groups": [
+        "historical_failure_evidence"
+      ],
+      "feature_count": 13,
+      "numeric_features": [
+        "prior_fail_days",
+        "prior_conditions_days",
+        "historical_failure_rate",
+        "historical_conditions_rate",
+        "routine_failure_rate",
+        "last3_failure_rate",
+        "last5_failure_rate",
+        "recency_weighted_failure_rate",
+        "failures_365d",
+        "failure_rate_365d",
+        "recent_failure_streak"
+      ],
+      "categorical_features": [
+        "last_result",
+        "last_routine_result"
+      ],
+      "selected_candidate_index": 3,
+      "selected_parameters": {
+        "C": 1.0,
+        "class_weight": "balanced"
+      },
+      "validation_ap": 0.36459613224374987,
+      "calibrator": {
+        "slope": 0.9190912194712092,
+        "intercept": -1.1574467867133316,
+        "n": 8590
+      }
+    },
+    {
+      "stage": "history_time",
+      "stage_label": "+ Inspection exposure and time",
+      "groups": [
+        "historical_failure_evidence",
+        "inspection_exposure_time"
+      ],
+      "feature_count": 27,
+      "numeric_features": [
+        "prior_inspection_days",
+        "prior_scored_days",
+        "prior_fail_days",
+        "prior_conditions_days",
+        "historical_failure_rate",
+        "historical_conditions_rate",
+        "prior_routine_days",
+        "routine_failure_rate",
+        "last3_failure_rate",
+        "last5_failure_rate",
+        "recency_weighted_failure_rate",
+        "scored_days_365d",
+        "failures_365d",
+        "failure_rate_365d",
+        "days_since_last_inspection",
+        "days_since_last_scored_inspection",
+        "days_since_last_routine",
+        "days_since_last_failure",
+        "observed_history_years",
+        "cold_start",
+        "no_scored_history",
+        "recent_failure_streak",
+        "historical_pre2018_share",
+        "month_sin",
+        "month_cos"
+      ],
+      "categorical_features": [
+        "last_result",
+        "last_routine_result"
+      ],
+      "selected_candidate_index": 0,
+      "selected_parameters": {
+        "C": 0.1,
+        "class_weight": null
+      },
+      "validation_ap": 0.37507137053959416,
+      "calibrator": {
+        "slope": 0.7615207728490482,
+        "intercept": -0.368190229382758,
+        "n": 8590
+      }
+    },
+    {
+      "stage": "history_time_license",
+      "stage_label": "+ Business license background",
+      "groups": [
+        "historical_failure_evidence",
+        "inspection_exposure_time",
+        "license_background"
+      ],
+      "feature_count": 37,
+      "numeric_features": [
+        "prior_inspection_days",
+        "prior_scored_days",
+        "prior_fail_days",
+        "prior_conditions_days",
+        "historical_failure_rate",
+        "historical_conditions_rate",
+        "prior_routine_days",
+        "routine_failure_rate",
+        "last3_failure_rate",
+        "last5_failure_rate",
+        "recency_weighted_failure_rate",
+        "scored_days_365d",
+        "failures_365d",
+        "failure_rate_365d",
+        "days_since_last_inspection",
+        "days_since_last_scored_inspection",
+        "days_since_last_routine",
+        "days_since_last_failure",
+        "observed_history_years",
+        "cold_start",
+        "no_scored_history",
+        "recent_failure_streak",
+        "historical_pre2018_share",
+        "license_history_available",
+        "license_observed_tenure_years",
+        "days_since_license_issue",
+        "license_records_observed",
+        "license_terms_observed",
+        "days_to_license_term_end",
+        "license_term_elapsed_days",
+        "month_sin",
+        "month_cos"
+      ],
+      "categorical_features": [
+        "last_result",
+        "last_routine_result",
+        "license_term_status",
+        "license_category",
+        "license_application_type"
+      ],
+      "selected_candidate_index": 0,
+      "selected_parameters": {
+        "C": 0.1,
+        "class_weight": null
+      },
+      "validation_ap": 0.37529998863602854,
+      "calibrator": {
+        "slope": 0.7353985916646028,
+        "intercept": -0.3982329722716724,
+        "n": 8590
+      }
+    }
+  ],
+  "test_calibrated": [
+    {
+      "stage": "history_only",
+      "stage_label": "Historical outcomes",
+      "stage_order": 1,
+      "feature_count": 13,
+      "split": "test",
+      "probability_kind": "calibrated",
+      "n": 8363,
+      "failures": 1886,
+      "is_frozen_reference": false,
+      "average_precision": 0.310701359788295,
+      "roc_auc": 0.621742838801004,
+      "brier_score": 0.169285959285521,
+      "delta_average_precision": null,
+      "delta_roc_auc": null,
+      "delta_brier_score": null
+    },
+    {
+      "stage": "history_time",
+      "stage_label": "+ Inspection exposure and time",
+      "stage_order": 2,
+      "feature_count": 27,
+      "split": "test",
+      "probability_kind": "calibrated",
+      "n": 8363,
+      "failures": 1886,
+      "is_frozen_reference": false,
+      "average_precision": 0.308814978830015,
+      "roc_auc": 0.624676868685033,
+      "brier_score": 0.169318948029222,
+      "delta_average_precision": -0.00188638095828,
+      "delta_roc_auc": 0.002934029884029,
+      "delta_brier_score": 3.2988743701e-05
+    },
+    {
+      "stage": "history_time_license",
+      "stage_label": "+ Business license background",
+      "stage_order": 3,
+      "feature_count": 37,
+      "split": "test",
+      "probability_kind": "calibrated",
+      "n": 8363,
+      "failures": 1886,
+      "is_frozen_reference": false,
+      "average_precision": 0.311789514022863,
+      "roc_auc": 0.628029092583251,
+      "brier_score": 0.168988699340399,
+      "delta_average_precision": 0.002974535192848,
+      "delta_roc_auc": 0.003352223898218,
+      "delta_brier_score": -0.000330248688823
+    },
+    {
+      "stage": "frozen_primary_39",
+      "stage_label": "Frozen primary LR (includes facility/risk)",
+      "stage_order": 4,
+      "feature_count": 39,
+      "split": "test",
+      "probability_kind": "calibrated",
+      "n": 8363,
+      "failures": 1886,
+      "is_frozen_reference": true,
+      "average_precision": 0.314566233364636,
+      "roc_auc": 0.632636962735094,
+      "brier_score": 0.168512688665238,
+      "delta_average_precision": null,
+      "delta_roc_auc": null,
+      "delta_brier_score": null
+    }
+  ],
+  "provenance": {
+    "source_sha256": {
+      "inspections.parquet": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+      "licenses.parquet": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272"
+    },
+    "feature_sha256": "be7d1ce6df1f697058b8b8435c5d4cd344466d47e92b72f4729ef9b9af51014a",
+    "frozen_primary_model_sha256": "ff1fb87e241f37a141da3486e9638b4d6b16c50c8bf8d1578426c527db943a69",
+    "config_sha256": "c4c687c1264ec5044f127e80c75ae51824101fbe04734235706e408d0b0ce289",
+    "core_code_sha256": {
+      "data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+      "features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686",
+      "models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+      "metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663"
+    }
+  }
+}

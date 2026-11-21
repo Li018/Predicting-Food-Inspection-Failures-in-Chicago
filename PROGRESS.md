@@ -125,3 +125,29 @@ The four reused core modules remain byte-identical to the starting remote commit
 The 13-stage reproduction plan passed its actual dry run, including frozen source
 hashes; full analysis stages were already executed individually during Steps 2–8.
 The new wrapper was not represented as a second end-to-end training run.
+
+## Incremental literature and presentation extension · 2026-11-21
+
+### Commit 1 — Feature-group ablation and seasonality / Complaint check
+
+Reviewed the existing core package, reproduction entry point, README and full report
+before adding work. Existing annual drift, individual SHAP and error slices remain intact.
+Added a shared four-group partition of all 39 fields, three nested LR ablations
+(13 → 27 → 37 fields), and a separately loaded, never-refitted 39-field primary reference.
+Each ablation selects among the original four LR candidates on 2023 AP, fits only
+on 2019–2022, calibrates only on 2024, and reports 2025 AP / ROC-AUC / Brier.
+Test calibrated AP: 0.310701 → 0.308815 → 0.311790; frozen primary AP 0.314566.
+The non-monotonic AP result is retained rather than presented as an automatic gain.
+
+Added exact-type Canvass versus Complaint annual, year-month and month-of-year
+aggregates using recognized outcomes, same-label entity-day collapsing and conflict
+exclusion. In 2019–2025, pooled monthly Fail-rate ranges are 6.79 and 7.94 percentage
+points respectively; both peak in August and reach their minimum in December.
+Equal-year summaries and the July 2018 break are separate descriptive diagnostics,
+not causal effects or an exact replication of old-code critical-violation findings.
+
+Validation before this commit: **63 passed, 1 warning** (all original 55 plus 8 new
+regressions); Ruff and `git diff --check` passed. All 33 protected original files,
+including frozen snapshots, fitted models, predictions, SHAP, core source, existing
+tests and original figures, retain their initial SHA-256. No original model fit,
+source manifest, reproduction command or Speaker Notes was changed.
