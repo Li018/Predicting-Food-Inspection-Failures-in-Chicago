@@ -194,3 +194,24 @@ reference metrics, nested deltas, seasonal denominators, grouped cancellation, O
 subgroup calibration bins/capacity and positive-weighted reordering. Documentation
 tables are checked against their CSV/JSON evidence. These checks work without the
 private local row-level artifacts. All 33 protected baseline hashes remain unchanged.
+
+### Commit 4 — Readable projection figures and rounded slide facts
+
+Added an independent read-only exporter for nine projection figures in
+`reports/slide_figures/`: annual comparison drift, one large PR plot, two calibration
+panels, daily yield bars, grouped SHAP with the Top 8 fields, two enlarged dependence
+plots, two Top 5 + signed Other error waterfalls, and the historical subgroup audit.
+Original figures are not output destinations and remain byte-identical. Plot titles
+are at least 18 pt and all plotted labels are at least 12 pt; long in-chart footnotes
+and miniature multi-panel layouts are removed.
+
+Exported `slide_metrics.json` with 213 rounded display bindings, source references,
+figure hashes and aggregate plot data. Daily versus annual selection denominators
+remain separate. Days Earlier displays +5.95 and absolute score changes use
+percentage-point units. The exporter reads frozen predictions and analytic SHAP;
+it does not fit a model or recompute explanations.
+
+Validation before this commit: **94 passed, 1 warning**; Ruff and whitespace checks
+passed. New regressions cover signed waterfall closure, output-directory isolation,
+finite rounded serialization and projection font sizes. All nine figure hashes
+and the 33 protected baseline files were checked; all originals remain unchanged.
