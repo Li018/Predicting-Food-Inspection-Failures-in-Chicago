@@ -151,3 +151,30 @@ regressions); Ruff and `git diff --check` passed. All 33 protected original file
 including frozen snapshots, fitted models, predictions, SHAP, core source, existing
 tests and original figures, retain their initial SHA-256. No original model fit,
 source manifest, reproduction command or Speaker Notes was changed.
+
+### Commit 2 — Grouped SHAP, standardized odds ratios and subgroup audit
+
+Loaded the original LR, analytic SHAP and predictions without fitting. Signed
+per-observation group sums cover all 39 fields and reconstruct original probabilities
+within 3.33e-16. Both the original fixed 1,500-case explanation sample and the full
+8,363-case test set are reported. Numeric ORs distinguish raw and calibrated
+coefficients per training SD; encoded coordinates have separately stated units.
+
+Added historical Risk / Facility slices with AP, Brier, calibration bias, 10 fixed
+equal-width-bin ECE and selection under the same global annual 837-slot allocation.
+Risk 3 has 76 observations and is explicitly small-sample. The audit describes
+operational disparities, not a guarantee that excluding sanitarian inputs removes
+label or proxy bias. The new ECE convention is distinct from the old equal-frequency
+calibration-plot diagnostic.
+
+The official calendar-slot calculation is adapted to six fixed 2025 two-month
+windows: mean Days Earlier 5.9526; 38.123% of Fail outcomes are delayed. Negative
+advances remain in the mean and exact-score ties use uniform expected date slots;
+per-day expected capacity error is zero. The output explicitly records both the
+2019 time-invariance limitation and the use of actual-date features that might not
+be available on a simulated earlier date. This is a retrospective reference.
+
+Validation before this commit: **77 passed, 1 warning** (original 55 retained);
+Ruff/new-file whitespace checks passed, protected 33-file baseline unchanged.
+Added 14 tests for signed cancellation, OR units, common subgroup capacity,
+calibration bins, negative advances, ties/window pooling and prediction alignment.

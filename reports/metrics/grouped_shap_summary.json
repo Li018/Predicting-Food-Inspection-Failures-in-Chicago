@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "model": "logistic_regression",
+  "refitted": false,
+  "input_sha256": {
+    ".local/features.parquet": "be7d1ce6df1f697058b8b8435c5d4cd344466d47e92b72f4729ef9b9af51014a",
+    "config/topic1.json": "c4c687c1264ec5044f127e80c75ae51824101fbe04734235706e408d0b0ce289",
+    "scripts/run_model.py": "6ee725ce0c296478f62f7f233dc088dbac792685df3bd142a79e3553e5e5a70a",
+    "src/chicago_food/data.py": "f1bd195a0fa5a04ea51a627d8503cc4d4a9f4b3f8f3795ea4b24333a839eb8b1",
+    "src/chicago_food/features.py": "5d6e02f75bd6e516629b0d5525c2241d204c99e7b6ca7d66e5c8bdb700ee1686",
+    "src/chicago_food/models.py": "e099ad16bf028d47e56431474b52cfad0965016293ae1619ce2a7bbba812b29d",
+    "src/chicago_food/metrics.py": "65faa1ac16c3d65bbf571db1b2789d3bca8c740023ea5806f071e0357f927663",
+    "data/snapshots/inspections.parquet": "bc37fc88eb5d5dd199acba36bb310a0787fb70ad92699d498541648a636a1585",
+    "data/snapshots/licenses.parquet": "049431f1501b11314f240afa530acab10c3e571af7c03d24d85744ca82654272",
+    ".local/models/logistic_regression.joblib": "ff1fb87e241f37a141da3486e9638b4d6b16c50c8bf8d1578426c527db943a69",
+    ".local/shap/logistic_regression.joblib": "3f505461a591d5660e94e0babb6036183c2367f3c547130421e6badacbe9f8dc",
+    ".local/predictions/logistic_regression.parquet": "b6f923256dfc72f1dff7ac8e3c12ea080333612fe2047bcf5d82ef84431e03fc",
+    "data/snapshots/manifest.json": "9b778d4b57805b5ebd8364a22f4aa298e51ae38bf6b17cac47de554b4d89b35a"
+  },
+  "method": "Signed sum of existing analytic calibrated LR-logit SHAP within each business group",
+  "units": "Calibrated log-odds",
+  "feature_groups": {
+    "historical_failure_evidence": [
+      "prior_fail_days",
+      "prior_conditions_days",
+      "historical_failure_rate",
+      "historical_conditions_rate",
+      "routine_failure_rate",
+      "last3_failure_rate",
+      "last5_failure_rate",
+      "recency_weighted_failure_rate",
+      "failures_365d",
+      "failure_rate_365d",
+      "recent_failure_streak",
+      "last_result",
+      "last_routine_result"
+    ],
+    "inspection_exposure_time": [
+      "prior_inspection_days",
+      "prior_scored_days",
+      "prior_routine_days",
+      "scored_days_365d",
+      "days_since_last_inspection",
+      "days_since_last_scored_inspection",
+      "days_since_last_routine",
+      "days_since_last_failure",
+      "observed_history_years",
+      "cold_start",
+      "no_scored_history",
+      "historical_pre2018_share",
+      "month_sin",
+      "month_cos"
+    ],
+    "facility_risk": [
+      "prior_facility_type",
+      "prior_risk"
+    ],
+    "license_background": [
+      "license_history_available",
+      "license_observed_tenure_years",
+      "days_since_license_issue",
+      "license_records_observed",
+      "license_terms_observed",
+      "days_to_license_term_end",
+      "license_term_elapsed_days",
+      "license_term_status",
+      "license_category",
+      "license_application_type"
+    ]
+  },
+  "fixed_explanation_sample": {
+    "n": 1500,
+    "feature_count": 39,
+    "group_count": 4,
+    "sum_group_mean_abs_shap": 0.7288546689893513,
+    "mean_abs_total_shap": 0.33609636005249716,
+    "cross_group_cancellation_fraction": 0.5388705398312985,
+    "sum_max_absolute_error": 8.881784197001252e-16
+  },
+  "full_test": {
+    "n": 8363,
+    "feature_count": 39,
+    "group_count": 4,
+    "sum_group_mean_abs_shap": 0.7293249909124482,
+    "mean_abs_total_shap": 0.33183548190722345,
+    "cross_group_cancellation_fraction": 0.545010131228235,
+    "sum_max_absolute_error": 1.27675647831893e-15
+  },
+  "verification": {
+    "saved_prediction_max_absolute_error": 1.6653345369377348e-16,
+    "saved_raw_prediction_max_absolute_error": 1.6653345369377348e-16,
+    "shap_probability_max_absolute_error": 4.440892098500626e-16,
+    "shap_logit_max_absolute_error": 1.9984014443252818e-15,
+    "stored_shap_probability_max_absolute_error": 0.0,
+    "grouped_probability_max_absolute_error": 3.3306690738754696e-16
+  },
+  "limitations": [
+    "Business grouping makes cancellation explicit; it does not uniquely resolve correlated attribution.",
+    "Mean absolute group contributions are descriptive, not causal effects or ablation gains.",
+    "Sample scope matches the original fixed 1,500-row explanation; full_test uses all test rows."
+  ]
+}
