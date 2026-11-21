@@ -80,7 +80,7 @@ LightGBM 的 2025 年点估计略高，但其相对 LR 的 AP 差值为 **+0.006
 
 **实现层面的时间边界与历史公开时间是两件事。** 官方许可数据说明披露 2025-09-25 补充了部分 Address 字段；事后快照无法还原每个字段当时的公开版本。回归测试和 7／30 天滞后实验不能消除这一未知性。最终 QA 验证代码约束、数值和交付一致性，不把它扩展为对历史发布时间“绝对零泄露”的证明。
 
-区间采用固定模型下的实体聚类 bootstrap，未覆盖重新训练、选参和校准的不确定性。子组覆盖差异和 SHAP 是描述性证据；如需判断许可特征增益、因果作用或未来调度效果，应另行设计消融或前瞻对照试验。
+区间采用固定模型下的实体聚类 bootstrap，未覆盖重新训练、选参和校准的不确定性。子组覆盖差异和 SHAP 是描述性证据；[新增分组消融](reports/metrics/feature_ablation.csv)给出当前许可特征的条件预测增量，因果作用与未来调度效果仍需前瞻对照试验。
 
 ## 6. 一键复现
 
@@ -132,7 +132,7 @@ python scripts/qa_delivery.py
 
 ## 7. 验证与交付索引
 
-完整回归测试结果：**55 passed，1 warning**。唯一警告来自第三方测试插件对未来 pytest 10 的兼容性弃用提示。警告说明及当前数值、链接、图像、忽略规则和 Git 追踪核验结果见 [qa_summary.json](reports/metrics/qa_summary.json)。测试覆盖未来记录不改变过去特征、同日不可见、许可可见边界、未知结果处理、实体隔离、训练期预处理、校准单调性及容量同分策略等。[测试代码](tests/)
+冻结主研究的回归测试基线：**55 passed，1 warning**。增量分析的阶段测试数量见 [PROGRESS](PROGRESS.md)。唯一警告来自第三方测试插件对未来 pytest 10 的兼容性弃用提示。警告说明及当前数值、链接、图像、忽略规则和 Git 追踪核验结果见 [qa_summary.json](reports/metrics/qa_summary.json)。测试覆盖未来记录不改变过去特征、同日不可见、许可可见边界、未知结果处理、实体隔离、训练期预处理、校准单调性及容量同分策略等。[测试代码](tests/)
 
 | 内容 | 入口 |
 |---|---|
@@ -149,3 +149,64 @@ python scripts/qa_delivery.py
 
 - [Chicago/food-inspections-evaluation](https://github.com/Chicago/food-inspections-evaluation) 与[官方评估](https://chicago.github.io/food-inspections-evaluation/)：旧制度下的 critical violations 与历史排班模拟，是本项目的问题来源。其标签、时期及“提前发现”口径与本研究不同。
 - Kannan, Shapiro & Bilgic (2019), [Hindsight Analysis of the Chicago Food Inspection Forecasting Model](https://arxiv.org/abs/1910.04906)：用于审视排班反事实假设、检查员差异及预测表现与公共卫生效果之间的距离。
+
+
+## 9. 增量分析与两篇文献的实证对照
+
+补充采用独立脚本，复用原冻结数据、主模型和解释结果；消融专用 LR 与原 39 字段主模型分别保留。完整方法、单位与表格见[报告第 14 节](reports/topic1_report.md#14-增量研究补充消融业务分组与文献对标)。
+
+### 9.1 三组嵌套消融
+
+<!-- supplemental-ablation-table -->
+| 版本 | 原始字段数 | 2023 AP（raw） | 2025 AP（cal） | 相对前一消融 Δ AP | 2025 ROC-AUC（cal） | 2025 Brier（cal） |
+|---|---:|---:|---:|---:|---:|---:|
+| 仅历史结果 | 13 | 0.364596 | 0.310701 | — | 0.621743 | 0.169286 |
+| ＋检查暴露与时间 | 27 | 0.375071 | 0.308815 | -0.001886 | 0.624677 | 0.169319 |
+| ＋营业执照背景 | 37 | 0.375300 | 0.311790 | +0.002975 | 0.628029 | 0.168989 |
+| 冻结主模型（单独参考） | 39 | 0.378830 | 0.314566 | — | 0.632637 | 0.168513 |
+<!-- /supplemental-ablation-table -->
+
+13→27→37 字段的三个版本均排除业态与风险等级，39 字段原模型单独作为参考。沿用 2019–2022 训练、2023 raw AP 选参、2024 独立校准、2025 测试；时间组提高测试 AUC 却降低 AP，许可组随后使 AP 增加 0.002975、Brier 减少 0.000330。这里是条件预测增量，未估计差值显著性。[完整消融与候选](reports/metrics/feature_ablation.json)
+
+### 9.2 季节性、解释与业务切片
+
+<!-- supplemental-seasonality-table -->
+| 2019–2025 同制度样本 | 合格实体日数 | 最低月 Fail 率 | 最高月 Fail 率 | pooled 月度振幅 | 各年等权月度振幅 | 2023→2025 变化 |
+|---|---:|---|---|---:|---:|---:|
+| Canvass | 51,626 | 12 月／20.65% | 8 月／27.44% | 6.79 pp | 5.87 pp | -5.08 pp |
+| Complaint | 10,817 | 12 月／33.16% | 8 月／41.10% | 7.94 pp | 7.67 pp | -2.93 pp |
+<!-- /supplemental-seasonality-table -->
+
+月序列基于 exact Canvass／Complaint 的明确结果与保守实体日去重。两组均有月度差异且 2023→2025 Fail 率下降，用于检查 2019 Finding 2 的时间不变性与 Finding 3 的对照趋势；Complaint 属于观察性对照，两篇旧制研究的 critical violations 也不等同本研究的 Fail。[年度／月度与分组摘要](reports/metrics/seasonality_complaint.json)
+
+- **四组 SHAP：**沿用固定 1,500 条解释样本，历史失败／暴露时间／业态风险／许可背景的 mean abs grouped SHAP 分别为 **0.333／0.244／0.081／0.071**。先在样本内有符号相加，再取平均绝对值，保留局部闭合并显示相关项抵消；分组不等于消除了共线性。[分组证据](reports/metrics/grouped_shap_summary.json)
+- **标准化 OR：**历史失败日数、历史观察年限和许可观察年限每增加 1 个训练 SD，对应校准后条件 odds 倍数为 **1.277／1.249／1.033**。与旧官方模型 Purple 聚类的 **4.74** 倍只比较信息依赖，不能跨标签、时期和单位比较效应强弱。本模型不包含检验员输入，但未证明历史标签或代理偏差消除。[OR 表与单位](reports/metrics/lr_odds_ratio_summary.json)
+- **子群切片：**历史 Risk 1／2／3 的 AP 为 **0.320／0.294／0.266**，等宽 10 箱 ECE 为 **2.08／2.82／6.36 个百分点**；Risk 3 仅 **76 条／15 次 Fail**。全部切片共享年度 **837 槽位**的 Top10% 规则，主要业态和 Unknown 也保留在报告中。这是运营分配差异审计，不能据此认证人口公平性。[子组表](reports/metrics/subgroup_audit.csv)、[口径](reports/metrics/subgroup_audit_summary.json)
+- **Days Earlier：**在 2025 六个固定双月窗口保留原每日日期槽，按每次 Fail 加权得到 **5.953 天**的回溯参考，包含所有负值和 **38.12%** 被延后的 Fail。现有分数在实际检查日生成，提前日期可能尚无输入；换日后标签也可能变化，因此不等于已实现的提前发现收益。[双月明细](reports/metrics/days_earlier_windows.csv)、[定义与局限](reports/metrics/days_earlier_summary.json)
+
+### 9.3 与 CDPH 2015 和 Kannan 2019 的方法对照
+
+| 维度 | CDPH／Schenk Jr. et al.（2015） | Kannan et al.（2019） | 本研究 Topic 1 |
+|---|---|---|---|
+| 角色与年代 | 官方预测项目，2011–2014 历史建模；2014 年 9–10 月评估 | 对旧官方模型及历史执法结果的独立审计 | 2019–2022 训练／2023 验证／2024 校准／2025 测试 |
+| 标签与规则 | 2018-07-01 前旧制度的 critical violations | 检查旧制度标签、季节性与对照趋势 | 2018 规则变更后的 Canvass `Fail`；更早记录仅作历史 |
+| 检验员相关偏差 | 模型包含检验员／聚类相关预测信息 | Finding 1 指出检验员聚类对预测与排班的影响 | 不使用检验员或聚类字段；未证明历史标签与代理偏差已消除 |
+| 主要评估 | 固定两个月日期槽重排，计算 Days Earlier 等 | 系数、时间不变性、Canvass／Complaint 趋势审计 | AP／ROC-AUC／Brier、同日容量、历史风险与业态切片；另附双月重排参考 |
+| 结论边界 | 历史队列模拟不等于因果公共卫生收益 | 审查排班假设，未替本研究验证部署效果 | 标签、时期、窗口不同；不以现代 AP 或 Days Earlier 宣称胜过旧项目 |
+
+来源：[官方项目](https://github.com/Chicago/food-inspections-evaluation)、[官方重排函数](https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/functions/simulated_date_diff_mean.R)、[Kannan et al.（2019）](https://arxiv.org/abs/1910.04906)。
+
+### 9.4 独立重算补充分析
+
+需要原冻结快照及已生成的特征、主模型、预测和 SHAP 本地产物：
+
+```bash
+PYTHONPATH=src python scripts/analyze_ablation.py
+PYTHONPATH=src python scripts/analyze_seasonality.py
+PYTHONPATH=src python scripts/analyze_model_audit.py
+python -m pytest -q
+```
+
+原 `scripts/reproduce.py` 及主模型拟合流程保持不变。新克隆即使不含本地逐行产物，仍可运行已发布汇总的一致性测试；精确重算继续要求原冻结快照，不能用新下载覆盖来源哈希。
+
+本节补充阶段（2026-11-21，Commit 3）的完整测试为 **90 passed，1 warning**，包含原 55 项基线；该警告仍来自第三方 pytest 插件。后续演示文稿阶段的新增验证数量单独记录于 [PROGRESS](PROGRESS.md)。

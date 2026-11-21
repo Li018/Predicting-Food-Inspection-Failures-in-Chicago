@@ -178,3 +178,19 @@ Validation before this commit: **77 passed, 1 warning** (original 55 retained);
 Ruff/new-file whitespace checks passed, protected 33-file baseline unchanged.
 Added 14 tests for signed cancellation, OR units, common subgroup capacity,
 calibration bins, negative advances, ties/window pooling and prediction alignment.
+
+### Commit 3 — CDPH 2015 / Kannan 2019 report comparison
+
+Incrementally extended README and the research report with measured ablation,
+seasonality/comparison trends, signed four-group SHAP, standardized ORs, historical
+Risk/Facility slices and fixed-window Days Earlier. Added a concise three-way
+comparison of eras, targets, inspector inputs, evaluation methods and interpretation
+limits. Prior 55-test statements now explicitly identify the frozen research baseline.
+The original study results and all original figures remain intact.
+
+Validation before this commit: **90 passed, 1 warning**; Ruff and whitespace checks
+passed. Thirteen new public-artifact checks reconcile source hashes, primary-model
+reference metrics, nested deltas, seasonal denominators, grouped cancellation, ORs,
+subgroup calibration bins/capacity and positive-weighted reordering. Documentation
+tables are checked against their CSV/JSON evidence. These checks work without the
+private local row-level artifacts. All 33 protected baseline hashes remain unchanged.

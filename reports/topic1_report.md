@@ -116,7 +116,7 @@
 | 留出集参与预处理或选参 | 缺失处理、类别编码、估计器只在 2019–2022 年拟合；2023 年仅选择候选 | [运行脚本](../scripts/run_model.py) |
 | 用测试标签选择模型或校准 | 2024 年独立校准；2025 年只评估与解释；主模型选择记录冻结 | [model_selection.json](metrics/model_selection.json) |
 
-训练、预测及解释产物通过来源哈希和目标对齐检查连接起来；SHAP 重构与已保存概率也做了数值核对。已有回归测试覆盖未来记录不改变过去特征、同日不可见、实体隔离、未知结果处理、训练期预处理和测试标签不影响拟合等性质。**最终完整 pytest 已通过：55 passed、1 warning。唯一警告来自第三方测试插件对 pytest 内部名称的弃用提示，不涉及模型数值或时间边界断言；具体交付核验见 [qa_summary.json](metrics/qa_summary.json)。**[特征测试](../tests/test_features.py)、[模型测试](../tests/test_models.py)
+训练、预测及解释产物通过来源哈希和目标对齐检查连接起来；SHAP 重构与已保存概率也做了数值核对。已有回归测试覆盖未来记录不改变过去特征、同日不可见、实体隔离、未知结果处理、训练期预处理和测试标签不影响拟合等性质。**冻结主研究的 pytest 基线已通过：55 passed、1 warning。唯一警告来自第三方测试插件对 pytest 内部名称的弃用提示，不涉及模型数值或时间边界断言；具体交付核验见 [qa_summary.json](metrics/qa_summary.json)。**[特征测试](../tests/test_features.py)、[模型测试](../tests/test_models.py)
 
 ### 3.2 事件发生时间正确，不等于历史公开时间可复原
 
@@ -311,7 +311,7 @@ LR 的验证 AP 高于训练 AP，但验证 AUC 更低；同时 Fail 基率由 2
 | 检查历史 | 1.4964 | 0.2719 | 81.83% |
 | 许可历史 | 0.7639 | 0.0709 | 90.72% |
 
-抵消率定义为 `1−mean(abs(组内Σφ))/Σmean(abs(φ))`。其意义是同一样本上正负项大量相抵，而不是“81.83% 的历史特征无用”或“许可信息没有增益”。要评价增加／删除一组特征的预测价值，需要另行预先设计消融实验；本次没有用这些归因汇总冒充消融结果。[特征组汇总](metrics/shap_feature_groups.csv)、[定义与解释边界](metrics/feature_context.json)
+抵消率定义为 `1−mean(abs(组内Σφ))/Σmean(abs(φ))`。其意义是同一样本上正负项大量相抵，而不是“81.83% 的历史特征无用”或“许可信息没有增益”。增加／删除一组特征的预测价值由第 14.1 节新增的独立消融评价；这里保留原两组归因汇总，便于核对固定样本及定义。[特征组汇总](metrics/shap_feature_groups.csv)、[定义与解释边界](metrics/feature_context.json)
 
 ## 9. 误判分析：容量遗漏、概率错误与现场根因分开
 
@@ -420,6 +420,18 @@ FN 中 68.86% 最近历史结果为 Pass，25.33% 从未出现可见失败日，
 
 Kannan、Shapiro 与 Bilgic 的 *Hindsight Analysis of the Chicago Food Inspection Forecasting Model*（AAAI FSS-19，2019）指出，历史重排假设换一天检查仍会得到同一结果，而该假设可能受季节和其他因素影响；检查员差异也会影响风险记录，命中率提高不能直接等同公共卫生改善。本报告因此把观察样本排序、模型解释与真实调度因果效果分开，并避免将检查员或当前结果作为输入。[论文全文](https://arxiv.org/html/1910.04906v1)、[论文元数据](https://arxiv.org/abs/1910.04906)
 
+### 12.1 三方方法对照
+
+| 维度 | CDPH／Schenk Jr. et al.（2015） | Kannan et al.（2019） | 本研究 Topic 1 |
+|---|---|---|---|
+| 角色与年代 | 官方预测项目，2011–2014 历史建模；2014 年 9–10 月评估 | 对旧官方模型及历史执法结果的独立审计 | 2019–2022 训练／2023 验证／2024 校准／2025 测试 |
+| 标签与规则 | 2018-07-01 前旧制度的 critical violations | 检查旧制度标签、季节性与对照趋势 | 2018 规则变更后的 Canvass `Fail`；更早记录仅作历史 |
+| 检验员相关偏差 | 模型包含检验员／聚类相关预测信息 | Finding 1 指出检验员聚类对预测与排班的影响 | 不使用检验员或聚类字段；未证明历史标签与代理偏差已消除 |
+| 主要评估 | 固定两个月日期槽重排，计算 Days Earlier 等 | 系数、时间不变性、Canvass／Complaint 趋势审计 | AP／ROC-AUC／Brier、同日容量、历史风险与业态切片；另附双月重排参考 |
+| 结论边界 | 历史队列模拟不等于因果公共卫生收益 | 审查排班假设，未替本研究验证部署效果 | 标签、时期、窗口不同；不以现代 AP 或 Days Earlier 宣称胜过旧项目 |
+
+对照依据为[官方评估源码](https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/functions/simulated_date_diff_mean.R)、[官方报告](https://chicago.github.io/food-inspections-evaluation/)与 [Kannan et al. 论文](https://arxiv.org/abs/1910.04906)。2019 的 Finding 1、2、3 在本研究分别对应第 14.3–14.4 节的解释与业务切片、第 14.2 与 14.5 节的季节性和重排假设检查，以及第 14.2 节的 Complaint 对照趋势。
+
 ## 13. 交付物与最终复核状态
 
 本报告以各步骤已保存的汇总产物为证据，正文嵌入 11 张高清图。关键结果可按以下链条核对：
@@ -434,7 +446,7 @@ Kannan、Shapiro 与 Bilgic 的 *Hindsight Analysis of the Chicago Food Inspecti
 | 信息滞后及相关归因 | [lag_sensitivity.json](metrics/lag_sensitivity.json)、[feature_context.json](metrics/feature_context.json) |
 | 容量与业务收益 | [年度 Top-K](metrics/figure_topk_performance.csv)、[逐日容量](metrics/figure_daily_capacity_yield.csv) |
 
-当前研究结论建立在已完成的全量数据处理、模型训练、独立校准、留出评估及解释数值闭合上。最终完整 pytest 为 **55 passed、1 warning**。一键复现、来源哈希核验和简洁日志见 [README](../README.md) 与 [reproduce.py](../scripts/reproduce.py)；数值、链接、PNG 和当前 Git 追踪检查由 [qa_delivery.py](../scripts/qa_delivery.py) 汇总至 [qa_summary.json](metrics/qa_summary.json)。这些检查验证本次实现与交付的一致性，仍保留第 3 节关于历史发布时间的局限。
+当前研究结论建立在已完成的全量数据处理、模型训练、独立校准、留出评估及解释数值闭合上。冻结主研究的 pytest 基线为 **55 passed、1 warning**；增量模块的阶段测试记录见 [PROGRESS](../PROGRESS.md)。一键复现、来源哈希核验和简洁日志见 [README](../README.md) 与 [reproduce.py](../scripts/reproduce.py)；数值、链接、PNG 和当前 Git 追踪检查由 [qa_delivery.py](../scripts/qa_delivery.py) 汇总至 [qa_summary.json](metrics/qa_summary.json)。这些检查验证本次实现与交付的一致性，仍保留第 3 节关于历史发布时间的局限。
 
 ### 外部一手参考
 
@@ -442,3 +454,139 @@ Kannan、Shapiro 与 Bilgic 的 *Hindsight Analysis of the Chicago Food Inspecti
 2. City of Chicago：[Business Licenses，r5kz-chrr](https://data.cityofchicago.org/Community-Economic-Development/Business-Licenses/r5kz-chrr)。
 3. City of Chicago：[food-inspections-evaluation 源码](https://github.com/Chicago/food-inspections-evaluation)与[官方评估介绍](https://chicago.github.io/food-inspections-evaluation/)。
 4. Kannan, V., Shapiro, M. A., & Bilgic, M. (2019). [Hindsight Analysis of the Chicago Food Inspection Forecasting Model](https://arxiv.org/abs/1910.04906). AAAI FSS-19: Artificial Intelligence in Government and Public Sector。
+
+
+## 14. 增量研究补充：消融、业务分组与文献对标
+
+本节复用原冻结检查／许可快照、39 字段特征缓存、主模型、2025 预测及解析 LR-logit SHAP。原研究的模型、时间切分、来源 SHA-256、11 张原图和 55 项基线测试保持不变。新增消融模型只在独立分析中拟合；其余补充均读取既有模型结果。
+
+### 14.1 特征分组消融：许可增益与时间组变化分别报告
+
+三组嵌套实验依次使用 13 个历史结果字段、再加 14 个检查暴露与时间字段、再加 10 个许可背景字段。`prior_facility_type` 和 `prior_risk` 在三个消融版本中均排除，因此最终是 **37 字段**；原 **39 字段主模型是单独参考**，不作为第四步嵌套增量。结果型字段自身可包含“过去 365 天”或时间衰减定义，第二组增加的是检查分母、间隔、观测长度与日历项。
+
+每个消融版本沿用原四组 LR 候选，仅在 2019–2022 拟合预处理器与估计器，按 2023 raw AP 选择候选，另在 2024 拟合正斜率校准器。表内验证列使用 raw 概率，测试列使用 calibrated 概率；不会把 2024 校准器用于先前的 2023。
+
+<!-- supplemental-ablation-table -->
+| 版本 | 原始字段数 | 2023 AP（raw） | 2025 AP（cal） | 相对前一消融 Δ AP | 2025 ROC-AUC（cal） | 2025 Brier（cal） |
+|---|---:|---:|---:|---:|---:|---:|
+| 仅历史结果 | 13 | 0.364596 | 0.310701 | — | 0.621743 | 0.169286 |
+| ＋检查暴露与时间 | 27 | 0.375071 | 0.308815 | -0.001886 | 0.624677 | 0.169319 |
+| ＋营业执照背景 | 37 | 0.375300 | 0.311790 | +0.002975 | 0.628029 | 0.168989 |
+| 冻结主模型（单独参考） | 39 | 0.378830 | 0.314566 | — | 0.632637 | 0.168513 |
+<!-- /supplemental-ablation-table -->
+
+增加检查暴露与时间后，2025 AUC 上升但 AP 下降，不能把三个步骤写成 AP 持续提高。随后添加许可背景使 AP 增加 0.002975、Brier 减少 0.000330。消融显示当前特征组合及原候选选择程序下的增量表现，没有估计差值置信区间，也不把许可特征的条件预测增益解释为经营许可的因果效果。
+
+证据：[完整 raw／calibrated 结果](metrics/feature_ablation.csv)、[全部候选验证结果](metrics/feature_ablation_validation.csv)、[字段分组、选择与来源](metrics/feature_ablation.json)。
+
+### 14.2 月度季节性与 Complaint 对照趋势
+
+新增检查只选准确类型 `Canvass` 和 `Complaint`，不包含两者的 Re-Inspection。两组都要求明确的 Fail／Pass／Pass w/ Conditions 标签，分别按“实体＋日期＋检查类型”排除二分类冲突并折叠同标签。Canvass 由此与原目标政策一致；Complaint 只是另一个观察性比较队列。
+
+<!-- supplemental-seasonality-table -->
+| 2019–2025 同制度样本 | 合格实体日数 | 最低月 Fail 率 | 最高月 Fail 率 | pooled 月度振幅 | 各年等权月度振幅 | 2023→2025 变化 |
+|---|---:|---|---|---:|---:|---:|
+| Canvass | 51,626 | 12 月／20.65% | 8 月／27.44% | 6.79 pp | 5.87 pp | -5.08 pp |
+| Complaint | 10,817 | 12 月／33.16% | 8 月／41.10% | 7.94 pp | 7.67 pp | -2.93 pp |
+<!-- /supplemental-seasonality-table -->
+
+两类样本的 pooled 月度 Fail 率均在 8 月最高、12 月最低，且 2023→2025 都下降。各年等权月度曲线仍有变化，帮助检查 pooled 振幅是否仅由年份构成造成；逐年月度表还保存相对本年度平均 Fail 率的偏差。它们共同说明不能普遍假定“换到另一日期仍必然是同一结果”，但不能凭这些汇总确定季节的因果作用，或把 Complaint 当成随机对照。
+
+这些结果回应 2019 Finding 2 与 3，采用的是现代 `Fail` 标签，未重新定义旧制 critical violations。年度与逐年月表保留 2010–2025 全范围及 2018 规则标记，2018 年不能作为完整的新制度年合并解释。
+
+证据：[年度对照](metrics/inspection_type_annual.csv)、[逐年月度对照](metrics/inspection_type_monthly.csv)、[同制度月序列](metrics/inspection_type_seasonality.csv)、[样本清理与摘要](metrics/seasonality_complaint.json)。
+
+### 14.3 四个业务组 SHAP 与标准化 Odds Ratio
+
+**Grouped SHAP** 在每条样本内先将同组 39 个原字段贡献按符号相加，再对组贡献取平均绝对值：`mean(abs(sum(phi_j within group)))`。四组覆盖全部字段且互不重叠，保留基值加组贡献对预测 log-odds 的闭合。固定 1,500 样本口径沿用原全局解释，同时提供全部 8,363 条测试记录的汇总。
+
+<!-- supplemental-grouped-shap-table -->
+| 业务组 | 字段数 | 固定 1,500 样本 mean abs grouped SHAP | 全部 8,363 测试样本 | 固定样本组内抵消率 |
+|---|---:|---:|---:|---:|
+| 历史失败证据 | 13 | 0.332671 | 0.328006 | 52.03% |
+| 检查暴露与时间 | 14 | 0.243904 | 0.248218 | 74.49% |
+| 业态与风险等级 | 2 | 0.081391 | 0.082479 | 42.39% |
+| 营业执照背景 | 10 | 0.070889 | 0.070623 | 90.72% |
+<!-- /supplemental-grouped-shap-table -->
+
+分组使正负抵消可见，而没有唯一消除共线性归因问题。固定样本四组之间仍有 53.89% 的抵消；因此组的重要性不能相加后当成预测效果，也不能替代第 14.1 节的消融。四组重构全部测试概率的最大误差为 3.33×10⁻¹⁶。[分组汇总](metrics/grouped_shap_importance.csv)、[闭合与范围](metrics/grouped_shap_summary.json)
+
+**标准化 OR** 直接读取冻结 LR 系数。数值字段的单位是训练期中位数填补后该坐标增加 1 个训练标准差；校准后系数为 `a × beta`，OR 为 `exp(a × beta)`。表中 OR 是 odds 的倍数，而非概率或风险比。
+
+<!-- supplemental-odds-ratio-table -->
+| 数值字段 | 原 LR 标准化 β | 校准后标准化 β | 校准后 OR／训练期 1 SD |
+|---|---:|---:|---:|
+| `prior_fail_days` | +0.319966 | +0.244407 | 1.276864 |
+| `observed_history_years` | +0.290923 | +0.222222 | 1.248849 |
+| `prior_scored_days` | -0.279128 | -0.213212 | 0.807985 |
+| `historical_failure_rate` | -0.038897 | -0.029711 | 0.970726 |
+| `license_term_elapsed_days` | +0.366123 | +0.279664 | 1.322685 |
+| `days_since_license_issue` | -0.268989 | -0.205468 | 0.814266 |
+| `license_observed_tenure_years` | +0.042471 | +0.032441 | 1.032973 |
+<!-- /supplemental-odds-ratio-table -->
+
+例如历史失败日数增加 1 SD 时，其他模型坐标不变条件下的校准 odds 倍数为 1.277；失败比例的负条件系数则需要结合失败日数、已评分分母与近期历史共同解读。分类编码和缺失指示另保存在完整变换表，采用其相应的 0→1 坐标变化单位，不能混写成数值 1 SD。
+
+2019 论文 Table 3 的 Purple 检验员聚类系数为 1.555，对应 `exp(1.555)=4.74` 的 dummy-coordinate odds 倍数。本研究没有使用检验员／聚类输入；现代数值 1 SD 的 OR 与这个历史 dummy OR 的单位、标签和时期不同，展示它们是为了比较模型依赖的信息，不是据倍数大小比较两个模型强弱，也不等于证明检验员造成的标签或代理偏差已经消除。[标准化数值 OR](metrics/lr_standardized_odds_ratios.csv)、[完整变换列 OR](metrics/lr_transformed_odds_ratios.csv)、[单位与文献对照](metrics/lr_odds_ratio_summary.json)、[论文 Table 3](https://arxiv.org/abs/1910.04906)
+
+### 14.4 历史风险等级与主要业态：同一全局容量下的切片
+
+切片使用最近一次可见历史检查的 `prior_risk` 和 `prior_facility_type`，而不是当前检查才记录的属性。全局仍是 2025 年 **8,363 条目标中的 837 个年度 pooled Top10% 槽位**，边界同分采用原来的期望分配；没有在每个子组内重新选 10%。主要业态按测试数量选取前五个已知值，另外保留 Unknown；完整 CSV 发布全部切片。
+
+ECE 使用 `[0,1]` 上固定 10 个等宽概率箱，各箱绝对“均值预测－观察 Fail 率”差按箱内样本数加权，表内换算为百分点。它与第 7 节的等频箱 ECE 口径不同，不作逐值横比。另提供带符号的总体均值偏差 `mean(p)−mean(y)`、Brier、ROC-AUC 和组内 Fail 捕获率。
+
+<!-- supplemental-subgroup-table -->
+| 历史字段／取值 | n | Fail | AP | ECE（百分点） | 获得全局 Top10 槽位的组内比例 | 小样本 |
+|---|---:|---:|---:|---:|---:|---|
+| `prior_risk`／Risk 1 (High) | 7,322 | 1,678 | 0.3200 | 2.08 | 9.57% | 否 |
+| `prior_risk`／Risk 2 (Medium) | 918 | 184 | 0.2936 | 2.82 | 13.29% | 否 |
+| `prior_risk`／Risk 3 (Low) | 76 | 15 | 0.2655 | 6.36 | 17.11% | 是 |
+| `prior_risk`／Unknown | 44 | 9 | 0.4905 | 5.88 | 0.00% | 是 |
+| `prior_facility_type`／Restaurant | 5,950 | 1,382 | 0.3254 | 2.81 | 8.72% | 否 |
+| `prior_facility_type`／School | 810 | 188 | 0.2926 | 1.69 | 12.59% | 否 |
+| `prior_facility_type`／Grocery Store | 515 | 111 | 0.3170 | 5.06 | 22.72% | 否 |
+| `prior_facility_type`／Children's Services Facility | 274 | 39 | 0.1855 | 3.10 | 1.82% | 否 |
+| `prior_facility_type`／Bakery | 128 | 28 | 0.3597 | 6.03 | 26.56% | 否 |
+| `prior_facility_type`／Unknown | 53 | 12 | 0.5094 | 4.86 | 0.00% | 是 |
+<!-- /supplemental-subgroup-table -->
+
+Risk 3 的样本只有 76 条、15 次 Fail，结果带小样本标记；标记条件为 `n<100`、Fail<10 或 Non-Fail<10。单一类别切片的 AP／AUC 留空，不将无法估计的量记成 0。这里呈现的是运营组别的概率与分配差异，没有估计子组置信区间，也没有使用受保护人口属性，所以不能以这些结果认证“公平性通过”或推断差异的因果来源。它补充回应 Finding 1，但不替代对检验员标签过程的直接审计。
+
+证据：[全部子组汇总](metrics/subgroup_audit.csv)、[逐箱统计](metrics/subgroup_audit_calibration_bins.csv)、[统一容量、ECE 和字段时点定义](metrics/subgroup_audit_summary.json)。
+
+### 14.5 固定双月窗口的 Days Earlier 参考
+
+按[官方评价函数](https://github.com/Chicago/food-inspections-evaluation/blob/master/CODE/functions/simulated_date_diff_mean.R)的核心定义，保留每个窗口原有的每日检查日期槽，把该窗口检查按固定 LR 分数降序分配至从早到晚的原日期槽。每次 Fail 的值为 `实际日期 − 重排日期`，单位是日历天；被推迟的 Fail 贡献负值，均值包含全部 Fail。本次把官方 2014 年 9–10 月的单个窗口适配为 2025 年六个固定双月窗口，不将全年度视为一个任意重排窗口。
+
+<!-- supplemental-days-earlier-table -->
+| 2025 固定窗口 | 检查数 | Fail 数 | Days Earlier（日历天） | Fail 被延后比例 |
+|---|---:|---:|---:|---:|
+| 2025-01-01 至 2025-02-28 | 1,537 | 357 | 6.947 | 35.85% |
+| 2025-03-01 至 2025-04-30 | 1,840 | 383 | 8.373 | 32.64% |
+| 2025-05-01 至 2025-06-30 | 1,426 | 342 | 4.690 | 38.60% |
+| 2025-07-01 至 2025-08-31 | 1,203 | 290 | 5.285 | 41.03% |
+| 2025-09-01 至 2025-10-31 | 1,196 | 274 | 5.376 | 40.15% |
+| 2025-11-01 至 2025-12-31 | 1,161 | 240 | 3.875 | 43.75% |
+| 按全部 Fail 加权汇总 | 8,363 | 1,886 | 5.953 | 38.12% |
+<!-- /supplemental-days-earlier-table -->
+
+按各窗口 Fail 数加权后的参考值为 **5.953 天**，随机分配原日期槽的对应期望为 **-0.042 天**。同分检查使用对应日期槽的均匀期望分配，因此不依赖原行序；每日容量最大核验误差为 0。正均值同时伴随 **38.12%** 的 Fail 被推迟，不能只展示被提前的子集。
+
+这一数值有两项关键回溯假设。第一，2019 Finding 2 指出的时间不变性并不成立于所有情形：换一天检查，标签可能变化。第二，现有分数在每次**实际检查日**计算，提前分配的日期可能早于某些输入信息真正可见的时点；本分析没有重新构造每个提前日期的历史候选池与分数。再加上实际检查池未覆盖未检查商户、路线、法定周期和人员约束，Days Earlier 仅作为文献方法的轻量回溯参考，不能写成已经实现的提前发现收益。
+
+证据：[窗口明细](metrics/days_earlier_windows.csv)、[全 Fail 加权、输入哈希与局限](metrics/days_earlier_summary.json)。这与第 11 节同日容量 341 对 214.22 的收益是不同问题，应分别展示。
+
+### 14.6 增量复现与验证
+
+在原冻结快照和已经生成的本地特征、模型、预测、SHAP 产物齐备后运行：
+
+```bash
+PYTHONPATH=src python scripts/analyze_ablation.py
+PYTHONPATH=src python scripts/analyze_seasonality.py
+PYTHONPATH=src python scripts/analyze_model_audit.py
+python -m pytest -q
+```
+
+这些独立入口不修改 `scripts/reproduce.py` 的原训练流程；本节复用主模型时不要为补充解释重跑主模型训练。若新克隆只有已发布的汇总文件，仍能执行聚合一致性测试和阅读全部结果，实际重算需要原冻结本地产物。新增测试核对来源哈希、分组完整性、主模型参考数值、消融增量、聚合分母、分箱 ECE、全局容量及双月加权，并核对本节表格中的数值与 CSV。各阶段实际通过数量记录于 [PROGRESS](../PROGRESS.md)。
+
+本节补充阶段（2026-11-21，Commit 3）的完整回归为 **90 passed，1 warning**，包含原 55 项基线。唯一警告仍来自第三方 pytest 插件的未来版本弃用提示；此处记录本阶段结果，后续演示文稿阶段的验证在 PROGRESS 中追加。
